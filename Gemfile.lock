@@ -140,6 +140,7 @@ GEM
       daemons (>= 1.0.3)
       fastthread (>= 1.0.1)
       gem_plugin (>= 0.2.3)
+    mysql (2.8.1)
     nokogiri (1.4.4)
     polyglot (0.3.1)
     rack (1.2.2)
@@ -223,6 +224,7 @@ DEPENDENCIES
   hirb
   mime-types
   mongrel
+  mysql
   rails (= 3.0.5)
   railties (~> 3.0.5)
   rake

@@ -1,9 +1,10 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.5'
-
 RAILS_VERSION = '~> 3.0.5'
 DM_VERSION    = '~> 1.1.0'
+
+gem 'rails', '3.0.5'
+gem "mysql"
 gem 'rake'
 gem 'activesupport',      RAILS_VERSION, :require => 'active_support'
 gem 'actionpack',         RAILS_VERSION, :require => 'action_pack'

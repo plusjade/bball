@@ -218,3 +218,6 @@ div.miss:hover {
   font-weight:bold;
   cursor:pointer;
 }
+
+/* TOOLBOX */
+#toolbox { border:1px solid red;}

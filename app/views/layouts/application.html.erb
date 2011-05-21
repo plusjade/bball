@@ -68,6 +68,19 @@
     
   /* init */
     $("#toggle").find("a").first().click();
+    
+    
+    $("#teams").find("a").click(function(){
+      $.getJSON(this.href, function(data){
+        console.log(data);
+        $playersW.empty();
+        $.tmpl( "playerTemplate", data ).appendTo($playersW);
+      })
+      
+      return false;
+    });
+    
+    $( "#playerTemplate" ).template( "playerTemplate" );
   })
   </script>
 </head>

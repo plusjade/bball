@@ -72,5 +72,22 @@
     </div>
   </div>
   
-  
+  <div id="toolbox">
+    <ul id="teams">
+    <% @teams.each do |t| %>
+      <li><%= link_to t.name, team_players_path(t) %></li>
+    <% end %>
+    </ul>
+  </div>
 </div>
+
+
+<script id="playerTemplate" type="text/x-jquery-tmpl">
+  <div id="p${number}" class="action">
+    <div class="head">${name}</div>
+    <div class="number">${number}</div>
+    <div class="assign js_record" rel="assign">=)</div>
+    <div class="miss js_record" rel="miss">Miss</div>
+    <div class="make js_record" rel="make">Make</div>
+  </div>
+</script>

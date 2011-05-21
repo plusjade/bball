@@ -2,20 +2,32 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.5'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+RAILS_VERSION = '~> 3.0.5'
+DM_VERSION    = '~> 1.1.0'
+gem 'rake'
+gem 'activesupport',      RAILS_VERSION, :require => 'active_support'
+gem 'actionpack',         RAILS_VERSION, :require => 'action_pack'
+gem 'actionmailer',       RAILS_VERSION, :require => 'action_mailer'
+gem 'railties',           RAILS_VERSION, :require => 'rails'
+gem 'mongrel'
 
-gem 'sqlite3'
+gem 'dm-rails',          '~> 1.1.0'
+gem 'dm-sqlite-adapter',    DM_VERSION
+gem 'dm-mysql-adapter',     DM_VERSION
+gem 'dm-migrations',        DM_VERSION
+gem 'dm-types',             DM_VERSION
+gem 'dm-validations',       DM_VERSION
+gem 'dm-constraints',       DM_VERSION
+gem 'dm-transactions',      DM_VERSION
+gem 'dm-aggregates',        DM_VERSION
+gem 'dm-timestamps',        DM_VERSION
+gem 'dm-serializer',        DM_VERSION
+gem 'dm-paperclip', :git => 'https://github.com/gix/dm-paperclip.git'
+gem 'dm-chunked_query'
+gem 'mime-types', :require => 'mime/types'
 
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
-# gem 'ruby-debug'
-# gem 'ruby-debug19', :require => 'ruby-debug'
+gem 'cancan'
+gem 'apron', '0.0.6', :git => 'https://github.com/plusjade/apron.git'
 
 # Bundle the extra gems:
 # gem 'bj'
@@ -23,9 +35,14 @@ gem 'sqlite3'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
-# Bundle gems for the local environment. Make sure to
-# put test-only gems in this group so their generators
-# and rake tasks are available in development mode:
-# group :development, :test do
-#   gem 'webrat'
-# end
+group(:development, :test) do
+  gem 'ruby-debug'
+  gem 'shoulda-context'
+  gem 'ruby-debug'
+  gem "rspec", "~> 2.5.0"
+  gem 'rspec-rails', '~> 2.5'
+  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+  gem 'factory_girl_rails'
+  gem "wirble"
+  gem "hirb"
+end

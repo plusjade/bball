@@ -2,9 +2,74 @@
 <html>
 <head>
   <title>Bball</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
+  <%= stylesheet_link_tag "style" %>
+  <%= render_javascripts %>
   <%= csrf_meta_tag %>
+  <script>
+  if (Modernizr.localstorage){
+    localStorage.clear();
+
+  } else {
+    console.log("boo");
+    // resort to cookies as best you can
+  }
+  
+  $(function(){
+    $actionsW = $("#actions_wrapper");
+    $playersW = $("#players_wrapper");
+
+  /* panels interface */
+    $("#toggle").find("a").click(function(){
+      $("#toggle").find("a").removeClass("active");
+      $(this).addClass("active");
+      var panel = $(this).attr("rel");
+      
+      if(panel === "offense"){
+        $actionsW.find(".offense").show();
+        $actionsW.find(".defense").hide();
+      }else{
+        $actionsW.find(".offense").hide();
+        $actionsW.find(".defense").show();
+      }
+      return false;
+    })
+    
+  /* actions interface */  
+    $actionsW.find("div.action").click(function(){
+      $actionsW.find("div.action").removeClass("active");
+      $playersW.addClass("active");
+      $(this).addClass("active");
+    })
+    $playersW.find("div.action").hover(function(){
+      var actionType = $actionsW.find("div.action.active").first().attr("rel");
+      
+      $(this).find("div.number").hide();
+      if(actionType === "shot"){
+        $(this).find("div.assign").hide();
+      }
+      
+    },function(){
+      $(this).find("div.number").show();
+      $(this).find("div.assign").show();
+    })
+    
+    
+  /* record the data */  
+    $("#players_wrapper").find("div.js_record").click(function(){
+      var key = app.keyize($(this));
+      app.recordData(key);
+      app.updateScore();
+      
+      console.log(localStorage);
+      
+      $playersW.removeClass("active");
+      $actionsW.find("div.action").removeClass("active");
+    })
+    
+  /* init */
+    $("#toggle").find("a").first().click();
+  })
+  </script>
 </head>
 <body>
 

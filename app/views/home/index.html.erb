@@ -1,10 +1,11 @@
 <div id="wrapper">
   
   <div id="top">
-    <div id="score">
-      <div class="us">0</div>
-      <div class="them">0</div>
-    </div>
+    <ul id="teams" style="float:right">
+    <% @teams.each_with_index do |t,i| %>
+      <li><%= link_to t.name, team_players_path(t), :rel => (i.zero? ? "home" : "away") %></li>
+    <% end %>
+    </ul>
   </div>
   
   <ul id="toggle">
@@ -32,25 +33,28 @@
     </div>
   </div>
 
-
-
-  <div id="players_wrapper">
-    <div id="p12" class="action">
-      <div class="head">Jade</div>
-      <div class="number">12</div>
-      <div class="assign js_record" rel="assign">=)</div>
-      <div class="miss js_record" rel="miss">Miss</div>
-      <div class="make js_record" rel="make">Make</div>
+  <div id="teamage">
+    <div class="home">
+      <div id="home_score" class="score">0</div>
+      <div class="team_name">PandaBOTS</div>
+    </div>
+    <div class="away">
+      <div class="score">0</div>
+      <div class="team_name">GameTime</div>
     </div>
   </div>
   
-  <div id="toolbox">
-    <ul id="teams">
-    <% @teams.each do |t| %>
-      <li><%= link_to t.name, team_players_path(t) %></li>
-    <% end %>
-    </ul>
+
+  <div id="players_game">
+    <div class="home" style="display:none"></div>
+    <div class="away" style="display:none"></div>
   </div>
+  
+  <div id="players_bench">
+    <div class="home" style="display:none"></div>
+    <div class="away" style="display:none"></div>
+  </div>
+  
 </div>
 
 
@@ -58,8 +62,8 @@
   <div id="p${number}" class="action">
     <div class="head">${name}</div>
     <div class="number">${number}</div>
-    <div class="assign js_record" rel="assign">=)</div>
-    <div class="miss js_record" rel="miss">Miss</div>
-    <div class="make js_record" rel="make">Make</div>
+    <div class="assign js_record" rel="assign">&#160;</div>
+    <div class="miss js_record" rel="miss">&#160;</div>
+    <div class="make js_record" rel="make">&#160;</div>
   </div>
 </script>

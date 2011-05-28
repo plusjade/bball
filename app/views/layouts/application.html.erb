@@ -18,7 +18,7 @@
     $("#playerTemplate").template("playerTemplate");
     app.init();
     
-  /* definsive/offensive panels interface */
+  /* defensive/offensive panels interface */
     $("#toggle").find("a").click(function(){
       $("#toggle").find("a").removeClass("active");
       $(this).addClass("active");
@@ -36,15 +36,22 @@
   
   /* load teams */
     $("#teams").find("a").click(function(){
+      var side = $(this).attr("rel");
       $.getJSON(this.href, function(data){
-        app.$playersW.empty();
-        $.tmpl("playerTemplate", data).appendTo(app.$playersW);
-        app.bindHover();
+        app.loadTeam(side, data);
       })
-      
       return false;
     });
 
+  /* toggle team panels */
+    $("#teamage").find(".team_name").click(function(){
+      $("#teamage").find("div").removeClass("active");
+      $(this).addClass("active");
+      var side = $(this).parent().hasClass("home") ? "home" : "away";
+      app.showTeam(side);
+      return false;
+    });
+    
   /* init */
     $("#toggle").find("a").first().click();
   })

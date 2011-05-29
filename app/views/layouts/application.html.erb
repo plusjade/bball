@@ -8,7 +8,6 @@
   <script>
   if (Modernizr.localstorage){
     localStorage.clear();
-
   } else {
     console.log("boo");
     // resort to cookies as best you can
@@ -16,44 +15,60 @@
   
   $(function(){
     $("#playerTemplate").template("playerTemplate");
-    app.init();
-    
-  /* defensive/offensive panels interface */
-    $("#toggle").find("a").click(function(){
-      $("#toggle").find("a").removeClass("active");
-      $(this).addClass("active");
-      var panel = $(this).attr("rel");
-      
-      if(panel === "offense"){
-        app.$actionsW.find(".offense").show();
-        app.$actionsW.find(".defense").hide();
-      }else{
-        app.$actionsW.find(".offense").hide();
-        app.$actionsW.find(".defense").show();
-      }
-      return false;
-    })
-  
-  /* load teams */
-    $("#teams").find("a").click(function(){
-      var side = $(this).attr("rel");
-      $.getJSON(this.href, function(data){
-        app.loadTeam(side, data);
-      })
-      return false;
-    });
 
-  /* toggle team panels */
-    $("#teamage").find(".team_name").click(function(){
-      $("#teamage").find("div").removeClass("active");
-      $(this).addClass("active");
-      var side = $(this).parent().hasClass("home") ? "home" : "away";
-      app.showTeam(side);
-      return false;
+    var gameId = 123;
+    game = {id: gameId}
+    
+    $.getJSON("/teams/1.json", function(data){
+      game["home"] = data["team"];
+      game["homePlayers"] = data["players"];
+      
+      $.getJSON("/teams/2.json", function(data){
+        game["away"] = data["team"];
+        game["awayPlayers"] = data["players"];
+        
+        localStorage["game."+gameId] = JSON.stringify(game);
+        //console.log(JSON.parse(localStorage["game."+gameId]));
+        
+        app.init();
+        
+        
+        /* defensive/offensive panels interface */
+          $("#toggle").find("a").click(function(){
+            $("#toggle").find("a").removeClass("active");
+            $(this).addClass("active");
+            var panel = $(this).attr("rel");
+
+            if(panel === "offense"){
+              app.$actionsW.find(".offense").show();
+              app.$actionsW.find(".defense").hide();
+            }else{
+              app.$actionsW.find(".offense").hide();
+              app.$actionsW.find(".defense").show();
+            }
+            return false;
+          })
+
+
+        /* toggle team panels */
+          $("#teams").find(".team_name").click(function(){
+            $("#teams").find("div").removeClass("active");
+            $(this).addClass("active");
+            var side = $(this).parent().hasClass("home") ? "home" : "away";
+            app.showTeam(side);
+            return false;
+          });
+
+        /* init */
+          $("#toggle").find("a").first().click();
+          $("#teams").find("div.team_name").first().click();
+      });
+
     });
     
-  /* init */
-    $("#toggle").find("a").first().click();
+    
+    
+
   })
   </script>
 </head>

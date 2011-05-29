@@ -258,24 +258,24 @@ div.miss:hover {
 
  /* blah */
 
-#teamage{
+#teams{
   overflow:hidden;
   position:relative;
   top:10px;
   z-index:5;
 }
 
-#teamage .home, #teamage .away{
+#teams .home, #teams .away{
   float:left;
 }
-#teamage .home {
+#teams .home {
   width:50%;
 }
-#teamage .away {
+#teams .away {
   width:48%;
 }
 
-#teamage .score{ 
+#teams .score{ 
   padding:10px;
   width:88px;
   font-weight:bold;
@@ -295,14 +295,14 @@ div.miss:hover {
   background: linear-gradient(top, #d2e6ef 0%,#a5cad2 51%,#8cc5d1 100%);
 }
 
-#teamage .home .score{ 
+#teams .home .score{ 
   float:right;
 }
-#teamage .away .score{ 
+#teams .away .score{ 
   float:left;
 }
 
-#teamage .team_name {
+#teams .team_name {
   padding:10px;
   width:200px;
   line-height:26px;
@@ -323,16 +323,16 @@ div.miss:hover {
   background: linear-gradient(top, #d2e6ef 0%,#a5cad2 51%,#8cc5d1 100%);
 
 }
-#teamage .home .team_name {
+#teams .home .team_name {
   float:right;
   border-right:0;
 }
-#teamage .away .team_name {
+#teams .away .team_name {
   float:left;
   border-left:0;
 }
 
-#teamage .team_name:hover, #teamage .team_name.active {
+#teams .team_name:hover, #teams .team_name.active {
   cursor:pointer;
   border-color:green;
   

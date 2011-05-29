@@ -29,6 +29,10 @@ var app = {
       app.$playersGame.removeClass("active");
       app.$actionsW.find("div.action").removeClass("active");
     })
+    
+  /* load teams */
+    app.loadTeam("home", game["home"], game["homePlayers"]);  
+    app.loadTeam("away", game["away"], game["awayPlayers"]);  
   },
   
   bindHover : function(){
@@ -48,8 +52,9 @@ var app = {
   keyize : function($node){
     var val = $node.attr("rel");
     var player = $node.parent()[0].id;
+    var side = $node.parent().parent().hasClass("home") ? "home" : "away";
     var action = app.$actionsW.find("div.action.active").first()[0].id;
-    return player + "." + action + "." + val;
+    return "game." + game["id"] + "." +  side + "." + player + "." + action + "." + val;
   },
   
   recordData : function(key){
@@ -61,27 +66,35 @@ var app = {
   },
   
   updateScore : function(){
-    var score = 0;
+    var homeScore = 0;
+    var awayScore = 0;
     for(var key in localStorage) {
       if(localStorage.hasOwnProperty(key)){
         var a = key.split(".");
-        var player = a[0], action = a[1], type = a[2];
-        console.log(action +":" + type + ", val: " + localStorage[key]);
 
-        if(type === "make" && app.pointValues.hasOwnProperty(action)){
-          score += (+localStorage[key]*app.pointValues[action]);
+        if(a.length === 6){ // 6 length means this is in stat format
+          // TODO: scope to this game only
+          var side = a[2], player = a[3], action = a[4], type = a[5];
+
+          if(type === "make" && app.pointValues.hasOwnProperty(action)){
+            var tally = (+localStorage[key]*app.pointValues[action]);
+            if(side === "home") homeScore += tally;
+            else awayScore += tally;
+          }
         }
       }
     }
-    $("#home_score").text(score);  
+    $("#home_score").text(homeScore);  
+    $("#away_score").text(awayScore);  
   },
   
-  loadTeam : function(side, data){
+  loadTeam : function(side, team, players){
+    $("#teams").find("."+side).find(".team_name").text(team["name"]);
     app.$playersGame.find("div."+side).empty();
     app.$playersBench.find("div."+side).empty();
     
-    $.tmpl("playerTemplate", data).appendTo(app.$playersGame.find("div."+side));
-    $.tmpl("playerTemplate", data).appendTo(app.$playersBench.find("div."+side));
+    $.tmpl("playerTemplate", players).appendTo(app.$playersGame.find("div."+side));
+    $.tmpl("playerTemplate", players).appendTo(app.$playersBench.find("div."+side));
     app.bindHover();
   },
   

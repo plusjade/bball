@@ -8,4 +8,5 @@ class Player
   
   belongs_to :team
   
+  has n, :stats
 end

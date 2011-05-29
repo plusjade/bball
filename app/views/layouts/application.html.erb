@@ -32,36 +32,7 @@
         
         app.init();
         
-        
-        /* defensive/offensive panels interface */
-          $("#toggle").find("a").click(function(){
-            $("#toggle").find("a").removeClass("active");
-            $(this).addClass("active");
-            var panel = $(this).attr("rel");
 
-            if(panel === "offense"){
-              app.$actionsW.find(".offense").show();
-              app.$actionsW.find(".defense").hide();
-            }else{
-              app.$actionsW.find(".offense").hide();
-              app.$actionsW.find(".defense").show();
-            }
-            return false;
-          })
-
-
-        /* toggle team panels */
-          $("#teams").find(".team_name").click(function(){
-            $("#teams").find("div").removeClass("active");
-            $(this).addClass("active");
-            var side = $(this).parent().hasClass("home") ? "home" : "away";
-            app.showTeam(side);
-            return false;
-          });
-
-        /* init */
-          $("#toggle").find("a").first().click();
-          $("#teams").find("div.team_name").first().click();
       });
 
     });

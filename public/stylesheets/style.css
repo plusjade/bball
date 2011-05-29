@@ -19,6 +19,8 @@ body {
 	line-height: 1;
 	color:#3a4c4c;
 	background:#daeded;
+	background:url("/images/body_bg.png") repeat 0 0;
+	background:url("/images/bg2.png") repeat 0 0;
 	font-family:arial;
 }
 ol, ul {
@@ -58,8 +60,9 @@ em {font-weight:bold;}
 #wrapper {
   margin:0;
   padding:0;
-  margin: 50px auto;
-  width:1000px;
+  margin: auto;
+  width:1024px;
+  height: 768px;
 }
 #top {
   position:absolute;
@@ -71,10 +74,11 @@ em {font-weight:bold;}
 
 
 #toggle {
-  margin-bottom:10px;
   padding:7px 0;
   text-align:center;
   position:relative;
+  width:250px;
+  border:1px solid red;
 }
 #toggle li {
  display:inline; 
@@ -110,153 +114,57 @@ em {font-weight:bold;}
 
 
 #actions_wrapper {
-  clear:both;
+  clear:left;
   overflow:hidden;
   margin-bottom:10px;
+  width:300px;
+}
+#actions_wrapper .offense, #actions_wrapper .defense {
+  clear:both;
+  overflow:hidden;
+  margin-bottom:20px;
 }
 #actions_wrapper div.action {
   float:left;
   padding:10px;
-  margin:10px;
-  height:100px;
-  width:100px;
-  background:#fff;
+  margin:8px;
+  height:60px;
+  width:110px;
   text-align:center;
   overflow:hidden;
+  line-height:60px;
+  font-weight:bold;
+  font-size:17px;
+  color:#FFF;
   -webkit-border-radius:10px;
-  -webkit-box-shadow:2px 1px 8px #777;
+  -webkit-box-shadow:1px 1px 3px #52633A;
+}
+#actions_wrapper div.offense div.action {
+  background-color:#AACD79;
+  text-shadow: 0px 1px 0px #52633A;
+  -webkit-box-shadow:1px 1px 3px #52633A;
+}  
+#actions_wrapper div.defense div.action {
+  background-color:#9AC1D6;
+  text-shadow: 0px 1px 0px #4B5E69;
+  -webkit-box-shadow:1px 1px 3px #4B5E69;
 }
 #actions_wrapper div.action:hover {
-  background:#FFAA3E;
   cursor:pointer;
 }
 #actions_wrapper div.action.active {
-  background:#199919;
-  color:#fff;
-  
-  background: #008a00;
-  background: -moz-linear-gradient(top, #008a00 0%, #52b152 38%, #008a00 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#008a00), color-stop(38%,#52b152), color-stop(100%,#008a00));
-  background: -webkit-linear-gradient(top, #008a00 0%,#52b152 38%,#008a00 100%);
-  background: -o-linear-gradient(top, #008a00 0%,#52b152 38%,#008a00 100%);
-  background: -ms-linear-gradient(top, #008a00 0%,#52b152 38%,#008a00 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#008A00', endColorstr='#008a00',GradientType=0 );
-  background: linear-gradient(top, #008a00 0%,#52b152 38%,#008a00 100%);
+  background:#FFAA3E !important;
+}
+
+#right_panel {
+  float:right;
+  width:700px;
+  position:relative;
+  top:10px;
 }
 
 
-
-
-/* PLAYERS */
-/*
-  ================== */
-
-#players_game {
-  clear:both;
-  border:2px solid #B1C1C1;
-  overflow:hidden;
-  padding:20px 15px;
-  background:#C5D7D7;
-  ackground:#2FC8D7;
-  min-height:140px;
-  -webkit-border-radius:10px;
-  -webkit-opacity:0.6;
-}
-#players_game.active {
-  border-color:#199919;
-  -webkit-opacity:1;
-}
-#players_bench {
-  -webkit-opacity:0.9;
-}
-div.action {
-  float:left;
-  margin:10px;
-  height:120px;
-  width:170px;
-  background:#fff;
-  text-align:center;
-  overflow:hidden;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-  -webkit-box-shadow:2px 1px 8px #777;
-  -moz-box-shadow:2px 1px 8px #777;
-  box-shadow:2px 1px 8px #777;
-}
-#players_bench div.action {
-  margin:10px 7px;
-  height:80px;
-  width:85px;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
-}
-div.action .head{
-  padding:5px 10px;
-  background:#333;
-  color:#fff;
-}
-
-#players_bench div.action .head{
-  font-size:14px;
-}
-div.action:hover {
-  background:#e0f7e1;
-  cursor:pointer;
-}
-
-/* number */
-div.action .number{
-  padding:10px 10px;
-  text-align:center;
-  font-weight:bold;
-  font-size:38px;
-  line-height:74px;
-}
-
-#players_bench div.action .number {
-  font-size:30px;
-  line-height:36px;
-}
-
-/* bool assignment */
-div.action .assign{ 
-  background:#199919;
-  color:#fff;
-  height:95px;
-  text-align:center;
-}
-
-
-/* make/miss */
-
-div.make, div.miss {
-  height:95px;
-  width:85px;
-  float:left;
-  color:#fff;
-  text-align:center;
-}
-div.make {
-  background:#199919;
-}
-div.miss {
-  background:#FF515A;
-}
-div.make:hover {
-  font-weight:bold;
-  cursor:pointer;
-}
-
-div.miss:hover {
-  font-weight:bold;
-  cursor:pointer;
-}
-
-
-
- /* blah */
+ /* TEAMS */
 
 #teams{
   overflow:hidden;
@@ -279,7 +187,7 @@ div.miss:hover {
   padding:10px;
   width:88px;
   font-weight:bold;
-  font-size:30px;
+  font-size:24px;
   text-align:center;
   border:2px solid #7B979C;
   background:#94B6BD;
@@ -305,7 +213,7 @@ div.miss:hover {
 #teams .team_name {
   padding:10px;
   width:200px;
-  line-height:26px;
+  line-height:20px;
   font-size:18px;
   position:relative;
   background:#94B6BD;
@@ -345,3 +253,122 @@ div.miss:hover {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6EC4CC', endColorstr='#00A5B5',GradientType=0 );
   background: linear-gradient(top, #6ec4cc 0%,#28aab7 58%,#00a5b5 100%);
 }
+
+
+
+/* PLAYERS */
+/*
+  ================== */
+
+#players_game {
+
+}
+#players_game.active {
+  border-color:#199919;
+  -webkit-opacity:1;
+}
+#players_bench {
+  -webkit-opacity:0.9;
+  display:none;
+}
+#players_game .home, #players_game .away {
+  clear:both;
+  margin-bottom:20px;
+  overflow:hidden;
+
+  border:2px dashed #FFF;
+  overflow:hidden;
+  padding:10px;
+  ackground:#C5D7D7;
+  min-height:140px;
+  -webkit-border-radius:10px;
+  
+}
+#players_bench .home, #players_bench .away {
+  clear:both;
+}
+div.action {
+  float:left;
+  margin:10px;
+  height:100px;
+  width:160px;
+  background:#fff;
+  text-align:center;
+  overflow:hidden;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow:1px 1px 3px #777;
+  -moz-box-shadow:2px 1px 8px #777;
+  box-shadow:1px 1px 3px #555;
+}
+#players_bench div.action {
+  margin:10px 7px;
+  height:80px;
+  width:85px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+div.action .head{
+  padding:5px 10px;
+  background:#333;
+  color:#fff;
+}
+
+#players_bench div.action .head{
+  font-size:14px;
+}
+div.action:hover {
+  background:#e0f7e1;
+  cursor:pointer;
+}
+
+/* number */
+div.action .number{
+  padding:10px 10px;
+  text-align:center;
+  font-weight:bold;
+  font-size:38px;
+  line-height:58px;
+}
+
+#players_bench div.action .number {
+  font-size:30px;
+  line-height:36px;
+}
+
+/* bool assignment */
+div.action .assign{ 
+  background:#199919;
+  color:#fff;
+  height:95px;
+  text-align:center;
+}
+
+
+/* make/miss */
+
+div.make, div.miss {
+  height:95px;
+  width:85px;
+  float:left;
+  color:#fff;
+  text-align:center;
+}
+div.make {
+  background:#199919;
+}
+div.miss {
+  background:#AE3B46;
+}
+div.make:hover {
+  font-weight:bold;
+  cursor:pointer;
+}
+
+div.miss:hover {
+  font-weight:bold;
+  cursor:pointer;
+}
+

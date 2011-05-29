@@ -8,7 +8,7 @@ class TeamsController < ApplicationController
   def show
     @team = Team.get!(params[:id])
     
-    @players = @team.players
+    @players = @team.players(:limit => 5)
     
     
     render :json => {

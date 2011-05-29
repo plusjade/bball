@@ -1,40 +1,5 @@
 <div id="wrapper">
   
-  <div id="right_panel">
-    
-    <div id="teams">
-      <div class="home">
-        <div id="home_score" class="score">0</div>
-        <div class="team_name">&#160;</div>
-      </div>
-      <div class="away">
-        <div id="away_score" class="score">0</div>
-        <div class="team_name">&#160;</div>
-      </div>
-    </div>
-  
-    <div id="players_game">
-      <div class="blah home_wrapper">
-        <div class="name">Pandabots</div>
-        <div id="home_score" class="score">0</div>
-        <div class="home"></div>
-      </div>
-      <div class="blah away_wrapper">
-        <div class="name">Lakers</div>
-        <div id="away_score" class="score">0</div>
-        <div class="away"></div>
-      </div>
-    </div>
-  
-    <div id="players_bench">
-      <div class="home"></div>
-      <div class="away"></div>
-    </div>
-
-  </div>
-  
-
-  
   <div id="actions_wrapper">
     <div class="offense">
       <div id="three" class="action" rel="shot">3pt Shot</div>
@@ -54,6 +19,78 @@
       <div id="charge" class="action">Charge</div>
     </div>
   </div>  
+
+  <div id="right_panel">
+    
+    <div id="players_bench">
+      
+      <div class="home_bench">
+      <% 10.times do %>
+        <div id="a" class="action">
+          <div class="head">subbie</div>
+          <div class="number">34</div>
+          <div class="assign js_record" rel="assign">&#160;</div>
+          <div class="miss js_record" rel="miss">&#160;</div>
+          <div class="make js_record" rel="make">&#160;</div>
+        </div>
+      <% end %>
+      </div>
+    
+      <div class="away_bench">
+      <% 10.times do %>
+        <div id="a" class="action">
+          <div class="head">away</div>
+          <div class="number">10</div>
+          <div class="assign js_record" rel="assign">&#160;</div>
+          <div class="miss js_record" rel="miss">&#160;</div>
+          <div class="make js_record" rel="make">&#160;</div>
+        </div>
+      <% end %>
+      </div>
+      
+    </div>
+    
+    <div id="toolbar">
+      
+    </div>
+    
+    <div id="teams">
+      <div class="home">
+        <div id="home_score" class="score">0</div>
+        <div class="team_name">&#160;</div>
+      </div>
+      <div class="away">
+        <div id="away_score" class="score">0</div>
+        <div class="team_name">&#160;</div>
+      </div>
+    </div>
+  
+    <div id="players_game">
+
+      <div class="blah home_wrapper">
+        <div class="name">Pandabots <a href="#">bench</a></div>
+        <div id="home_score" class="score">0</div>
+        <div class="home"></div>
+        
+
+        
+      </div>
+        
+      <div class="blah away_wrapper">
+        <div class="name">Lakers <a href="#">bench</a></div>
+        <div id="away_score" class="score">0</div>
+        <div class="away"></div>
+      </div>
+    </div>
+  
+    <div id="players_bench" style="display:none">
+      <div class="home"></div>
+      <div class="away"></div>
+    </div>
+  </div>
+
+
+
 </div>
 
 

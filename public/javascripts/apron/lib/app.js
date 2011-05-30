@@ -1,5 +1,5 @@
 var app = {
-  $actionsW : null,
+  $actions : null,
   $playersGame : null,
   $playersBench : null,
   
@@ -8,27 +8,43 @@ var app = {
   pointValues : {"three": 3, "two": 2, "layup": 2, "freethrow": 1},
   
   init : function(){
-    app.$actionsW = $("#actions_wrapper");
+    app.$actions = $("#actions_wrapper");
     app.$playersGame = $("#players_game");
     app.$playersBench = $("#players_bench");
 
   /* actions interface */  
-    app.$actionsW.find("div.action").live("click", function(){
-      app.$actionsW.find("div.action").removeClass("active");
-      app.$playersGame.addClass("active");
+    app.$actions.find("div.actions > div").live("click", function(){
+      app.$actions.find("div").removeClass("active");
       $(this).addClass("active");
     })
           
   /* record the data */  
     app.$playersGame.find("div.js_record").live("click", function(){
-      if(app.$actionsW.find("div.action.active").length === 0) return false;
+      if(app.$actions.find("div.active").length === 0) return false;
       app.recordData(app.keyize($(this)));
       app.updateScore();
       console.log(localStorage);
 
-      app.$playersGame.removeClass("active");
-      app.$actionsW.find("div.action").removeClass("active");
+      app.$actions.find("div").removeClass("active");
     })
+    
+  /* bench interface */
+    $("a.bench").click(function(){
+      var side = $(this).hasClass("home") ? "home" : "away";
+      app.$playersBench.removeClass("home_bg away_bg").addClass(side+"_bg").show();
+    
+      app.$playersBench.find("div.home").hide();
+      app.$playersBench.find("div.away").hide();
+    
+      app.$playersBench.find("div."+side).show();
+
+      return false;
+    });
+  
+    $("a.close").click(function(){
+      $(this).parent().hide();
+      return false;
+    });
     
   /* load teams */
     app.loadTeam("home", game["home"], game["homePlayers"]);  
@@ -36,16 +52,13 @@ var app = {
   },
   
   bindHover : function(){
-    app.$playersGame.find("div.action").hover(function(){
-      var actionType = app.$actionsW.find("div.action.active").first().attr("rel");
-      
-      $(this).find("div.number").hide();
+    app.$playersGame.find("div.player").hover(function(){
+      var actionType = app.$actions.find("div.active").first().attr("rel");
       if(actionType === "shot"){
         $(this).find("div.assign").hide();
       }
     },function(){
-      $(this).find("div.number").show();
-      $(this).find("div.assign").show();
+      $(this).find("div").show();
     });
   },
   
@@ -53,7 +66,7 @@ var app = {
     var val = $node.attr("rel");
     var player = $node.parent()[0].id;
     var side = $node.parent().parent().hasClass("home") ? "home" : "away";
-    var action = app.$actionsW.find("div.action.active").first()[0].id;
+    var action = app.$actions.find("div.active").first()[0].id;
     return "game." + game["id"] + "." +  side + "." + player + "." + action + "." + val;
   },
   
@@ -95,21 +108,7 @@ var app = {
     
     $.tmpl("playerTemplate", players).appendTo(app.$playersGame.find("div."+side));
     $.tmpl("playerTemplate", players).appendTo(app.$playersBench.find("div."+side));
-    //app.bindHover();
-  },
-  
-  showTeam : function(side){
-    app.$playersGame.find("div.home").hide();
-    app.$playersGame.find("div.away").hide();
-    app.$playersBench.find("div.home").hide();
-    app.$playersBench.find("div.away").hide();
-    
-    if(side === "home"){
-      app.$playersGame.find("div.home").show();
-      app.$playersBench.find("div.home").show();
-    }else{
-      app.$playersGame.find("div.away").show();
-      app.$playersBench.find("div.away").show();
-    }
+    app.bindHover();
   }
+
 }

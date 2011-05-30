@@ -31,23 +31,6 @@
         //console.log(JSON.parse(localStorage["game."+gameId]));
         
         app.init();
-        
-        $(".bench").click(function(){
-          var side = $(this).hasClass("home") ? "home" : "away";
-          $("#players_bench").removeClass("home_bg away_bg").addClass(side+"_bg").show();
-          
-          $("#players_bench").find("div.home").hide();
-          $("#players_bench").find("div.away").hide();
-          
-          $("#players_bench").find("div."+side).show();
-
-          return false;
-        });
-        
-        $("a.close").click(function(){
-          $(this).parent().hide();
-          return false;
-        });
       });
 
     });

@@ -3,7 +3,7 @@ var app = {
   $actions : null,
   $playersGame : null,
   $playersBench : null,
-  
+
   offensiveActions : ["three", "two", "layup", "freethrow", "orebound", "assist", "turnover"],
   defensiveActions : ["steal", "block", "drebound", "foul", "charge"],
   pointValues : {"three": 3, "two": 2, "layup": 2, "freethrow": 1},
@@ -56,7 +56,6 @@ var app = {
     app.$playersGame.find("div.js_record").live("click", function(){
       if(app.$actions.find("div.active").length === 0) return false;
       app.recordData(app.keyize($(this)));
-      app.updateScores();
       console.log(localStorage);
 
       app.$actions.find("div").removeClass("active");
@@ -77,6 +76,21 @@ var app = {
   
     $("a.close").click(function(){
       $(this).parent().hide();
+      return false;
+    });
+    
+    $("a.undo").live("click", function(){
+      $li = $(this).parent();
+      var key = $li.find("span").text();
+
+      if($li.hasClass("undone")){
+        app.recordData(key);
+        $li.remove();
+      }else{
+        app.unRecordData(key);
+        $li.find("a").text("REDO");
+      }
+      $li.toggleClass("undone");
       return false;
     });
     
@@ -121,7 +135,24 @@ var app = {
     }else{
       localStorage[key] = +localStorage[key] + 1;
     }
+
+    app.updateScores();
+    app.log('<span>'+key+'</span> <a href="#" class="undo">UNDO</a>');
   },
+
+  unRecordData : function(key){
+    if(!key) return false;
+    if(typeof localStorage[key] !== "undefined"){
+      if(localStorage[key] === 1){
+        localStorage.removeItem(key);
+      }else{
+        localStorage[key] = +localStorage[key] - 1;
+      }
+    }
+    console.log("unrecorded!");
+    app.updateScores();
+  },
+
   
   updateScores : function(){
     var homeScore = 0;
@@ -144,6 +175,10 @@ var app = {
     }
     $("#home_score").text(homeScore);  
     $("#away_score").text(awayScore);  
+  },
+  
+  log : function(message){
+    $("#log").prepend("<li>"+message+"</li>");
   }
 
 }

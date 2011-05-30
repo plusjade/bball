@@ -74,11 +74,22 @@ var app = {
       return false;
     });
   
+  /* close bench */
     $("a.close").click(function(){
       $(this).parent().hide();
       return false;
     });
-    
+
+  /* toggle logger */
+    $("div.tab").find("span").click(function(){
+      $("div.tab").find("span").show();
+      $(this).hide();
+      
+      var action = $(this).attr("rel");
+      $("#log").removeClass("expand contract").addClass(action);
+    });
+  
+  /* undo/redo logged actions */  
     $("a.undo").live("click", function(){
       $li = $(this).parent();
       var key = $li.find("span").text();
@@ -149,7 +160,6 @@ var app = {
         localStorage[key] = +localStorage[key] - 1;
       }
     }
-    console.log("unrecorded!");
     app.updateScores();
   },
 
@@ -179,6 +189,8 @@ var app = {
   
   log : function(message){
     $("#log").prepend("<li>"+message+"</li>");
+    $("#log").find("li.highlight").show();
+    setTimeout('$("#log").find("li.highlight").fadeOut(4000)', 1200);
   }
 
 }

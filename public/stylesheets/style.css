@@ -101,19 +101,22 @@ div.away div.head{
   Wrapper */
   
 #wrapper {
-  margin: auto;
   width:1024px;
-  height: 650px;
+  height: 690px;
+  position:relative;
+  margin: auto;
+  overflow:hidden;
 }
 
 /* ======================================================
   ACTIONS (left panel) */
 
 #actions_wrapper {
-  float:left;
-  overflow:hidden;
-  margin-top:20px;
+  position:absolute;
+  bottom:0;
+  left:0;
   width:300px;
+  overflow:hidden;
 }
 #actions_wrapper div.actions {
   float:left;
@@ -160,22 +163,25 @@ div.away div.head{
   RIGHT PANEL */
 
 #right_panel {
-  float:right;
+  position:absolute;
+  bottom:0;
+  right:0;
   width:700px;
-  position:relative;
-  top:10px;
 }
 
 #toolbar {
   height:110px;
 }
 
+/* ======================================================
+  Logger */
+  
 #log {
   position:absolute;
   top:0;
   left:0;
   width:350px;
-  height:93px;
+  height:90px;
   font-size:14px;
   z-index:10;
   overflow:hidden;
@@ -184,19 +190,23 @@ div.away div.head{
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  
 }
-
-log {
-  height:auto;
-  overflow:visible;
-  -webkit-box-shadow:4px 4px 8px #C6B38D;
+#log.expand {
+  height:665px;
+  -webkit-box-shadow:0px 0px 10px #C6B38D;
 }
-
 #log li{
   padding:4px 12px;
   color:#5D8053;
-  border:1px solid #eee;
+}
+#log li.highlight {
+  position:absolute;
+  top:0;
+  left:0;
+  width:326px;
+  z-index:-1;
+  background:yellow;
+  display:none;
 }
 #log li.undone span {
   text-decoration:line-through;
@@ -204,8 +214,49 @@ log {
 }
 #log li a {
   float:right;
-  font-size:12px;
+  font-size:10px;
+  padding:0px 7px;
+  -webkit-border-radius:5px;
+  background:#DFE2E2;
+  color:#A4A6A6;
+  box-shadow: inset -1px -1px 1px #C4C6C6;
 }
+#log li.undone a {
+  background:#BBD4B1;
+  color:#759E5B;
+  box-shadow: inset -1px -1px 1px #82AF65;
+}
+
+
+/* ======================================================
+  Expand/Contract Logger */
+  
+div.tab {
+  position:absolute;
+  top:32px;
+  left:-30px;
+  background:#FFF;
+  color:#800F02;
+  text-align:center;
+  font-size:14px;
+  z-index:50;
+  
+  -webkit-border-radius:7px;
+  -webkit-border-top-right-radius:0;
+  -webkit-border-bottom-right-radius:0;
+  
+  webkit-box-shadow: inset 0 0 4px #300500;  
+  webkit-box-shadow:4px 0px 8px #C6B38D;
+}
+div.tab span{
+  width:25px;
+  padding:5px;
+  display:block;
+  
+  z-index:50;
+  cursor:pointer;
+}
+
 /* ======================================================
   Player Icons */
 
@@ -218,7 +269,6 @@ div.player {
   text-align:center;
   overflow:hidden;
 }
-
 div.player .head{
   padding:5px 10px;
 }
@@ -268,14 +318,21 @@ div.miss:hover {
 /* ======================================================
   players in game */
 
+
 #players_game div.team{
   position:relative; 
   clear:both;
   height:240px;
   padding:10px;
-  margin-bottom:30px;
   overflow:visible;
 }
+#players_game div.team.home_bg {
+  margin-bottom:30px;
+}
+#players_game div.team.away_bg {
+  margin-bottom:10px;
+}
+
 #players_game div.team div.name{
  position:absolute;
  bottom:0px;
@@ -331,8 +388,7 @@ div.miss:hover {
     
   overflow:visible;
   z-index:50 !important;
-  
-  -webkit-box-shadow:4px 4px 8px #C6B38D;
+  box-shadow: 0 0 10px #C6B38D;
 }
 
 #players_bench div.player {
@@ -356,7 +412,7 @@ div.miss:hover {
 
 
 /* ======================================================
-  MISC */
+  Close Bench */
 
 a.close {
   position:absolute;
@@ -375,24 +431,4 @@ a.close {
   
   -webkit-box-shadow: inset 0 0 4px #300500;  
   -webkit-box-shadow:4px 0px 8px #C6B38D;
-}
-
-a.tab {
-  position:absolute;
-  top:1px;
-  left:-33px;
-  padding:5px;
-  display:block;
-  width:25px;
-  background:#FFF;
-  color:#800F02;
-  text-align:center;
-  z-index:5;
-  -webkit-border-radius:7px;
-  -webkit-border-top-right-radius:0;
-  -webkit-border-bottom-right-radius:0;
-  
-  webkit-box-shadow: inset 0 0 4px #300500;  
-  webkit-box-shadow:4px 0px 8px #C6B38D;
-  z-index:50;
 }

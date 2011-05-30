@@ -1,4 +1,5 @@
 var app = {
+  gameId : null,
   $actions : null,
   $playersGame : null,
   $playersBench : null,
@@ -7,7 +8,40 @@ var app = {
   defensiveActions : ["steal", "block", "drebound", "foul", "charge"],
   pointValues : {"three": 3, "two": 2, "layup": 2, "freethrow": 1},
   
+  start : function(gameId){
+    app.gameId = "game." + gameId;
+
+    if(localStorage[app.gameId]){
+      console.log("existing game!");
+      app.init();
+      app.updateScores();
+    }else{
+      console.log("load game from database!");
+      /*
+      to get to this page a game must have been created so
+      we'll likely have game data in localStorage. actually should be required
+      so we may not need this.
+      */
+      game = {id: gameId}
+      $.getJSON("/teams/1.json", function(data){
+        game["home"] = data["team"];
+        game["homePlayers"] = data["players"];
+      
+        $.getJSON("/teams/2.json", function(data){
+          game["away"] = data["team"];
+          game["awayPlayers"] = data["players"];
+        
+          localStorage[app.gameId] = JSON.stringify(game);
+
+          app.init();
+        });
+      });    
+
+    }
+  },
+
   init : function(){
+    $("#playerTemplate").template("playerTemplate");
     app.$actions = $("#actions_wrapper");
     app.$playersGame = $("#players_game");
     app.$playersBench = $("#players_bench");
@@ -22,7 +56,7 @@ var app = {
     app.$playersGame.find("div.js_record").live("click", function(){
       if(app.$actions.find("div.active").length === 0) return false;
       app.recordData(app.keyize($(this)));
-      app.updateScore();
+      app.updateScores();
       console.log(localStorage);
 
       app.$actions.find("div").removeClass("active");
@@ -47,8 +81,9 @@ var app = {
     });
     
   /* load teams */
-    app.loadTeam("home", game["home"], game["homePlayers"]);  
-    app.loadTeam("away", game["away"], game["awayPlayers"]);  
+    var tmp = JSON.parse(localStorage[app.gameId]);
+    app.loadTeam("home", tmp["home"], tmp["homePlayers"]);  
+    app.loadTeam("away", tmp["away"], tmp["awayPlayers"]);  
   },
   
   loadTeam : function(side, team, players){
@@ -77,7 +112,7 @@ var app = {
     var player = $node.parent()[0].id;
     var side = $node.parent().parent().hasClass("home") ? "home" : "away";
     var action = app.$actions.find("div.active").first()[0].id;
-    return "game." + game["id"] + "." +  side + "." + player + "." + action + "." + val;
+    return app.gameId + "." +  side + "." + player + "." + action + "." + val;
   },
   
   recordData : function(key){
@@ -88,7 +123,7 @@ var app = {
     }
   },
   
-  updateScore : function(){
+  updateScores : function(){
     var homeScore = 0;
     var awayScore = 0;
     for(var key in localStorage) {

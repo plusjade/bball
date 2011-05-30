@@ -5,45 +5,19 @@
   <%= stylesheet_link_tag "style" %>
   <%= render_javascripts %>
   <%= csrf_meta_tag %>
-  <script>
-  if (Modernizr.localstorage){
-    localStorage.clear();
-  } else {
-    console.log("boo");
-    // resort to cookies as best you can
-  }
-  
-  $(function(){
-    $("#playerTemplate").template("playerTemplate");
-
-    var gameId = 123;
-    game = {id: gameId}
-    
-    $.getJSON("/teams/1.json", function(data){
-      game["home"] = data["team"];
-      game["homePlayers"] = data["players"];
-      
-      $.getJSON("/teams/2.json", function(data){
-        game["away"] = data["team"];
-        game["awayPlayers"] = data["players"];
-        
-        localStorage["game."+gameId] = JSON.stringify(game);
-        //console.log(JSON.parse(localStorage["game."+gameId]));
-        
-        app.init();
-      });
-
-    });
-    
-    
-    
-
-  })
-  </script>
 </head>
 <body>
 
 <%= yield %>
 
+  <script>
+  if (Modernizr.localstorage){
+    //localStorage.clear();
+    app.start(123);
+  } else {
+    console.log("Sorry this app is cool so it requires HTML5 support");
+  }
+
+  </script>
 </body>
 </html>

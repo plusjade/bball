@@ -51,6 +51,16 @@ var app = {
     app.loadTeam("away", game["away"], game["awayPlayers"]);  
   },
   
+  loadTeam : function(side, team, players){
+    $("#"+side+"_name").find("span").text(team["name"]);
+    app.$playersGame.find("div."+side).empty();
+    app.$playersBench.find("div."+side).empty();
+    
+    $.tmpl("playerTemplate", players).appendTo(app.$playersGame.find("div."+side));
+    $.tmpl("playerTemplate", players).appendTo(app.$playersBench.find("div."+side));
+    app.bindHover();
+  },
+  
   bindHover : function(){
     app.$playersGame.find("div.player").hover(function(){
       var actionType = app.$actions.find("div.active").first().attr("rel");
@@ -60,7 +70,7 @@ var app = {
     },function(){
       $(this).find("div").show();
     });
-  },
+  },  
   
   keyize : function($node){
     var val = $node.attr("rel");
@@ -99,16 +109,6 @@ var app = {
     }
     $("#home_score").text(homeScore);  
     $("#away_score").text(awayScore);  
-  },
-  
-  loadTeam : function(side, team, players){
-    $("#teams").find("."+side).find(".team_name").text(team["name"]);
-    app.$playersGame.find("div."+side).empty();
-    app.$playersBench.find("div."+side).empty();
-    
-    $.tmpl("playerTemplate", players).appendTo(app.$playersGame.find("div."+side));
-    $.tmpl("playerTemplate", players).appendTo(app.$playersBench.find("div."+side));
-    app.bindHover();
   }
 
 }

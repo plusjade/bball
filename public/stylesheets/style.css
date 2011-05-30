@@ -62,19 +62,22 @@ em {font-weight:bold;}
   padding:0;
   margin: auto;
   width:1024px;
-  height: 768px;
+  height: 650px;
 }
 
+
 /* ACTIONS (left panel) */
+/* =============================================== */
 
 #actions_wrapper {
   float:left;
   overflow:hidden;
-  margin-bottom:10px;
+  margin-top:20px;
   width:300px;
 }
 #actions_wrapper .offense, #actions_wrapper .defense {
-  clear:both;
+  float:left;
+  width:149px;
   overflow:hidden;
 }
 #actions_wrapper div.action {
@@ -110,7 +113,10 @@ em {font-weight:bold;}
   background:#FFAA3E !important;
 }
 
+
+
 /* RIGHT PANEL */
+/* =============================================== */
 
 #right_panel {
   float:right;
@@ -211,15 +217,21 @@ em {font-weight:bold;}
   top:30px;
   left:-230px;
     
-  overflow:hidden;
-  background:#FFE6B5;
+  overflow:visible;
+  
   z-index:50 !important;
   
   -webkit-border-radius:10px;
   -webkit-box-shadow: inset 0 0 4px #C6B38D;  
   -webkit-box-shadow:4px 4px 8px #C6B38D;
+  background:#FFF;
 }
-
+#players_bench.home {
+  background:#FFE6B5;
+}
+#players_bench.away {
+  background:#FFC9B7;
+}
 #players_bench .home, #players_bench .away {
   clear:both;
 }
@@ -313,99 +325,23 @@ div.miss:hover {
 
 
 
+/* MISC */
 
-/* not using */
-
-
-/* TEAMS */
-
-#teams{
-  overflow:hidden;
-  position:relative;
-  top:10px;
+a.close {
+  position:absolute;
+  top:-26px;
+  left:15px;
+  padding:5px;
+  display:block;
+  width:165px;
+  background:#800F02;
+  color:#fff;
+  text-align:center;
   z-index:5;
-  display:none;
-}
-
-#teams .home, #teams .away{
-  float:left;
-}
-#teams .home {
-  width:50%;
-}
-#teams .away {
-  width:48%;
-}
-
-#teams .score{ 
-  padding:10px;
-  width:88px;
-  font-weight:bold;
-  font-size:24px;
-  text-align:center;
-  border:2px solid #7B979C;
-  background:#94B6BD;
-  color:#fff;
+  -webkit-border-radius:7px;
+  -webkit-border-bottom-right-radius:0;
+  -webkit-border-bottom-left-radius:0;
   
-  background:#A5CAD2;
-  background: -moz-linear-gradient(top, #d2e6ef 0%, #a5cad2 51%, #8cc5d1 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d2e6ef), color-stop(51%,#a5cad2), color-stop(100%,#8cc5d1));
-  background: -webkit-linear-gradient(top, #d2e6ef 0%,#a5cad2 51%,#8cc5d1 100%);
-  background: -o-linear-gradient(top, #d2e6ef 0%,#a5cad2 51%,#8cc5d1 100%);
-  background: -ms-linear-gradient(top, #d2e6ef 0%,#a5cad2 51%,#8cc5d1 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#D2E6EF', endColorstr='#8CC5D1',GradientType=0 );
-  background: linear-gradient(top, #d2e6ef 0%,#a5cad2 51%,#8cc5d1 100%);
+  -webkit-box-shadow: inset 0 0 4px #300500;  
+  -webkit-box-shadow:4px 0px 8px #C6B38D;
 }
-
-#teams .home .score{ 
-  float:right;
-}
-#teams .away .score{ 
-  float:left;
-}
-
-#teams .team_name {
-  padding:10px;
-  width:200px;
-  line-height:20px;
-  font-size:18px;
-  position:relative;
-  background:#94B6BD;
-  border:2px solid #daeded;
-  color:#fff;
-  text-align:center;
-  
-  background:#A5CAD2;
-  background: -moz-linear-gradient(top, #d2e6ef 0%, #a5cad2 51%, #8cc5d1 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d2e6ef), color-stop(51%,#a5cad2), color-stop(100%,#8cc5d1));
-  background: -webkit-linear-gradient(top, #d2e6ef 0%,#a5cad2 51%,#8cc5d1 100%);
-  background: -o-linear-gradient(top, #d2e6ef 0%,#a5cad2 51%,#8cc5d1 100%);
-  background: -ms-linear-gradient(top, #d2e6ef 0%,#a5cad2 51%,#8cc5d1 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#D2E6EF', endColorstr='#8CC5D1',GradientType=0 );
-  background: linear-gradient(top, #d2e6ef 0%,#a5cad2 51%,#8cc5d1 100%);
-
-}
-#teams .home .team_name {
-  float:right;
-  border-right:0;
-}
-#teams .away .team_name {
-  float:left;
-  border-left:0;
-}
-
-#teams .team_name:hover, #teams .team_name.active {
-  cursor:pointer;
-  border-color:green;
-  
-  background:#28AAB7; 
-  background: -moz-linear-gradient(top, #6ec4cc 0%, #28aab7 58%, #00a5b5 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6ec4cc), color-stop(58%,#28aab7), color-stop(100%,#00a5b5));
-  background: -webkit-linear-gradient(top, #6ec4cc 0%,#28aab7 58%,#00a5b5 100%);
-  background: -o-linear-gradient(top, #6ec4cc 0%,#28aab7 58%,#00a5b5 100%);
-  background: -ms-linear-gradient(top, #6ec4cc 0%,#28aab7 58%,#00a5b5 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6EC4CC', endColorstr='#00A5B5',GradientType=0 );
-  background: linear-gradient(top, #6ec4cc 0%,#28aab7 58%,#00a5b5 100%);
-}
-
-

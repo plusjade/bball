@@ -38,11 +38,11 @@ q:before, q:after {
 	content: none;
 }
 
-a {
-	text-decoration: none;
-}
+a {text-decoration: none;}
 
-/* base */ 
+/* ======================================================
+  Base Styles */ 
+
 h1, h2, h3, h4, h5 {margin-bottom:10px; font-family:verdana;}
 h1 { font-size:26px;}
 h2 { font-size:22px;}
@@ -55,19 +55,59 @@ p {margin-bottom:10px;
   line-height:1.5em;
   }
 em {font-weight:bold;}
+
+/* ======================================================
+  UI colors and styles */
+
+.round {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.home_bg{
+  background:#FFE6B5;
+  -webkit-box-shadow: inset 0 0 4px #C6B38D;  
+  -moz-box-shadow: inset 0 0 4px #C6B38D;  
+  box-shadow: inset 0 0 4px #C6B38D;  
+}
+div.home div.player {
+  -webkit-box-shadow: inset 0 0 4px #DFC160;
+}
+div.home div.head{
+  background:#DFC160;
+  color:#fff;
+  -webkit-box-shadow: inset 0 0 2px #C6B38D;
+  text-shadow: 0px 1px 0px #C6B38D;
+}
+
+.away_bg{
+  background:#FFC9B7;
+  -webkit-box-shadow: inset 0 0 4px #AF8A7B;  
+  -moz-box-shadow: inset 0 0 4px #AF8A7B;  
+  box-shadow: inset 0 0 4px #AF8A7B;  
+}
+div.away div.player {
+  -webkit-box-shadow: inset 0 0 4px #AF8A7B;
+}
+div.away div.head{
+  background:#FF9776;
+  color:#fff;
+  -webkit-box-shadow: inset 0 0 2px #AF8A7B;
+  text-shadow: 0px 1px 0px #AF8A7B;
+}
+
+/* ======================================================
+  Wrapper */
   
-/* wrapper */
 #wrapper {
-  margin:0;
-  padding:0;
   margin: auto;
   width:1024px;
   height: 650px;
 }
 
-
-/* ACTIONS (left panel) */
-/* =============================================== */
+/* ======================================================
+  ACTIONS (left panel) */
 
 #actions_wrapper {
   float:left;
@@ -75,12 +115,12 @@ em {font-weight:bold;}
   margin-top:20px;
   width:300px;
 }
-#actions_wrapper .offense, #actions_wrapper .defense {
+#actions_wrapper div.actions {
   float:left;
   width:149px;
   overflow:hidden;
 }
-#actions_wrapper div.action {
+#actions_wrapper div.actions div {
   float:left;
   height:60px;
   width:110px;
@@ -93,30 +133,31 @@ em {font-weight:bold;}
   font-weight:bold;
   font-size:17px;
   color:#FFF;
-
-  -webkit-border-radius:10px;
 }
-#actions_wrapper div.offense div.action {
+#actions_wrapper div.actions div:hover {
+  cursor:pointer;
+}
+#actions_wrapper div.actions div.active {
+  background:#FFAA3E !important;
+}
+#actions_wrapper div.actions.offense div {
   background-color:#AACD79;
   text-shadow: 0px 1px 0px #52633A;
   -webkit-box-shadow:inset -1px -1px 3px #6F874E;
+  -moz-box-shadow:inset -1px -1px 3px #6F874E;
+  box-shadow:inset -1px -1px 3px #6F874E;
 }  
-#actions_wrapper div.defense div.action {
+#actions_wrapper div.actions.defense div {
   background-color:#9AC1D6;
   text-shadow: 0px 1px 0px #4B5E69;
   -webkit-box-shadow:inset -1px -1px 3px #627B88;
-}
-#actions_wrapper div.action:hover {
-  cursor:pointer;
-}
-#actions_wrapper div.action.active {
-  background:#FFAA3E !important;
+  -moz-box-shadow:inset -1px -1px 3px #627B88;
+  box-shadow:inset -1px -1px 3px #627B88;
 }
 
 
-
-/* RIGHT PANEL */
-/* =============================================== */
+/* ======================================================
+  RIGHT PANEL */
 
 #right_panel {
   float:right;
@@ -124,48 +165,82 @@ em {font-weight:bold;}
   position:relative;
   top:10px;
 }
+
 #toolbar {
   height:80px;
 }
 
+/* ======================================================
+  Player Icons */
 
-/* PLAYERS */
-/* ================== */
-
-#players_game {
-
+div.player {
+  float:left;
+  margin:10px;
+  height:100px;
+  width:160px;
+  background:#fff;
+  text-align:center;
+  overflow:hidden;
 }
 
-#players_game div.blah{
+div.player .head{
+  padding:5px 10px;
+}
+div.player .number{
+  padding:10px 10px;
+  text-align:center;
+  font-weight:bold;
+  font-size:38px;
+  line-height:54px;
+}
+
+/* ======================================================
+  Player bool assignment */
+
+#players_game div.player .assign:hover{ 
+  background:#199919;
+  color:#FFF;
+  cursor:pointer;
+}
+
+/* ======================================================
+  Player make/miss */
+
+div.make, div.miss {
+  height:95px;
+  width:85px;
+  float:left;
+  color:#fff;
+  text-align:center;
+}
+div.make {
+  background:#199919;
+}
+div.miss {
+  background:#AE3B46;
+}
+div.make:hover {
+  font-weight:bold;
+  cursor:pointer;
+}
+div.miss:hover {
+  font-weight:bold;
+  cursor:pointer;
+}
+
+
+/* ======================================================
+  players in game */
+
+#players_game div.team{
   position:relative; 
   clear:both;
   height:240px;
   padding:10px;
   margin-bottom:30px;
   overflow:visible;
-  
-  -webkit-border-radius:10px;
 }
-#players_game div.home_wrapper {
-  background:#FFE6B5;
-  -webkit-box-shadow: inset 0 0 4px #C6B38D;  
-}
-
-#players_game div.away_wrapper {
-  background:#FFC9B7;
-  -webkit-box-shadow: inset 0 0 4px #AF8A7B;  
-}
-
-#players_game div.home_wrapper div.action .head{
-  background:#DFC160;
-  color:#fff;
-}
-#players_game div.away_wrapper div.action .head{
-  background:#FF9776;
-  color:#fff;
-}
-
-#players_game div.name{
+#players_game div.team div.name{
  position:absolute;
  bottom:0px;
  right:0px;
@@ -182,10 +257,10 @@ em {font-weight:bold;}
  
  -webkit-box-shadow: inset 1px 1px 4px #C6B38D;  
 }
-#players_game div.name a{
+#players_game div.team div.name a{
  float:right; 
 }
-#players_game div.score{
+#players_game div.team div.score{
   position:absolute;
   top:0px;
   right:0px;
@@ -207,7 +282,8 @@ em {font-weight:bold;}
 }
 
 
-/* PLAYERS BENCH */
+/* ======================================================
+  PLAYERS BENCH */
 
 #players_bench {
   clear:both;
@@ -218,42 +294,12 @@ em {font-weight:bold;}
   left:-230px;
     
   overflow:visible;
-  
   z-index:50 !important;
   
-  -webkit-border-radius:10px;
-  -webkit-box-shadow: inset 0 0 4px #C6B38D;  
   -webkit-box-shadow:4px 4px 8px #C6B38D;
-  background:#FFF;
-}
-#players_bench.home {
-  background:#FFE6B5;
-}
-#players_bench.away {
-  background:#FFC9B7;
-}
-#players_bench .home, #players_bench .away {
-  clear:both;
 }
 
-
-/* player icons */
-
-div.action {
-  float:left;
-  margin:10px;
-  height:100px;
-  width:160px;
-  background:#fff;
-  text-align:center;
-  overflow:hidden;
-  
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 4px #555;  
-}
-#players_bench div.action {
+#players_bench div.player {
   margin:10px 7px;
   height:80px;
   width:85px;
@@ -261,71 +307,20 @@ div.action {
   -moz-border-radius: 8px;
   border-radius: 8px;
 }
-
-div.action .head{
-  padding:5px 10px;
-  color:#fff;
+#players_bench div.player { 
+  cursor:move;
 }
-
-#players_bench div.action .head{
+#players_bench div.player .head{
   font-size:14px;
 }
-div.action:hover {
-  background:#e0f7e1;
-  cursor:pointer;
-}
-
-/* number */
-div.action .number{
-  padding:10px 10px;
-  text-align:center;
-  font-weight:bold;
-  font-size:38px;
-  line-height:58px;
-}
-
-#players_bench div.action .number {
+#players_bench div.player .number {
   font-size:30px;
   line-height:36px;
 }
 
-/* bool assignment */
-div.action .assign{ 
-  background:#199919;
-  color:#fff;
-  height:95px;
-  text-align:center;
-}
 
-
-/* make/miss */
-
-div.make, div.miss {
-  height:95px;
-  width:85px;
-  float:left;
-  color:#fff;
-  text-align:center;
-}
-div.make {
-  background:#199919;
-}
-div.miss {
-  background:#AE3B46;
-}
-div.make:hover {
-  font-weight:bold;
-  cursor:pointer;
-}
-
-div.miss:hover {
-  font-weight:bold;
-  cursor:pointer;
-}
-
-
-
-/* MISC */
+/* ======================================================
+  MISC */
 
 a.close {
   position:absolute;

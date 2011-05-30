@@ -95,7 +95,7 @@ var app = {
     
     $.tmpl("playerTemplate", players).appendTo(app.$playersGame.find("div."+side));
     $.tmpl("playerTemplate", players).appendTo(app.$playersBench.find("div."+side));
-    app.bindHover();
+    //app.bindHover();
   },
   
   showTeam : function(side){

@@ -1,0 +1,57 @@
+<div id="wrapper">
+
+  <div id="title">New Team</div>
+  
+  <ul id="dash_navigation">
+    <li class="active round">Teams</li>
+    <li class="round">Games</li>
+    <li class="round">Account</li>
+  </ul>
+
+  <div id="work_wrapper" class="round" style="display:none">
+    
+  </div>
+  
+  <div id="tabs_wrapper" class="round">
+  
+    <div id="teams_pane" class="tabs">
+      <div class="new round">New Team</div>
+    <% 2.times do %>  
+      <div class="round">Pandabots</div>
+      <div class="round">Gametime</div>
+      <div class="round">SuperNova</div>
+      <div class="round">BTR</div>
+      <div class="round">Pistoleros</div>
+      <div class="round">Team Supreme</div>
+    <% end %>
+    </div>
+  
+    <div id="games_pane" class="tabs">
+      <div class="new round">New Game</div>
+    <% 2.times do %>  
+      <div class="round">Pandabots</div>
+      <div class="round">Gametime</div>
+      <div class="round">SuperNova</div>
+      <div class="round">BTR</div>
+      <div class="round">Pistoleros</div>
+      <div class="round">Team Supreme</div>
+    <% end %>
+    </div>
+  
+    <div class="tabs">
+      Account
+    </div>
+    
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+  $(function(){
+    simpleTabs.init($("#dash_navigation"), $("#tabs_wrapper"));
+    
+    $("#teams_pane").find("div.new").click(function(){
+      simpleTabs.clear();
+    })
+  })
+</script>

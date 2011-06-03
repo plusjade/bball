@@ -11,6 +11,7 @@ var simpleTabs = {
     });
     
     simpleTabs.showFirstTab();
+    simpleTabs.clear();
   },
   
   showFirstTab : function(){
@@ -21,13 +22,17 @@ var simpleTabs = {
   showTab : function(node){
     simpleTabs.clear();
     
+    simpleTabs.$wrapper.show();
     var tabIndex = node.index();
     simpleTabs.$wrapper.find("div.tabs").eq(tabIndex).show();
     node.addClass("active");
+    
+    $("#title").removeClass("active")
   },
   
   clear : function(){
     simpleTabs.$list.find("li").removeClass("active");
     simpleTabs.$wrapper.find("div.tabs").hide();
+    simpleTabs.$wrapper.hide();
   }
 }

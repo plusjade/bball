@@ -9,8 +9,21 @@
   </ul>
 
   <div id="work_wrapper" class="round">
-    <div id="team_breakdown">
-
+    <div id="team_roster">
+      
+      <div id="new_player">
+        <div class="row" style="display:none"><div class="number"><input type="text" value="" maxlength="2" /></div><div class="name"><input type="text" value="" /></div><div class="delete">&#10006;</div></div>
+        <div class="row"><div class="number"><input type="text" value="00" maxlength="2" /></div><div class="name"><input type="text" value="name" /></div><div class="add">&#10010;</div></div>
+      </div>
+      
+      <div class="players">
+      <% 3.times do %>
+        <div class="row"><div class="number"><input type="text" value="12" maxlength="2" /></div><div class="name"><input type="text" value="Jade" /></div><div class="delete">&#10006;</div></div>
+        <div class="row"><div class="number"><input type="text" value="56" maxlength="2" /></div><div class="name"><input type="text" value="Tom" /></div><div class="delete">&#10006;</div></div>
+        <div class="row"><div class="number"><input type="text" value="34" maxlength="2" /></div><div class="name"><input type="text" value="Bobert" /></div><div class="delete">&#10006;</div></div>
+      <% end %>
+      </div>
+      
     </div>
   </div>
   
@@ -94,7 +107,21 @@
     simpleTabs.init($("#dash_navigation"), $("#tabs_wrapper"));
     
     $("#title").click(function(){
+      $(this).addClass("active")
       simpleTabs.clear();
     })
+    
+    $("#team_roster").find("div.add").click(function(){
+      var $clone = $("#team_roster").find("div.row").first().clone().show();
+      $clone.find("input").first().val($(this).parent().find("input").first().val());
+      $clone.find("input").last().val($(this).parent().find("input").last().val());
+      $("#team_roster").find("div.players").append($clone);
+    })
+    
+    $("#team_roster").find("div.delete").live("click", function(){
+      $(this).parent().remove();
+    })
+    
+    
   })
 </script>

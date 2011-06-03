@@ -19,8 +19,9 @@ body {
 	line-height: 1;
 	color:#3a4c4c;
 	background:#daeded;
-	background:url("/images/body_bg.png") repeat 0 0;
-	background:url("/images/bg2.png") repeat 0 0;
+  background:url("/images/bg2.png") repeat 0 0;
+  background:url("/images/woodlight.jpg") repeat 0 0;
+  background:url("/images/darkwood.png") repeat 0 0;
 	font-family:arial;
 }
 ol, ul {

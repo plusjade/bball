@@ -111,17 +111,32 @@
       simpleTabs.clear();
     })
     
+    
+    $("#teams_pane").find(".offensive_style").click(function(){
+      var team = $(this).text().toLowerCase().replace(" ", "-");
+      console.log(team);
+    })
+    
     $("#team_roster").find("div.add").click(function(){
       var $clone = $("#team_roster").find("div.row").first().clone().show();
       $clone.find("input").first().val($(this).parent().find("input").first().val());
       $clone.find("input").last().val($(this).parent().find("input").last().val());
       $("#team_roster").find("div.players").append($clone);
+      teamRoster.update();
     })
     
     $("#team_roster").find("div.delete").live("click", function(){
       $(this).parent().remove();
+      teamRoster.update();
     })
     
+    $("#team_roster").find("div.players").find("input").keyup(function(){
+      teamRoster.update();
+    })
     
   })
+</script>
+
+<script id="rosterTemplate" type="text/x-jquery-tmpl">
+  <div class="row"><div class="number"><input type="text" value="${number}" maxlength="2" /></div><div class="${name}"><input type="text" value="Jade" /></div><div class="delete">&#10006;</div></div>
 </script>

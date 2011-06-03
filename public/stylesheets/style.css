@@ -105,6 +105,24 @@ div.away div.head{
   text-shadow: 0px 1px 0px #AF8A7B;
 }
 
+
+.offensive_style {
+  color:#FFF;
+  background-color:#AACD79;
+  text-shadow: 0px 1px 0px #52633A;
+  -webkit-box-shadow:inset -1px -1px 3px #6F874E;
+  -moz-box-shadow:inset -1px -1px 3px #6F874E;
+  box-shadow:inset -1px -1px 3px #6F874E;
+}
+
+.defensive_style {
+  color:#FFF;
+  background:#9AC1D6;
+  text-shadow: 0px 1px 0px #4B5E69;
+  -webkit-box-shadow:inset -1px -1px 3px #627B88;
+  -moz-box-shadow:inset -1px -1px 3px #627B88;
+  box-shadow:inset -1px -1px 3px #627B88;
+}
 /* ======================================================
   Wrapper */
   
@@ -483,11 +501,21 @@ a.close {
 
 /* ======================================================
   Account Page */
+
+#work_wrapper{
+  clear:both;
+  padding:10px;
+  height:400px;
+  background:transparent;
+  -webkit-border-top-left-radius:0;
+}
   
+    
 #dash_navigation{
   padding:6px;
   text-align:right;
   position:relative;
+  float:right;
   top:1px;
 }  
 #dash_navigation li{ 
@@ -506,7 +534,7 @@ a.close {
   -moz-border-radius-bottomleft:0;
 }
 #dash_navigation li.active{ 
-  background:#EBF5F2;
+  background:#FFF;
 }
 #title{
   position:absolute;
@@ -516,39 +544,143 @@ a.close {
   line-height:40px;
   border-bottom:2px solid #333;
   font-weight:bold;
-}
-#work_wrapper{
-  padding:10px;
-  height:400px;
-  -webkit-border-top-left-radius:0;
+  cursor:pointer;
 }
 
 #tabs_wrapper{
   height:400px;
+  width:100%;
+  position:absolute;
+  top:47px;
 }
-
 .tabs {
   clear:both;
   height:400px;
   padding:10px;
-  background:#EBF5F2;
+  background:#FFF;
   overflow:hidden;
   
   -webkit-box-shadow:2px 2px 8px #ccc;
+  -webkit-border-radius:10px;
 }
-.tabs div{
+
+/* ======================================================
+  Teams Tab */
+
+#teams_pane div.left {
+  width:500px;
+  float:left;
+}
+#teams_pane div.right {
+  width:480px;
   float:right;
-  padding:10px;
-  width:120px;
-  height:70px;
-  margin:10px;
-  background:#555;
-  color:#fff;
+}
+
+#teams_pane div.left div.round{
+  float:left;
+  padding:10px 15px;
+  margin:7px;
   text-align:center;
-  line-height:72px;
   font-size:16px;
-  
+  -webkit-border-radius:5px;
 } 
-.tabs div.new {
-  background:#558015;
+
+#new_team {
+  padding:5px;
+  margin-bottom:10px;
+  -webkit-border-radius:5px;
+}
+
+#new_team input{
+  width:270px;
+  font-size:18px;
+  padding:3px;
+  font-weight:bold;
+  background:#EBF5F2;
+  border:1px solid #627B88;
+}
+
+#new_game {
+  padding-left:20px;
+  border-left:1px dashed #333;
+  overflow:hidden;
+}
+#new_game .drop{ 
+  height:300px;
+  margin:10px;
+}
+#new_game .drop .home{ 
+  height:120px;
+  }
+#new_game .drop .away{ 
+  height:120px;
+  }
+#new_game .drop .vs{ 
+  text-align:center;
+  font-weight:bold;
+  font-size:26px;
+  line-height:48px;
+  }
+#new_game .start div{   
+  float:left;
+  width:250px;
+  position:relative;
+  top:10px;
+  left:50px;
+  line-height:1.5em;
+}
+#new_game button{ 
+  display:block;
+  float:right;
+  width:100px;
+  padding:20px;
+  text-align:center;
+  background:green;
+  color:#FFF;
+  border:0;
+  -webkit-border-radius:10px;
+  
+}  
+
+/* ======================================================
+  Games Tab */
+
+#games_pane table {
+  border-collapse:collapse;
+  margin-left:220px;
+}
+#games_pane td {
+  padding:10px;
+  -webkit-border-radius:10px;
+}
+#games_pane td.date { 
+  font-size:12px;
+  color:#777;
+  }
+#games_pane td.home { 
+  text-align:right;
+  width:200px;
+  background:#EBF5F2;
+  border-right:4px solid #FFF;
+  border-bottom:4px solid #FFF;
+}
+#games_pane td.away { 
+  width:200px;
+  background:#EBF5F2;
+  border-left:4px solid #FFF;
+  border-bottom:4px solid #FFF;
+}
+#games_pane td.vs { 
+  width:35px;
+  background:#EBF5F2;
+  text-align:center;
+  border-bottom:4px solid #FFF;
+}
+#games_pane td.home span { 
+  float:left;
+  font-weight:bold;
+}
+#games_pane td.away span { 
+  float:right;
+  font-weight:bold;
 }

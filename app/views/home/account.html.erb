@@ -1,6 +1,6 @@
 <div id="wrapper">
 
-  <div id="title">New Team</div>
+  <div id="title">Team: PandaBots</div>
   
   <ul id="dash_navigation">
     <li class="active round">Teams</li>
@@ -8,34 +8,77 @@
     <li class="round">Account</li>
   </ul>
 
-  <div id="work_wrapper" class="round" style="display:none">
-    
+  <div id="work_wrapper" class="round">
+    <div id="team_breakdown">
+
+    </div>
   </div>
   
   <div id="tabs_wrapper" class="round">
   
     <div id="teams_pane" class="tabs">
-      <div class="new round">New Team</div>
-    <% 2.times do %>  
-      <div class="round">Pandabots</div>
-      <div class="round">Gametime</div>
-      <div class="round">SuperNova</div>
-      <div class="round">BTR</div>
-      <div class="round">Pistoleros</div>
-      <div class="round">Team Supreme</div>
-    <% end %>
+      <div class="left">
+        <div id="new_team" class="defensive_style">
+          <label>Name</label> <input type="text" name="team_name"/>
+          <button>Create New Team</button>
+        </div>
+      <% 2.times do %>  
+        <div class="round offensive_style">Pandabots</div>
+        <div class="round offensive_style">Gametime</div>
+        <div class="round offensive_style">SuperNova</div>
+        <div class="round offensive_style">BTR</div>
+        <div class="round offensive_style">Pistoleros</div>
+        <div class="round offensive_style">Team Supreme</div>
+      <% end %>
+      </div>
+      
+      <div class="right">
+        <div id="new_game">
+          <div class="drop">
+            <div class="home home_bg round"></div>
+            <div class="vs">VS</div>
+            <div class="away away_bg round"></div>
+          </div>
+          <div class="start">
+            <div>
+              Drag a team into home and away boxes above to start a game.
+            </div>
+          <button>Start New Game</button>
+          </div>
+        </div>
+      </div>
+    
     </div>
   
     <div id="games_pane" class="tabs">
-      <div class="new round">New Game</div>
+      <table>
     <% 2.times do %>  
-      <div class="round">Pandabots</div>
-      <div class="round">Gametime</div>
-      <div class="round">SuperNova</div>
-      <div class="round">BTR</div>
-      <div class="round">Pistoleros</div>
-      <div class="round">Team Supreme</div>
+      <tr>
+        <td class="home"><span>55</span>Pandabots</td><td class="vs">vs</td><td class="away">Gametime <span>45</span></td>
+        <td class="date">SUN May 24, 2011</td>
+      </tr>
+      <tr>
+        <td class="home"><span>74</span>Gametime</td><td class="vs">vs</td><td class="away">SuperNova<span>57</span></td>
+        <td class="date">MON JUN 24, 2011</td>
+      </tr>
+      <tr>
+        <td class="home"><span>54</span>SuperNova</td><td class="vs">vs</td><td class="away">Pandabots<span>35</span></td>
+        <td class="date">SUN May 24, 2011</td>
+      </tr>
+      <tr>
+        <td class="home"><span>78</span>BTR</td><td class="vs">vs</td><td class="away">Pandabots<span>45</span></td>
+        <td class="date">SAT APR 24, 2011</td>
+      </tr>
+      <tr>
+        <td class="home"><span>12</span>Pistoleros</td><td class="vs">vs</td><td class="away">SuperNova<span>56</span></td>
+        <td class="date">SUN FEB 24, 2011</td>
+      </tr>
+      <tr>
+        <td class="home"><span>34</span>Pistoleros</td><td class="vs">vs</td><td class="away">Team Supreme<span>58</span></td>
+        <td class="date">TUE JAN 24, 2011</td>
+      </tr>
     <% end %>
+      </table>
     </div>
   
     <div class="tabs">
@@ -50,7 +93,7 @@
   $(function(){
     simpleTabs.init($("#dash_navigation"), $("#tabs_wrapper"));
     
-    $("#teams_pane").find("div.new").click(function(){
+    $("#title").click(function(){
       simpleTabs.clear();
     })
   })

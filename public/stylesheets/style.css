@@ -133,7 +133,6 @@ div.away div.head{
   position:relative;
   margin: auto;
   overflow:hidden;
-  border:1px solid black;
 }
 
 /* ======================================================
@@ -511,7 +510,7 @@ a.close {
   line-height:40px;
   font-weight:bold;
   cursor:pointer;
-  color:#333;
+  color:#FFF;
 
   -webkit-border-radius:10px;
   -webkit-border-top-left-radius:0;
@@ -530,19 +529,20 @@ a.close {
   -webkit-border-top-left-radius:0;
 }
   
-    
 #dash_navigation{
   padding:6px;
   text-align:right;
   position:relative;
   float:right;
-  top:1px;
+  top:3px;
+  z-index:5;
 }  
 #dash_navigation li{ 
   display:inline;
   padding:10px 20px;
   margin-right:10px;
   font-size:22px;
+  color:#FFF;
   cursor:pointer;
   -webkit-border-radius:7px;
   -moz-border-radius:7px;
@@ -555,6 +555,7 @@ a.close {
 }
 #dash_navigation li.active{ 
   background:#FFF;
+  color:#333;
 }
 
 
@@ -708,7 +709,6 @@ a.close {
   width:400px;
   padding:10px; 
   margin:7px 15px;
-  border-bottom:2px dashed #FFF;
   overflow:hidden;
 }
 #new_player div.row {

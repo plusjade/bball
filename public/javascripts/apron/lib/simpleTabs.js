@@ -11,7 +11,6 @@ var simpleTabs = {
     });
     
     simpleTabs.showFirstTab();
-    simpleTabs.clear();
   },
   
   showFirstTab : function(){

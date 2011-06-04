@@ -589,12 +589,13 @@ a.close {
   float:right;
 }
 
-#teams_pane div.left div.round{
+#teams_list div{
   float:left;
   padding:10px 15px;
   margin:7px;
   text-align:center;
   font-size:16px;
+  cursor:pointer;
   -webkit-border-radius:5px;
 } 
 

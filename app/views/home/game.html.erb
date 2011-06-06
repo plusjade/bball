@@ -1,0 +1,76 @@
+<div id="wrapper">
+  
+  <div id="actions_wrapper">
+    <div class="actions offense">
+      <div id="three" class="round" rel="shot">3pt Shot</div>
+      <div id="two" class="round" rel="shot">2pt Shot</div>
+      <div id="layup" class="round" rel="shot">2pt Layup</div>
+      <div id="freethrow" class="round" rel="shot">FreeThrow</div>
+      <div id="orebound" class="round" rel="bool">Rebound</div>
+      <div id="assist" class="round" rel="bool">Assist</div>
+      <div id="turnover" class="round" rel="bool">Turnover</div>
+    </div>
+    
+    <div class="actions defense">
+      <div id="steal" class="round" style="visibility:hidden">Steal</div>
+      <div id="steal" class="round" style="visibility:hidden">Steal</div>
+      <div id="steal" class="round">Steal</div>
+      <div id="block" class="round">Block</div>
+      <div id="drebound" class="round">Rebound</div>
+      <div id="foul" class="round">Foul</div>
+      <div id="charge" class="round">Charge</div>
+    </div>
+  </div>  
+
+  <div id="right_panel">
+    <div id="toolbar">
+      <div class="tab">
+        <span rel="expand">&#x25BC;<br/>&#x25BC;<br/>&#x25BC;</span>
+        <span rel="contract" style="display:none">&#x25B2;<br/>&#x25B2;<br/>&#x25B2;</span>
+      </div>
+      <ul id="log">
+        <li class="highlight">&#160;</li>
+        <li style="text-align:center">&#x263C; [Actions Log - Recent First]</li>
+      </ul>
+    </div>
+
+
+    <div id="players_game">
+
+      <div class="team home_bg round">
+        <div id="home_name" class="name"><span>&#160;</span> <a href="#" class="bench home">bench</a></div>
+        <div id="home_score" class="score">0</div>
+        <div class="home"></div>
+      </div>
+        
+      <div class="team away_bg round">
+        <div id="away_name" class="name"><span>&#160;</span> <a href="#" class="bench away">bench</a></div>
+        <div id="away_score" class="score">0</div>
+        <div class="away"></div>
+      </div>
+
+    </div>
+  
+  
+    <div id="players_bench" class="round" style="display:none">
+      <a href="#" class="close">close</a>
+      <div class="home">&#160;</div>
+      <div class="away">&#160;</div>
+    </div>
+    
+    
+  </div>
+
+
+
+</div>
+
+
+<script id="playerTemplate" type="text/x-jquery-tmpl">
+  <div id="${number}" class="player round">
+    <div class="head">${name}</div>
+    <div class="number assign js_record" rel="assign">${number}</div>
+    <div class="miss js_record" rel="miss">&#160;</div>
+    <div class="make js_record" rel="make">&#160;</div>
+  </div>
+</script>

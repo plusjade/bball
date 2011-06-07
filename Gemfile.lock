@@ -1,10 +1,4 @@
 GIT
-  remote: https://github.com/gix/dm-paperclip.git
-  revision: 5c86cd9d8718127675148fcfd728199d941e878a
-  specs:
-    dm-paperclip (2.4.1)
-
-GIT
   remote: https://github.com/plusjade/apron.git
   revision: 182b784755f3cb9d4218f93f13441616913499fb
   specs:
@@ -178,7 +172,6 @@ DEPENDENCIES
   dm-constraints (~> 1.1.0)
   dm-migrations (~> 1.1.0)
   dm-mysql-adapter (~> 1.1.0)
-  dm-paperclip!
   dm-rails (~> 1.1.0)
   dm-serializer (~> 1.1.0)
   dm-sqlite-adapter (~> 1.1.0)

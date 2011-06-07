@@ -23,7 +23,6 @@ gem 'dm-transactions',      DM_VERSION
 gem 'dm-aggregates',        DM_VERSION
 gem 'dm-timestamps',        DM_VERSION
 gem 'dm-serializer',        DM_VERSION
-gem 'dm-paperclip', :git => 'https://github.com/gix/dm-paperclip.git'
 gem 'dm-chunked_query'
 gem 'mime-types', :require => 'mime/types'
 

@@ -10,8 +10,10 @@ var app = {
   
   start : function(gameId){
     app.gameId = "game." + gameId;
-
-    if(localStorage[app.gameId]){
+    
+    console.log(game.data[gameId]);
+    
+    if(game.data[gameId]){
       console.log("existing game!");
       app.init();
       app.updateScores();
@@ -106,13 +108,14 @@ var app = {
     });
     
   /* load teams */
-    var tmp = JSON.parse(localStorage[app.gameId]);
-    app.loadTeam("home", tmp["home"], tmp["homePlayers"]);  
-    app.loadTeam("away", tmp["away"], tmp["awayPlayers"]);  
+    var home = "pandabots";
+    var away = "gametime";
+    app.loadTeam("home", home, team.data[home]);  
+    app.loadTeam("away", away, team.data[away]);  
   },
   
   loadTeam : function(side, team, players){
-    $("#"+side+"_name").find("span").text(team["name"]);
+    $("#"+side+"_name").find("span").text(team);
     app.$playersGame.find("div."+side).empty();
     app.$playersBench.find("div."+side).empty();
     

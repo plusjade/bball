@@ -496,8 +496,10 @@ var app = {
   
   start : function(gameId){
     app.gameId = "game." + gameId;
-
-    if(localStorage[app.gameId]){
+    
+    console.log(game.data[gameId]);
+    
+    if(game.data[gameId]){
       console.log("existing game!");
       app.init();
       app.updateScores();
@@ -592,13 +594,14 @@ var app = {
     });
     
   /* load teams */
-    var tmp = JSON.parse(localStorage[app.gameId]);
-    app.loadTeam("home", tmp["home"], tmp["homePlayers"]);  
-    app.loadTeam("away", tmp["away"], tmp["awayPlayers"]);  
+    var home = "pandabots";
+    var away = "gametime";
+    app.loadTeam("home", home, team.data[home]);  
+    app.loadTeam("away", away, team.data[away]);  
   },
   
   loadTeam : function(side, team, players){
-    $("#"+side+"_name").find("span").text(team["name"]);
+    $("#"+side+"_name").find("span").text(team);
     app.$playersGame.find("div."+side).empty();
     app.$playersBench.find("div."+side).empty();
     
@@ -680,6 +683,16 @@ var app = {
   }
 
 }
+var game = {
+  data : {
+    123 : {
+      home : "pandabots",
+      away : "gametime",
+      timestamp : "2010-10-24 13:07:25"
+    }
+  }
+  
+}
 var simpleTabs = {
   $list : null,
   $wrapper : null,
@@ -720,14 +733,18 @@ var simpleTabs = {
 var team = {
   data : {
     "pandabots" : [
-      {name:"jade", number : "12"},
-      {name:"bologna", number : "7"},
-      {name:"bobberto", number : "55"},
+      {name:"Jade", number : "12"},
+      {name:"Tony", number : "7"},
+      {name:"Bobbert", number : "55"},
+      {name:"Tom", number : "35"},
+      {name:"Brandon", number : "17"},
     ],
     "gametime" : [
-      {name:"joe", number : "12"},
+      {name:"joe", number : "9"},
       {name:"mike", number : "7"},
-      {name:"adam", number : "55"},
+      {name:"adam", number : "22"},
+      {name:"Paul", number : "80"},
+      {name:"Russel", number : "12"},
     ],
     "supernova" : [
       {name:"cooper", number : "12"},

@@ -1,14 +1,18 @@
 var team = {
   data : {
     "pandabots" : [
-      {name:"jade", number : "12"},
-      {name:"bologna", number : "7"},
-      {name:"bobberto", number : "55"},
+      {name:"Jade", number : "12"},
+      {name:"Tony", number : "7"},
+      {name:"Bobbert", number : "55"},
+      {name:"Tom", number : "35"},
+      {name:"Brandon", number : "17"},
     ],
     "gametime" : [
-      {name:"joe", number : "12"},
+      {name:"joe", number : "9"},
       {name:"mike", number : "7"},
-      {name:"adam", number : "55"},
+      {name:"adam", number : "22"},
+      {name:"Paul", number : "80"},
+      {name:"Russel", number : "12"},
     ],
     "supernova" : [
       {name:"cooper", number : "12"},

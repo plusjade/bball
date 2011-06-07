@@ -37,12 +37,12 @@ gem 'apron', '0.0.6', :git => 'https://github.com/plusjade/apron.git'
 # gem 'aws-s3', :require => 'aws/s3'
 
 group(:development, :test) do
-  gem 'ruby-debug'
-  gem 'shoulda-context'
-  gem 'ruby-debug'
+  #gem 'ruby-debug'
+  #gem 'shoulda-context'
+  #gem 'ruby-debug'
   gem "rspec", "~> 2.5.0"
   gem 'rspec-rails', '~> 2.5'
-  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+  #gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
   gem 'factory_girl_rails'
   gem "wirble"
   gem "hirb"

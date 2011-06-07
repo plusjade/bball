@@ -15,7 +15,7 @@ var team = {
       {name:"danny", number : "7"},
       {name:"brandon", number : "55"},
     ],
-    "team-supreme" : [
+    "bulkan-ballers" : [
       {name:"cup", number : "12"},
       {name:"chair", number : "7"},
       {name:"samson", number : "55"},

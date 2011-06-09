@@ -40,12 +40,20 @@
     <div id="players_game">
 
       <div class="team home_bg round">
+        <div class="make_miss">
+          <div class="miss" rel="miss.home">:( MISS</div>
+          <div class="make" rel="make.home">MAKE :)</div>
+        </div>
         <div id="home_name" class="name"><span>&#160;</span> <a href="#" class="bench home">bench</a></div>
         <div id="home_score" class="score">0</div>
         <div class="home"></div>
       </div>
         
       <div class="team away_bg round">
+        <div class="make_miss">
+          <div class="miss" rel="miss.away">:( MISS</div>
+          <div class="make" rel="make.away">MAKE :)</div>
+        </div>
         <div id="away_name" class="name"><span>&#160;</span> <a href="#" class="bench away">bench</a></div>
         <div id="away_score" class="score">0</div>
         <div class="away"></div>
@@ -72,7 +80,5 @@
   <div id="${number}" class="player round">
     <div class="head">${name}</div>
     <div class="number assign js_record" rel="assign">${number}</div>
-    <div class="miss js_record" rel="miss">&#160;</div>
-    <div class="make js_record" rel="make">&#160;</div>
   </div>
 </script>

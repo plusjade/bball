@@ -48,18 +48,43 @@ var app = {
     app.$playersGame = $("#players_game");
     app.$playersBench = $("#players_bench");
 
-  /* actions interface */  
+  /* select action interface */  
     app.$actions.find("div.actions > div").live("click", function(){
       app.$actions.find("div").removeClass("active");
       $(this).addClass("active");
+      app.$playersGame.find("div.make_miss").hide();
     })
           
-  /* record the data */  
-    app.$playersGame.find("div.js_record").live("click", function(){
+  /* select player interface */  
+    app.$playersGame.find("div.number").live("click", function(){
       if(app.$actions.find("div.active").length === 0) return false;
-      app.recordData(app.keyize($(this)));
-      console.log(localStorage);
+      // set active player
+      app.$playersGame.find("div.player").removeClass("active");
+      $(this).parent().addClass("active");
 
+      var actionType = app.$actions.find("div.active").first().attr("rel");
+      if(actionType === "shot"){
+        console.log("shot!");
+        $(this).parent().parent().parent().find("div.make_miss").show();
+      }else{
+        app.recordData(app.keyize($(this)));
+        console.log(localStorage);
+        app.$actions.find("div").removeClass("active");        
+      }
+    })
+    
+    app.$playersGame.find("div.make_miss > div").live("click", function(){
+      app.$playersGame.find("div.make_miss").hide();
+      var pair = $(this).attr("rel").split(".");
+      var val = pair[0];
+      var side = pair[1];
+      var player = app.$playersGame.find("div.player.active")[0].id;
+      var action = app.$actions.find("div.active").first()[0].id;
+      var key = app.gameId + "." +  side + "." + player + "." + action + "." + val;
+      
+      app.recordData(key);
+      console.log(localStorage);
+      
       app.$actions.find("div").removeClass("active");
     })
     
@@ -125,14 +150,7 @@ var app = {
   },
   
   bindHover : function(){
-    app.$playersGame.find("div.player").hover(function(){
-      var actionType = app.$actions.find("div.active").first().attr("rel");
-      if(actionType === "shot"){
-        $(this).find("div.assign").hide();
-      }
-    },function(){
-      $(this).find("div").show();
-    });
+    
   },  
   
   keyize : function($node){

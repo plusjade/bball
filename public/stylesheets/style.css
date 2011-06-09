@@ -366,6 +366,34 @@ div.miss:hover {
 #players_game div.team.away_bg {
   margin-bottom:10px;
 }
+div.make_miss {
+  display:none;
+  height:170px;
+  width:1024px;
+  position:absolute;
+  top:0;
+  left:0;
+}
+div.make_miss div {
+  width:512px;
+  height:190px;
+  font-size:68px;
+  font-weight:bold;
+  line-height:180px;
+  text-align:center;
+  -webkit-border-radius:10px;
+}
+div.make_miss div.make {
+  background:#199919;
+  -webkit-border-top-left-radius:0;
+  -webkit-border-bottom-left-radius:0;
+}
+div.make_miss div.miss {
+  background:#AE3B46;
+  -webkit-border-top-right-radius:0;
+  -webkit-border-bottom-right-radius:0;
+}
+
 
 #players_game div.team div.name{
  position:absolute;

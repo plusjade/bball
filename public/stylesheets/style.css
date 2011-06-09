@@ -139,21 +139,19 @@ div.away div.head{
   ACTIONS (left panel) */
 
 #actions_wrapper {
-  position:absolute;
-  bottom:0;
-  left:0;
-  width:300px;
+  position:relative;
+  top:10px;
+  width:1020px;
   overflow:hidden;
+  margin-bottom:40px;
 }
 #actions_wrapper div.actions {
-  float:left;
-  width:149px;
   overflow:hidden;
 }
 #actions_wrapper div.actions div {
-  float:left;
+  float:right;
   height:60px;
-  width:110px;
+  width:100px;
   padding:10px;
   margin:8px;
   
@@ -190,14 +188,10 @@ div.away div.head{
   RIGHT PANEL */
 
 #right_panel {
-  position:absolute;
-  bottom:0;
-  right:0;
-  width:700px;
+
 }
 
 #toolbar {
-  height:110px;
 }
 
 /* ======================================================
@@ -205,9 +199,9 @@ div.away div.head{
   
 #log {
   position:absolute;
-  top:0;
-  left:0;
-  width:350px;
+  top:0px;
+  left:25px;
+  width:310px;
   height:90px;
   font-size:14px;
   z-index:10;
@@ -271,8 +265,8 @@ div.away div.head{
   
 div.tab {
   position:absolute;
-  top:32px;
-  left:-30px;
+  top:29px;
+  left:0px;
   background:#FFF;
   color:#800F02;
   text-align:center;
@@ -362,7 +356,7 @@ div.miss:hover {
 #players_game div.team{
   position:relative; 
   clear:both;
-  height:240px;
+  height:170px;
   padding:10px;
   overflow:visible;
 }
@@ -436,17 +430,17 @@ div.miss:hover {
 #players_bench {
   clear:both;
   position:absolute;
-  height:600px;
-  width:200px;
-  bottom:40px;
-  left:-200px;
+  height:105px;
+  width:1000px;
+  top:110px;
+  right:0px;
     
   overflow:visible;
   z-index:50 !important;
   
-  -webkit-box-shadow: 0 0 10px #C6B38D;
-  -moz-box-shadow: 0 0 10px #C6B38D;
-  box-shadow: 0 0 10px #C6B38D;
+  -webkit-box-shadow: 0 0 10px #333;
+  -moz-box-shadow: 0 0 10px #333;
+  box-shadow: 0 0 10px #333;
 }
 
 #players_bench div.player {
@@ -475,7 +469,7 @@ div.miss:hover {
 a.close {
   position:absolute;
   top:-26px;
-  left:15px;
+  right:15px;
   padding:5px;
   display:block;
   width:165px;
@@ -492,9 +486,9 @@ a.close {
   -moz-border-radius-bottomright:0;
   -moz-border-radius-bottomleft:0;
   
-  -webkit-box-shadow:4px 0px 8px #C6B38D;
-  -moz-box-shadow:4px 0px 8px #C6B38D;
-  box-shadow:4px 0px 8px #C6B38D;
+  -webkit-box-shadow:4px 0px 8px #333;
+  -moz-box-shadow:4px 0px 8px #333;
+  box-shadow:4px 0px 8px #333;
 }
 
 

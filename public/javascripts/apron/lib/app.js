@@ -76,7 +76,7 @@ var app = {
       }
     })
     
-    app.$playersGame.find("div.make_miss > a").live("click", function(){
+    app.$playersGame.find("div.make_miss > a").live("click", function(e){
       app.$playersGame.find("div.make_miss").hide();
       var pair = $(this).attr("rel").split(".");
       var val = pair[0];
@@ -89,6 +89,9 @@ var app = {
       console.log(localStorage);
       
       app.$actions.find("a").removeClass("active");
+      
+      e.preventDefault();
+      return false;
     })
     
   /* bench interface */

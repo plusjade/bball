@@ -64,31 +64,34 @@ em {font-weight:bold;}
   border-radius: 7px;
 }
 .red {
-  background:#800F02;
-  color:#FFF;
+  background:#BD1550;
+  color:#F9F2E7;
+}
+.green {
+  background:#8A9B0F;
+  color:#F9F2E7;
 }
 .home_bg{
-  background:#D4C69C;
+  background:#A69C80;
   -webkit-box-shadow: inset 0 0 4px #AFA381;  
   -moz-box-shadow: inset 0 0 4px #AFA381;  
-  box-shadow: inset 0 0 4px #AFA381;  
+  box-shadow: inset 0 0 4px #A69574;  
 }
 div.home div.player {
   -webkit-box-shadow: inset 0 0 4px #9F824B;
   -moz-box-shadow: inset 0 0 4px #9F824B;
-  box-shadow: inset 0 0 4px #9F824B;
+  box-shadow: inset 0 0 4px #A69574;
 }
 div.home div.head{
-  background:#9F824B;
+  background:#7E7159;
   color:#fff;
 }
 div.home a.number{
- color:#56482A;
+ color:#30261C;
 }
 
-
 .away_bg{
-  background:#644580;
+  background:#0B8185;
   -webkit-box-shadow: inset 0 0 4px #392749;  
   -moz-box-shadow: inset 0 0 4px #392749;  
   box-shadow: inset 0 0 4px #392749;  
@@ -96,14 +99,14 @@ div.home a.number{
 div.away div.player {
   -webkit-box-shadow: inset 0 0 4px #392749;
   -moz-box-shadow: inset 0 0 4px #392749;
-  box-shadow: inset 0 0 4px #392749;
+  box-shadow: inset 0 0 4px #36544F;
 }
 div.away div.head{
-  background:#392749;
+  background:#1F5F61;
   color:#fff;
 }
 div.away a.number{
- color:#392749;
+ color:#36544F;
 }
   
 .offensive_style {
@@ -157,28 +160,29 @@ div.away a.number{
   text-align:center;
   font-weight:bold;
   font-size:17px;
-  color:#FFF;
+  color:#F9F2E7;
   cursor:pointer;
 }
 
 #actions_wrapper div.actions a.active {
-  background:#FFAA3E !important;
+  background:#F8CA00 !important;
+  box-shadow:inset -1px -1px 3px #723E02 !important;
 }
-#actions_wrapper div.actions.offense a {
-  background-color:#AACD79;
-  text-shadow: 0px 1px 0px #52633A;
-  -webkit-box-shadow:inset -1px -1px 3px #6F874E;
-  -moz-box-shadow:inset -1px -1px 3px #6F874E;
-  box-shadow:inset -1px -1px 3px #6F874E;
-}  
 #actions_wrapper div.actions.defense a {
-  background-color:#9AC1D6;
-  text-shadow: 0px 1px 0px #4B5E69;
-  -webkit-box-shadow:inset -1px -1px 3px #627B88;
-  -moz-box-shadow:inset -1px -1px 3px #627B88;
-  box-shadow:inset -1px -1px 3px #627B88;
+  background-color:#604878;
+  text-shadow: 0px 1px 0px #111;
+  -webkit-box-shadow:inset -1px -1px 3px #111;
+  -moz-box-shadow:inset -1px -1px 3px #111;
+  box-shadow:inset -1px -1px 3px #111;
 }
 
+#actions_wrapper div.actions.offense a {
+  background-color:#604878;
+  text-shadow: 0px 1px 0px #111;
+  -webkit-box-shadow:inset -1px -1px 3px #111;
+  -moz-box-shadow:inset -1px -1px 3px #111;
+  box-shadow:inset -1px -1px 3px #111;
+}
 
 /* ======================================================
   Tool bar */
@@ -200,7 +204,7 @@ div.away a.number{
   font-size:16px;
   z-index:10;
   overflow:hidden;
-  background:#252829;
+  background:#30261C;
   
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -225,13 +229,13 @@ div.away a.number{
   width:600px;
   height:27px;
   z-index:-1;
-  background:yellow;
+  background:#F8CA00;
   color:#199919;
   display:none;
 }
 #log li.undone span {
   text-decoration:line-through;
-  color:#8C2022;
+  color:#BD1550;
 }
 #log li a {
   float:right;
@@ -311,13 +315,14 @@ div.player a.number{
   font-weight:bold;
   font-size:38px;
   line-height:54px;
+  background:#F9F2E7;
 }
 
 /* ======================================================
   Player bool assignment */
 
 #players_game div.player .assign:hover{ 
-  background:#199919;
+  background:#F8CA00;
   color:#FFF;
   cursor:pointer;
 }
@@ -349,7 +354,7 @@ div.make_miss a {
   cursor:pointer;
 }
 div.make_miss a.make {
-  background:#199919;
+  background:#8A9B0F;
   -webkit-border-top-left-radius:0;
   -webkit-border-bottom-left-radius:0;
 }
@@ -391,15 +396,15 @@ div.make_miss a.miss {
   bottom:-34px;
   left:0px;
 
-  background:#D4C69C;
-  color:#56482A;
+  background:#A69C80;
+  color:#FFF;
   -webkit-border-bottom-left-radius:7px;
   -webkit-border-bottom-right-radius:7px;
 }
 #players_game div.team.away_bg div.name{
   top:-34px;
   right:0px;
-  background:#644580;
+  background:#0B8185;
   color:#fff;
   -webkit-border-top-left-radius:7px;
   -webkit-border-top-right-radius:7px;
@@ -456,6 +461,7 @@ div.score{
   margin:10px 7px;
   height:80px;
   width:85px;
+
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;

@@ -535,27 +535,30 @@ var app = {
     app.$playersBench = $("#players_bench");
 
   /* select action interface */  
-    app.$actions.find("div.actions > div").live("click", function(){
-      app.$actions.find("div").removeClass("active");
+    app.$actions.find("div.actions > a").live("click", function(e){
+      app.$actions.find("a").removeClass("active");
       $(this).addClass("active");
       app.$playersGame.find("div.make_miss").hide();
+      
+      e.preventDefault();
+      return false;
     })
           
   /* select player interface */  
     app.$playersGame.find("div.number").live("click", function(){
-      if(app.$actions.find("div.active").length === 0) return false;
+      if(app.$actions.find("a.active").length === 0) return false;
       // set active player
       app.$playersGame.find("div.player").removeClass("active");
       $(this).parent().addClass("active");
 
-      var actionType = app.$actions.find("div.active").first().attr("rel");
+      var actionType = app.$actions.find("a.active").first().attr("rel");
       if(actionType === "shot"){
         console.log("shot!");
         $(this).parent().parent().parent().find("div.make_miss").show();
       }else{
         app.recordData(app.keyize($(this)));
         console.log(localStorage);
-        app.$actions.find("div").removeClass("active");        
+        app.$actions.find("a").removeClass("active");        
       }
     })
     
@@ -565,7 +568,7 @@ var app = {
       var val = pair[0];
       var side = pair[1];
       var player = app.$playersGame.find("div.player.active")[0].id;
-      var action = app.$actions.find("div.active").first()[0].id;
+      var action = app.$actions.find("a.active").first()[0].id;
       var key = app.gameId + "." +  side + "." + player + "." + action + "." + val;
       
       app.recordData(key);
@@ -643,7 +646,7 @@ var app = {
     var val = $node.attr("rel");
     var player = $node.parent()[0].id;
     var side = $node.parent().parent().hasClass("home") ? "home" : "away";
-    var action = app.$actions.find("div.active").first()[0].id;
+    var action = app.$actions.find("a.active").first()[0].id;
     return app.gameId + "." +  side + "." + player + "." + action + "." + val;
   },
   

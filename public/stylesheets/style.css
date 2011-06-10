@@ -60,12 +60,12 @@ em {font-weight:bold;}
 /* ======================================================
   UI colors and styles */
 
-.round {
+/*.round {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
 }
-
+*/
 .home_bg{
   background:#FFE6B5;
   -webkit-box-shadow: inset 0 0 4px #C6B38D;  
@@ -148,7 +148,7 @@ div.away div.head{
 #actions_wrapper div.actions {
   overflow:hidden;
 }
-#actions_wrapper div.actions div {
+#actions_wrapper div.actions a {
   float:right;
   height:60px;
   width:100px;
@@ -161,21 +161,20 @@ div.away div.head{
   font-weight:bold;
   font-size:17px;
   color:#FFF;
-}
-#actions_wrapper div.actions div:hover {
   cursor:pointer;
 }
-#actions_wrapper div.actions div.active {
+
+#actions_wrapper div.actions a.active {
   background:#FFAA3E !important;
 }
-#actions_wrapper div.actions.offense div {
+#actions_wrapper div.actions.offense a {
   background-color:#AACD79;
   text-shadow: 0px 1px 0px #52633A;
   -webkit-box-shadow:inset -1px -1px 3px #6F874E;
   -moz-box-shadow:inset -1px -1px 3px #6F874E;
   box-shadow:inset -1px -1px 3px #6F874E;
 }  
-#actions_wrapper div.actions.defense div {
+#actions_wrapper div.actions.defense a {
   background-color:#9AC1D6;
   text-shadow: 0px 1px 0px #4B5E69;
   -webkit-box-shadow:inset -1px -1px 3px #627B88;
@@ -192,6 +191,7 @@ div.away div.head{
 }
 
 #toolbar {
+  height:50px;
 }
 
 /* ======================================================
@@ -200,9 +200,9 @@ div.away div.head{
 #log {
   position:absolute;
   top:0px;
-  left:25px;
-  width:310px;
-  height:90px;
+  left:250px;
+  width:600px;
+  height:40px;
   font-size:14px;
   z-index:10;
   overflow:hidden;
@@ -211,6 +211,8 @@ div.away div.head{
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+  -webkit-border-top-left-radius:0;
+  -webkit-border-bottom-left-radius:0;
 }
 #log.expand {
   height:665px;
@@ -219,14 +221,14 @@ div.away div.head{
   box-shadow:0px 0px 10px #C6B38D;
 }
 #log li{
-  padding:4px 12px;
+  padding:5px 12px;
   color:#5D8053;
 }
 #log li.highlight {
   position:absolute;
   top:0;
   left:0;
-  width:326px;
+  width:600px;
   z-index:-1;
   background:yellow;
   display:none;
@@ -237,8 +239,8 @@ div.away div.head{
 }
 #log li a {
   float:right;
-  font-size:10px;
-  padding:0px 7px;
+  font-size:12px;
+  padding:1px 10px;
   background:#DFE2E2;
   color:#A4A6A6;
   
@@ -265,10 +267,10 @@ div.away div.head{
   
 div.tab {
   position:absolute;
-  top:29px;
-  left:0px;
-  background:#FFF;
-  color:#800F02;
+  top:0px;
+  left:210px;
+  background:#800F02;
+  color:#FFF;
   text-align:center;
   font-size:14px;
   z-index:50;
@@ -283,8 +285,10 @@ div.tab {
   -moz-border-radius-bottomright:0;
 }
 div.tab span{
-  width:25px;
-  padding:5px;
+  width:40px;
+  height:40px;
+  font-size:30px;
+  line-height:44px;
   display:block;
   
   z-index:50;
@@ -356,7 +360,7 @@ div.miss:hover {
 #players_game div.team{
   position:relative; 
   clear:both;
-  height:170px;
+  height:150px;
   padding:10px;
   overflow:visible;
 }
@@ -368,7 +372,7 @@ div.miss:hover {
 }
 div.make_miss {
   display:none;
-  height:170px;
+  height:150px;
   width:1024px;
   position:absolute;
   top:0;
@@ -376,7 +380,7 @@ div.make_miss {
 }
 div.make_miss div {
   width:512px;
-  height:190px;
+  height:170px;
   font-size:68px;
   font-weight:bold;
   line-height:180px;
@@ -460,7 +464,7 @@ div.make_miss div.miss {
   position:absolute;
   height:105px;
   width:1000px;
-  top:110px;
+  top:160px;
   right:0px;
     
   overflow:visible;

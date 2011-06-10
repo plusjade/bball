@@ -59,52 +59,53 @@ em {font-weight:bold;}
   UI colors and styles */
 
 .round {
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
 }
-
+.red {
+  background:#800F02;
+  color:#FFF;
+}
 .home_bg{
-  background:#FFE6B5;
-  -webkit-box-shadow: inset 0 0 4px #C6B38D;  
-  -moz-box-shadow: inset 0 0 4px #C6B38D;  
-  box-shadow: inset 0 0 4px #C6B38D;  
+  background:#D4C69C;
+  -webkit-box-shadow: inset 0 0 4px #AFA381;  
+  -moz-box-shadow: inset 0 0 4px #AFA381;  
+  box-shadow: inset 0 0 4px #AFA381;  
 }
 div.home div.player {
-  -webkit-box-shadow: inset 0 0 4px #DFC160;
-  -moz-box-shadow: inset 0 0 4px #DFC160;
-  box-shadow: inset 0 0 4px #DFC160;
+  -webkit-box-shadow: inset 0 0 4px #9F824B;
+  -moz-box-shadow: inset 0 0 4px #9F824B;
+  box-shadow: inset 0 0 4px #9F824B;
 }
 div.home div.head{
-  background:#DFC160;
+  background:#9F824B;
   color:#fff;
-  -webkit-box-shadow: inset 0 0 2px #C6B38D;
-  -moz-box-shadow: inset 0 0 2px #C6B38D;
-  box-shadow: inset 0 0 2px #C6B38D;
-  text-shadow: 0px 1px 0px #C6B38D;
 }
+div.home a.number{
+ color:#56482A;
+}
+
 
 .away_bg{
-  background:#FFC9B7;
-  -webkit-box-shadow: inset 0 0 4px #AF8A7B;  
-  -moz-box-shadow: inset 0 0 4px #AF8A7B;  
-  box-shadow: inset 0 0 4px #AF8A7B;  
+  background:#644580;
+  -webkit-box-shadow: inset 0 0 4px #392749;  
+  -moz-box-shadow: inset 0 0 4px #392749;  
+  box-shadow: inset 0 0 4px #392749;  
 }
 div.away div.player {
-  -webkit-box-shadow: inset 0 0 4px #AF8A7B;
-  -moz-box-shadow: inset 0 0 4px #AF8A7B;
-  box-shadow: inset 0 0 4px #AF8A7B;
+  -webkit-box-shadow: inset 0 0 4px #392749;
+  -moz-box-shadow: inset 0 0 4px #392749;
+  box-shadow: inset 0 0 4px #392749;
 }
 div.away div.head{
-  background:#FF9776;
+  background:#392749;
   color:#fff;
-  -webkit-box-shadow: inset 0 0 2px #AF8A7B;
-  -moz-box-shadow: inset 0 0 2px #AF8A7B;
-  box-shadow: inset 0 0 2px #AF8A7B;
-  text-shadow: 0px 1px 0px #AF8A7B;
 }
-
-
+div.away a.number{
+ color:#392749;
+}
+  
 .offensive_style {
   color:#FFF;
   background-color:#AACD79;
@@ -195,11 +196,11 @@ div.away div.head{
   top:0px;
   left:210px;
   width:600px;
-  height:40px;
-  font-size:14px;
+  height:38px;
+  font-size:16px;
   z-index:10;
   overflow:hidden;
-  background:#FFF;
+  background:#252829;
   
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -209,21 +210,23 @@ div.away div.head{
 }
 #log.expand {
   height:665px;
-  -webkit-box-shadow:0px 0px 10px #C6B38D;
-  -moz-box-shadow:0px 0px 10px #C6B38D;
-  box-shadow:0px 0px 10px #C6B38D;
+  -webkit-box-shadow:0px 0px 10px #333;
+  -moz-box-shadow:0px 0px 10px #333;
+  box-shadow:0px 0px 10px #333;
 }
 #log li{
   padding:5px 12px;
-  color:#5D8053;
+  color:#199919;
 }
 #log li.highlight {
   position:absolute;
   top:0;
   left:0;
   width:600px;
+  height:27px;
   z-index:-1;
   background:yellow;
+  color:#199919;
   display:none;
 }
 #log li.undone span {
@@ -246,8 +249,8 @@ div.away div.head{
   box-shadow: inset -1px -1px 1px #C4C6C6;
 }
 #log li.undone a {
-  background:#BBD4B1;
-  color:#759E5B;
+  background:#199919;
+  color:#BBD4B1; 
   
   -webkit-box-shadow: inset -1px -1px 1px #82AF65;
   -moz-box-shadow: inset -1px -1px 1px #82AF65;
@@ -262,8 +265,6 @@ div.tab {
   position:absolute;
   top:0px;
   left:170px;
-  background:#800F02;
-  color:#FFF;
   text-align:center;
   font-size:14px;
   z-index:50;
@@ -279,7 +280,7 @@ div.tab {
 }
 div.tab span{
   width:40px;
-  height:40px;
+  height:38px;
   font-size:30px;
   line-height:44px;
   display:block;
@@ -292,10 +293,10 @@ div.tab span{
   Player Icons */
 
 div.player {
-  float:left;
+  display:inline-block;
   margin:10px;
   height:100px;
-  width:160px;
+  width:170px;
   background:#fff;
   text-align:center;
   overflow:hidden;
@@ -327,23 +328,24 @@ div.player a.number{
   
 div.make_miss {
   display:none;
-  height:150px;
-  width:1024px;
+  height:130px;
+  width:1000px;
   position:absolute;
   top:0;
   left:0;
+  z-index:10;
 }
 div.make_miss a {
   float:left;
   display:block;
-  width:512px;
-  height:170px;
+  width:500px;
+  height:150px;
   font-size:68px;
   font-weight:bold;
   line-height:160px;
   text-align:center;
   color:#FFF;
-  -webkit-border-radius:10px;
+  -webkit-border-radius:7px;
   cursor:pointer;
 }
 div.make_miss a.make {
@@ -352,7 +354,6 @@ div.make_miss a.make {
   -webkit-border-bottom-left-radius:0;
 }
 div.make_miss a.miss {
-  background:#AE3B46;
   -webkit-border-top-right-radius:0;
   -webkit-border-bottom-right-radius:0;
 }
@@ -361,77 +362,76 @@ div.make_miss a.miss {
 /* ======================================================
   players in game */
 
-
 #players_game div.team{
   position:relative; 
   clear:both;
-  height:150px;
+  height:130px;
   padding:10px;
   overflow:visible;
+  text-align:center;
 }
 #players_game div.team.home_bg {
-  margin-bottom:30px;
+  margin-bottom:50px;
+  border-bottom-left-radius:0;
 }
 #players_game div.team.away_bg {
-  margin-bottom:10px;
+  border-top-right-radius:0;
 }
 
+/* ======================================================
+  Team Name */
+  
 #players_game div.team div.name{
  position:absolute;
- bottom:0px;
- right:0px;
- width:270px;
+ width:350px;
  padding:10px;
- 
- background:#FFF;
- color:#333;
+ text-align:left;
+}
+#players_game div.team.home_bg div.name{
+  bottom:-34px;
+  left:0px;
 
- -webkit-border-bottom-right-radius:10px;
- -webkit-border-top-left-radius:10px;
- -webkit-border-bottom-left-radius:0;
- -webkit-border-top-right-radius:0;
- 
- -moz-border-radius-bottomright:10px;
- -moz-border-radius-topleft:10px;
- -moz-border-radius-bottomleft:0;
- -moz-border-radius-topright:0;
- 
- -webkit-box-shadow: inset 1px 1px 4px #C6B38D;  
- -moz-box-shadow: inset 1px 1px 4px #C6B38D;  
- box-shadow: inset 1px 1px 4px #C6B38D;  
+  background:#D4C69C;
+  color:#56482A;
+  -webkit-border-bottom-left-radius:7px;
+  -webkit-border-bottom-right-radius:7px;
+}
+#players_game div.team.away_bg div.name{
+  top:-34px;
+  right:0px;
+  background:#644580;
+  color:#fff;
+  -webkit-border-top-left-radius:7px;
+  -webkit-border-top-right-radius:7px;
 }
 #players_game div.team div.name a{
  float:right; 
 }
-#players_game div.team div.score{
+
+/* ======================================================
+  Score */
+  
+div.score{
   position:absolute;
-  top:0px;
-  right:0px;
-  width:60px;
+  width:80px;
   padding:8px;
 
   text-align:center;
-  line-height:34px;
-  font-size:24px;
-  
-  background:#555;
+  line-height:44px;
+  font-size:34px;
   color:#FFF;
   
-  -webkit-border-bottom-right-radius:0;
-  -webkit-border-top-left-radius:0;
-  -webkit-border-bottom-left-radius:10px;
-  -webkit-border-top-right-radius:10px;
-  
-  -moz-border-radius-bottomright:0;
-  -moz-border-radius-topleft:0;
-  -moz-border-radius-bottomleft:10px;
-  -moz-border-radius-topright:10px;
-  
-  -webkit-box-shadow: inset -1px -1px 1px #000;  
-  -moz-box-shadow: inset -1px -1px 1px #000;  
-  box-shadow: inset -1px -1px 1px #000;  
+  border-top-left-radius:0;
+  border-top-right-radius:0;
 }
-
+#home_score {
+  top:0px;
+  left:0px;
+}
+#away_score {
+  top:0px;
+  right:0px;
+}
 
 /* ======================================================
   PLAYERS BENCH */
@@ -482,22 +482,16 @@ a.close {
   padding:5px;
   display:block;
   width:165px;
-  background:#800F02;
-  color:#fff;
   text-align:center;
   z-index:5;
-  -webkit-border-radius:7px;
-  -moz-border-radius:7px;
-  border-radius:7px;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border-radius:5px;
   
   -webkit-border-bottom-right-radius:0;
   -webkit-border-bottom-left-radius:0;
   -moz-border-radius-bottomright:0;
   -moz-border-radius-bottomleft:0;
-  
-  -webkit-box-shadow:4px 0px 8px #333;
-  -moz-box-shadow:4px 0px 8px #333;
-  box-shadow:4px 0px 8px #333;
 }
 
 

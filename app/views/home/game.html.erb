@@ -1,7 +1,9 @@
 <div id="wrapper">
   
   <div id="toolbar">
-    <div class="tab">
+    <div id="home_score" class="score round home_bg">0</div>
+    <div id="away_score" class="score round away_bg">0</div>
+    <div class="tab red">
       <span rel="expand">&#x25BC;</span>
       <span rel="contract" style="display:none">&#x25B2;</span>
     </div>
@@ -37,28 +39,26 @@
 
     <div class="team home_bg round">
       <div class="make_miss">
-        <a class="miss" rel="miss.home">MISS? =(</a>
+        <a class="miss red" rel="miss.home">MISS? =(</a>
         <a class="make" rel="make.home">MAKE? =)</a>
       </div>
       <div id="home_name" class="name"><span>&#160;</span> <a href="#" class="bench home">bench</a></div>
-      <div id="home_score" class="score">0</div>
       <div class="home"></div>
     </div>
       
     <div class="team away_bg round">
       <div class="make_miss">
-        <a class="miss" rel="miss.away">MISS? =(</a>
+        <a class="miss red" rel="miss.away">MISS? =(</a>
         <a class="make" rel="make.away">MAKE? =(</a>
       </div>
       <div id="away_name" class="name"><span>&#160;</span> <a href="#" class="bench away">bench</a></div>
-      <div id="away_score" class="score">0</div>
       <div class="away"></div>
     </div>
 
   </div>
 
   <div id="players_bench" class="round" style="display:none">
-    <a href="#" class="close">close</a>
+    <a href="#" class="close red">close</a>
     <div class="home">&#160;</div>
     <div class="away">&#160;</div>
   </div>

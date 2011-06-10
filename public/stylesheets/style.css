@@ -310,7 +310,8 @@ div.player {
 div.player .head{
   padding:5px 10px;
 }
-div.player .number{
+div.player a.number{
+  display:block;
   padding:10px 10px;
   text-align:center;
   font-weight:bold;
@@ -327,29 +328,40 @@ div.player .number{
   cursor:pointer;
 }
 
-/* ======================================================
-  Player make/miss */
 
-div.make, div.miss {
-  height:95px;
-  width:80px;
+/* ======================================================
+  make/miss */
+  
+div.make_miss {
+  display:none;
+  height:150px;
+  width:1024px;
+  position:absolute;
+  top:0;
+  left:0;
+}
+div.make_miss a {
   float:left;
-  color:#fff;
+  display:block;
+  width:512px;
+  height:170px;
+  font-size:68px;
+  font-weight:bold;
+  line-height:160px;
   text-align:center;
+  color:#FFF;
+  -webkit-border-radius:10px;
+  cursor:pointer;
 }
-div.make {
+div.make_miss a.make {
   background:#199919;
+  -webkit-border-top-left-radius:0;
+  -webkit-border-bottom-left-radius:0;
 }
-div.miss {
+div.make_miss a.miss {
   background:#AE3B46;
-}
-div.make:hover {
-  font-weight:bold;
-  cursor:pointer;
-}
-div.miss:hover {
-  font-weight:bold;
-  cursor:pointer;
+  -webkit-border-top-right-radius:0;
+  -webkit-border-bottom-right-radius:0;
 }
 
 
@@ -370,34 +382,6 @@ div.miss:hover {
 #players_game div.team.away_bg {
   margin-bottom:10px;
 }
-div.make_miss {
-  display:none;
-  height:150px;
-  width:1024px;
-  position:absolute;
-  top:0;
-  left:0;
-}
-div.make_miss div {
-  width:512px;
-  height:170px;
-  font-size:68px;
-  font-weight:bold;
-  line-height:180px;
-  text-align:center;
-  -webkit-border-radius:10px;
-}
-div.make_miss div.make {
-  background:#199919;
-  -webkit-border-top-left-radius:0;
-  -webkit-border-bottom-left-radius:0;
-}
-div.make_miss div.miss {
-  background:#AE3B46;
-  -webkit-border-top-right-radius:0;
-  -webkit-border-bottom-right-radius:0;
-}
-
 
 #players_game div.team div.name{
  position:absolute;

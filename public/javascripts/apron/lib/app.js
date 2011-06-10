@@ -59,7 +59,7 @@ var app = {
     })
           
   /* select player interface */  
-    app.$playersGame.find("div.number").live("click", function(){
+    app.$playersGame.find("a.number").live("click", function(){
       if(app.$actions.find("a.active").length === 0) return false;
       // set active player
       app.$playersGame.find("div.player").removeClass("active");
@@ -76,7 +76,7 @@ var app = {
       }
     })
     
-    app.$playersGame.find("div.make_miss > div").live("click", function(){
+    app.$playersGame.find("div.make_miss > a").live("click", function(){
       app.$playersGame.find("div.make_miss").hide();
       var pair = $(this).attr("rel").split(".");
       var val = pair[0];
@@ -88,7 +88,7 @@ var app = {
       app.recordData(key);
       console.log(localStorage);
       
-      app.$actions.find("div").removeClass("active");
+      app.$actions.find("a").removeClass("active");
     })
     
   /* bench interface */

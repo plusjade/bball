@@ -147,11 +147,11 @@ div.away .number{
   overflow:hidden;
   margin-bottom:40px;
 }
-#actions_wrapper div.actions {
+#actions_wrapper div {
   overflow:hidden;
   text-align:center;
 }
-#actions_wrapper div.actions a {
+#actions_wrapper a {
   display:inline-block;
   height:60px;
   width:100px;
@@ -165,16 +165,18 @@ div.away .number{
   font-size:17px;
   color:#DEDBB0;
   cursor:pointer;
+  
+  border-radius:7px;
 }
 
-#actions_wrapper div.actions a {
+#actions_wrapper  a {
   background-color:#6C343F;
   text-shadow: 0px 1px 0px #331110;
   -webkit-box-shadow:inset -1px -1px 3px #111;
   -moz-box-shadow:inset -1px -1px 3px #111;
   box-shadow:inset -1px -1px 3px #331110;
 }
-#actions_wrapper div.actions a.active {
+#actions_wrapper a.active {
   background:#7E841C;
   -webkit-box-shadow:inset -1px -1px 3px #111;
   -moz-box-shadow:inset -1px -1px 3px #111;

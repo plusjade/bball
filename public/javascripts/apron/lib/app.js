@@ -1,7 +1,7 @@
 var app = {
   gameId : null,
   $actions : null,
-  $playersGame : null,
+  $players : null,
   $playersBench : null,
 
   offensiveActions : ["three", "two", "layup", "freethrow", "orebound", "assist", "turnover"],
@@ -61,26 +61,26 @@ var app = {
   init : function(){
     $("#playerTemplate").template("playerTemplate");
     app.$actions = $("#actions_wrapper");
-    app.$playersGame = $("#players_game");
+    app.$players = $("#players_game");
     app.$playersBench = $("#players_bench");
 
   /* select action interface */  
     app.$actions.find("a").live("click", function(e){
       app.$actions.find("a").removeClass("active");
-      app.$playersGame.find("a.player").removeClass("active");
+      app.$players.find("a.player").removeClass("active");
       $(this).addClass("active");
-      app.$playersGame.find("div.make_miss").hide();
+      app.$players.find("div.make_miss").hide();
       
       e.preventDefault();
       return false;
     })
           
   /* select player interface */  
-    app.$playersGame.find("a.player").live("click", function(e){
+    app.$players.find("a.player").live("click", function(e){
       if(app.currentAction().length === 0) return false;
       
     // set active player
-      app.$playersGame.find("a.player").removeClass("active");
+      app.$players.find("a.player").removeClass("active");
       $(this).addClass("active");
 
       if(app.currentAction().type === "shot"){
@@ -98,12 +98,12 @@ var app = {
     })
     
   /* record a make or miss */
-    app.$playersGame.find("div.make_miss > a").live("click", function(e){
+    app.$players.find("div.make_miss > a").live("click", function(e){
       var pair = $(this).attr("rel").split(".");
       app.recordData(app.toKey(app.currentAction(), app.currentPlayer()[0], pair[0], pair[1]));
       
       app.$actions.find("a").removeClass("active");
-      app.$playersGame.find("div.make_miss").hide();
+      app.$players.find("div.make_miss").hide();
       
       console.log(localStorage);
       e.preventDefault();
@@ -163,10 +163,10 @@ var app = {
   
   loadTeam : function(side, team, players){
     $("#"+side+"_name").find("span").text(team);
-    app.$playersGame.find("div."+side).empty();
+    app.$players.find("div."+side).empty();
     app.$playersBench.find("div."+side).empty();
     
-    $.tmpl("playerTemplate", players).appendTo(app.$playersGame.find("div."+side));
+    $.tmpl("playerTemplate", players).appendTo(app.$players.find("div."+side));
     $.tmpl("playerTemplate", players).appendTo(app.$playersBench.find("div."+side));
   },
   
@@ -227,7 +227,7 @@ var app = {
   },
   
   currentPlayer : function(){
-    return app.$playersGame.find("a.player.active").first();
+    return app.$players.find("a.player.active").first();
   },
   
   log : function(message){

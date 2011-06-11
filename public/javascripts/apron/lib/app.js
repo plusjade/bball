@@ -215,9 +215,12 @@ var app = {
   },
   
   log : function(message){
-    $("#log").prepend("<li>"+message+"</li>");
-    $("#log").find("li.highlight").show();
-    setTimeout('$("#log").find("li.highlight").fadeOut(4000)', 1200);
+    $node = $("<li>"+message+"</li>");
+    $("#log").prepend($node);
+    $node.animate( {'marginLeft': '-=20px'}, 100, "linear" );
+    $node.animate( {'marginLeft': '+=20px'}, 100, "linear" );
+    $node.animate( {'marginLeft': '-=20px'}, 100, "linear" );
+    $node.animate( {'marginLeft': '+=20px'}, 100, "linear" );
   }
 
 }

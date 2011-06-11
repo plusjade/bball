@@ -219,6 +219,10 @@ div.away a.number{
   padding:5px 12px;
   color:#4A3B34;
 }
+
+#log li:first-child {
+  olor:red !important;
+}
 #log li.highlight {
   position:absolute;
   top:0;

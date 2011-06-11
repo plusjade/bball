@@ -38,8 +38,8 @@
 
     <div class="team home_bg round">
       <div class="make_miss">
-        <a class="miss red" rel="miss.home">MISS? =(</a>
-        <a class="make green" rel="make.home">MAKE? =)</a>
+        <a class="miss red" rel="home.miss">MISS? =(</a>
+        <a class="make green" rel="home.make">MAKE? =)</a>
       </div>
       <div id="home_name" class="home_bg name"><span>&#160;</span> <a href="#" class="bench home">bench</a></div>
       <div class="home"></div>
@@ -47,8 +47,8 @@
       
     <div class="team away_bg round">
       <div class="make_miss">
-        <a class="miss red" rel="miss.away">MISS? =(</a>
-        <a class="make green" rel="make.away">MAKE? =(</a>
+        <a class="miss red" rel="away.miss">MISS? =(</a>
+        <a class="make green" rel="away.make">MAKE? =(</a>
       </div>
       <div id="away_name" class="away_bg name"><span>&#160;</span> <a href="#" class="bench away">bench</a></div>
       <div class="away"></div>
@@ -66,8 +66,8 @@
 
 
 <script id="playerTemplate" type="text/x-jquery-tmpl">
-  <div id="${number}" class="player round">
+  <a id="${number}" class="player round">
     <div class="head">${name}</div>
-    <a class="number assign js_record" rel="assign">${number}</a>
-  </div>
+    <span class="number">${number}</span>
+  </a>
 </script>

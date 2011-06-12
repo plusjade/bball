@@ -484,19 +484,12 @@
 })( jQuery );
 // Modernizr v1.7  www.modernizr.com
 window.Modernizr=function(a,b,c){function G(){e.input=function(a){for(var b=0,c=a.length;b<c;b++)t[a[b]]=!!(a[b]in l);return t}("autocomplete autofocus list placeholder max min multiple pattern required step".split(" ")),e.inputtypes=function(a){for(var d=0,e,f,h,i=a.length;d<i;d++)l.setAttribute("type",f=a[d]),e=l.type!=="text",e&&(l.value=m,l.style.cssText="position:absolute;visibility:hidden;",/^range$/.test(f)&&l.style.WebkitAppearance!==c?(g.appendChild(l),h=b.defaultView,e=h.getComputedStyle&&h.getComputedStyle(l,null).WebkitAppearance!=="textfield"&&l.offsetHeight!==0,g.removeChild(l)):/^(search|tel)$/.test(f)||(/^(url|email)$/.test(f)?e=l.checkValidity&&l.checkValidity()===!1:/^color$/.test(f)?(g.appendChild(l),g.offsetWidth,e=l.value!=m,g.removeChild(l)):e=l.value!=m)),s[a[d]]=!!e;return s}("search tel url email datetime date month week time datetime-local number range color".split(" "))}function F(a,b){var c=a.charAt(0).toUpperCase()+a.substr(1),d=(a+" "+p.join(c+" ")+c).split(" ");return!!E(d,b)}function E(a,b){for(var d in a)if(k[a[d]]!==c&&(!b||b(a[d],j)))return!0}function D(a,b){return(""+a).indexOf(b)!==-1}function C(a,b){return typeof a===b}function B(a,b){return A(o.join(a+";")+(b||""))}function A(a){k.cssText=a}var d="1.7",e={},f=!0,g=b.documentElement,h=b.head||b.getElementsByTagName("head")[0],i="modernizr",j=b.createElement(i),k=j.style,l=b.createElement("input"),m=":)",n=Object.prototype.toString,o=" -webkit- -moz- -o- -ms- -khtml- ".split(" "),p="Webkit Moz O ms Khtml".split(" "),q={svg:"http://www.w3.org/2000/svg"},r={},s={},t={},u=[],v,w=function(a){var c=b.createElement("style"),d=b.createElement("div"),e;c.textContent=a+"{#modernizr{height:3px}}",h.appendChild(c),d.id="modernizr",g.appendChild(d),e=d.offsetHeight===3,c.parentNode.removeChild(c),d.parentNode.removeChild(d);return!!e},x=function(){function d(d,e){e=e||b.createElement(a[d]||"div");var f=(d="on"+d)in e;f||(e.setAttribute||(e=b.createElement("div")),e.setAttribute&&e.removeAttribute&&(e.setAttribute(d,""),f=C(e[d],"function"),C(e[d],c)||(e[d]=c),e.removeAttribute(d))),e=null;return f}var a={select:"input",change:"input",submit:"form",reset:"form",error:"img",load:"img",abort:"img"};return d}(),y=({}).hasOwnProperty,z;C(y,c)||C(y.call,c)?z=function(a,b){return b in a&&C(a.constructor.prototype[b],c)}:z=function(a,b){return y.call(a,b)},r.flexbox=function(){function c(a,b,c,d){a.style.cssText=o.join(b+":"+c+";")+(d||"")}function a(a,b,c,d){b+=":",a.style.cssText=(b+o.join(c+";"+b)).slice(0,-b.length)+(d||"")}var d=b.createElement("div"),e=b.createElement("div");a(d,"display","box","width:42px;padding:0;"),c(e,"box-flex","1","width:10px;"),d.appendChild(e),g.appendChild(d);var f=e.offsetWidth===42;d.removeChild(e),g.removeChild(d);return f},r.canvas=function(){var a=b.createElement("canvas");return a.getContext&&a.getContext("2d")},r.canvastext=function(){return e.canvas&&C(b.createElement("canvas").getContext("2d").fillText,"function")},r.webgl=function(){return!!a.WebGLRenderingContext},r.touch=function(){return"ontouchstart"in a||w("@media ("+o.join("touch-enabled),(")+"modernizr)")},r.geolocation=function(){return!!navigator.geolocation},r.postmessage=function(){return!!a.postMessage},r.websqldatabase=function(){var b=!!a.openDatabase;return b},r.indexedDB=function(){for(var b=-1,c=p.length;++b<c;){var d=p[b].toLowerCase();if(a[d+"_indexedDB"]||a[d+"IndexedDB"])return!0}return!1},r.hashchange=function(){return x("hashchange",a)&&(b.documentMode===c||b.documentMode>7)},r.history=function(){return !!(a.history&&history.pushState)},r.draganddrop=function(){return x("dragstart")&&x("drop")},r.websockets=function(){return"WebSocket"in a},r.rgba=function(){A("background-color:rgba(150,255,150,.5)");return D(k.backgroundColor,"rgba")},r.hsla=function(){A("background-color:hsla(120,40%,100%,.5)");return D(k.backgroundColor,"rgba")||D(k.backgroundColor,"hsla")},r.multiplebgs=function(){A("background:url(//:),url(//:),red url(//:)");return(new RegExp("(url\\s*\\(.*?){3}")).test(k.background)},r.backgroundsize=function(){return F("backgroundSize")},r.borderimage=function(){return F("borderImage")},r.borderradius=function(){return F("borderRadius","",function(a){return D(a,"orderRadius")})},r.boxshadow=function(){return F("boxShadow")},r.textshadow=function(){return b.createElement("div").style.textShadow===""},r.opacity=function(){B("opacity:.55");return/^0.55$/.test(k.opacity)},r.cssanimations=function(){return F("animationName")},r.csscolumns=function(){return F("columnCount")},r.cssgradients=function(){var a="background-image:",b="gradient(linear,left top,right bottom,from(#9f9),to(white));",c="linear-gradient(left top,#9f9, white);";A((a+o.join(b+a)+o.join(c+a)).slice(0,-a.length));return D(k.backgroundImage,"gradient")},r.cssreflections=function(){return F("boxReflect")},r.csstransforms=function(){return!!E(["transformProperty","WebkitTransform","MozTransform","OTransform","msTransform"])},r.csstransforms3d=function(){var a=!!E(["perspectiveProperty","WebkitPerspective","MozPerspective","OPerspective","msPerspective"]);a&&"webkitPerspective"in g.style&&(a=w("@media ("+o.join("transform-3d),(")+"modernizr)"));return a},r.csstransitions=function(){return F("transitionProperty")},r.fontface=function(){var a,c,d=h||g,e=b.createElement("style"),f=b.implementation||{hasFeature:function(){return!1}};e.type="text/css",d.insertBefore(e,d.firstChild),a=e.sheet||e.styleSheet;var i=f.hasFeature("CSS2","")?function(b){if(!a||!b)return!1;var c=!1;try{a.insertRule(b,0),c=/src/i.test(a.cssRules[0].cssText),a.deleteRule(a.cssRules.length-1)}catch(d){}return c}:function(b){if(!a||!b)return!1;a.cssText=b;return a.cssText.length!==0&&/src/i.test(a.cssText)&&a.cssText.replace(/\r+|\n+/g,"").indexOf(b.split(" ")[0])===0};c=i('@font-face { font-family: "font"; src: url(data:,); }'),d.removeChild(e);return c},r.video=function(){var a=b.createElement("video"),c=!!a.canPlayType;if(c){c=new Boolean(c),c.ogg=a.canPlayType('video/ogg; codecs="theora"');var d='video/mp4; codecs="avc1.42E01E';c.h264=a.canPlayType(d+'"')||a.canPlayType(d+', mp4a.40.2"'),c.webm=a.canPlayType('video/webm; codecs="vp8, vorbis"')}return c},r.audio=function(){var a=b.createElement("audio"),c=!!a.canPlayType;c&&(c=new Boolean(c),c.ogg=a.canPlayType('audio/ogg; codecs="vorbis"'),c.mp3=a.canPlayType("audio/mpeg;"),c.wav=a.canPlayType('audio/wav; codecs="1"'),c.m4a=a.canPlayType("audio/x-m4a;")||a.canPlayType("audio/aac;"));return c},r.localstorage=function(){try{return!!localStorage.getItem}catch(a){return!1}},r.sessionstorage=function(){try{return!!sessionStorage.getItem}catch(a){return!1}},r.webWorkers=function(){return!!a.Worker},r.applicationcache=function(){return!!a.applicationCache},r.svg=function(){return!!b.createElementNS&&!!b.createElementNS(q.svg,"svg").createSVGRect},r.inlinesvg=function(){var a=b.createElement("div");a.innerHTML="<svg/>";return(a.firstChild&&a.firstChild.namespaceURI)==q.svg},r.smil=function(){return!!b.createElementNS&&/SVG/.test(n.call(b.createElementNS(q.svg,"animate")))},r.svgclippaths=function(){return!!b.createElementNS&&/SVG/.test(n.call(b.createElementNS(q.svg,"clipPath")))};for(var H in r)z(r,H)&&(v=H.toLowerCase(),e[v]=r[H](),u.push((e[v]?"":"no-")+v));e.input||G(),e.crosswindowmessaging=e.postmessage,e.historymanagement=e.history,e.addTest=function(a,b){a=a.toLowerCase();if(!e[a]){b=!!b(),g.className+=" "+(b?"":"no-")+a,e[a]=b;return e}},A(""),j=l=null,f&&a.attachEvent&&function(){var a=b.createElement("div");a.innerHTML="<elem></elem>";return a.childNodes.length!==1}()&&function(a,b){function p(a,b){var c=-1,d=a.length,e,f=[];while(++c<d)e=a[c],(b=e.media||b)!="screen"&&f.push(p(e.imports,b),e.cssText);return f.join("")}function o(a){var b=-1;while(++b<e)a.createElement(d[b])}var c="abbr|article|aside|audio|canvas|details|figcaption|figure|footer|header|hgroup|mark|meter|nav|output|progress|section|summary|time|video",d=c.split("|"),e=d.length,f=new RegExp("(^|\\s)("+c+")","gi"),g=new RegExp("<(/*)("+c+")","gi"),h=new RegExp("(^|[^\\n]*?\\s)("+c+")([^\\n]*)({[\\n\\w\\W]*?})","gi"),i=b.createDocumentFragment(),j=b.documentElement,k=j.firstChild,l=b.createElement("body"),m=b.createElement("style"),n;o(b),o(i),k.insertBefore(m,k.firstChild),m.media="print",a.attachEvent("onbeforeprint",function(){var a=-1,c=p(b.styleSheets,"all"),k=[],o;n=n||b.body;while((o=h.exec(c))!=null)k.push((o[1]+o[2]+o[3]).replace(f,"$1.iepp_$2")+o[4]);m.styleSheet.cssText=k.join("\n");while(++a<e){var q=b.getElementsByTagName(d[a]),r=q.length,s=-1;while(++s<r)q[s].className.indexOf("iepp_")<0&&(q[s].className+=" iepp_"+d[a])}i.appendChild(n),j.appendChild(l),l.className=n.className,l.innerHTML=n.innerHTML.replace(g,"<$1font")}),a.attachEvent("onafterprint",function(){l.innerHTML="",j.removeChild(l),j.appendChild(n),m.styleSheet.cssText=""})}(a,b),e._enableHTML5=f,e._version=d,g.className=g.className.replace(/\bno-js\b/,"")+" js "+u.join(" ");return e}(this,this.document)
-var app = {
-  gameId : null,
-  action : null,
-  player : null,
-  $actions : null,
-  $players : null,
-  $playersBench : null,
-  
+Action = {
   offensiveActions : ["three", "two", "layup", "freethrow", "orebound", "assist", "turnover"],
   defensiveActions : ["steal", "block", "drebound", "foul", "charge"],
   pointValues : {"three": 3, "two": 2, "layup": 2, "freethrow": 1},
   
-  actions : {
+  data : {
     "three" : {id: "three", name : "3pt Shot", state : "offense", type : "shot", value : 3},
     "two" : {id: "two", name : "2pt Shot", state : "offense", type : "shot", value : 2},
     "layup" : {id: "layup", name : "2pt Layup", state : "offense", type : "shot", value : 2},
@@ -510,17 +503,25 @@ var app = {
     "drebound" : {id: "drebound", name : "D Rebound", state : "defense", type : "bool", value : null},
     "foul" : {id: "foul", name : "Foul", state : "defense", type : "bool", value : null},
     "charge" : {id: "charge", name : "Charge", state : "defense", type : "bool", value : null}
-  },
+  }
+}
+var App = {
+  gameId : null,
+  action : null,
+  player : null,
+  $actions : null,
+  $players : null,
+  $playersBench : null,
   
   start : function(gameId){
-    app.gameId = gameId;
+    App.gameId = gameId;
     
-    console.log(game.data[gameId]);
+    console.log(Game.data[gameId]);
     
-    if(game.data[gameId]){
+    if(Game.data[gameId]){
       console.log("existing game!");
-      app.init();
-      app.updateScores();
+      App.init();
+      App.updateScores();
     }else{
       console.log("load game from database!");
       /*
@@ -537,9 +538,9 @@ var app = {
           game["away"] = data["team"];
           game["awayPlayers"] = data["players"];
         
-          localStorage[app.gameId] = JSON.stringify(game);
+          localStorage[App.gameId] = JSON.stringify(game);
 
-          app.init();
+          App.init();
         });
       });    
 
@@ -548,35 +549,35 @@ var app = {
 
   init : function(){
     $("#playerTemplate").template("playerTemplate");
-    app.$actions = $("#actions_wrapper");
-    app.$players = $("#players_game");
-    app.$playersBench = $("#players_bench");
+    App.$actions = $("#actions_wrapper");
+    App.$players = $("#players_game");
+    App.$playersBench = $("#players_bench");
 
   /* select action interface */  
-    app.$actions.find("a").live("click", function(e){
-      app.$actions.find("a").removeClass("active");
-      app.$players.find("a.player").removeClass("active");
-      app.$players.find("div.make_miss").hide();
+    App.$actions.find("a").live("click", function(e){
+      App.$actions.find("a").removeClass("active");
+      App.$players.find("a.player").removeClass("active");
+      App.$players.find("div.make_miss").hide();
       $(this).addClass("active");
-      app.action = this.id;
+      App.action = this.id;
       
       e.preventDefault();
       return false;
     })
           
   /* select player interface */  
-    app.$players.find("a.player").live("click", function(e){
-      if(!app.action) return false;
+    App.$players.find("a.player").live("click", function(e){
+      if(!App.action) return false;
 
     // set active player
-      app.player = this.id;
-      app.$players.find("a.player").removeClass("active");
+      App.player = this.id;
+      App.$players.find("a.player").removeClass("active");
       $(this).addClass("active");
       
-      if(app.actions[app.action].type === "shot"){
+      if(Action.data[App.action].type === "shot"){
         $(this).parent().siblings("div.make_miss").show();
       }else{
-        app.recordStat(app.player, $(this).parent().attr("class"), app.action);
+        Stat.record(App.player, $(this).parent().attr("class"), App.action);
       }
       
       e.preventDefault();
@@ -584,9 +585,9 @@ var app = {
     })
     
   /* record a make or miss */
-    app.$players.find("div.make_miss > a").live("click", function(e){
+    App.$players.find("div.make_miss > a").live("click", function(e){
       var pair = $(this).attr("rel").split(".");
-      app.recordStat(app.player, pair[0], app.action, pair[1]);
+      Stat.record(App.player, pair[0], App.action, pair[1]);
       
       e.preventDefault();
       return false;
@@ -595,12 +596,12 @@ var app = {
   /* bench interface */
     $("a.bench").click(function(e){
       var side = $(this).hasClass("home") ? "home" : "away";
-      app.$playersBench.removeClass("home_bg away_bg").addClass(side+"_bg").show();
+      App.$playersBench.removeClass("home_bg away_bg").addClass(side+"_bg").show();
     
-      app.$playersBench.find("div.home").hide();
-      app.$playersBench.find("div.away").hide();
+      App.$playersBench.find("div.home").hide();
+      App.$playersBench.find("div.away").hide();
     
-      app.$playersBench.find("div."+side).show();
+      App.$playersBench.find("div."+side).show();
 
       e.preventDefault();
       return false;
@@ -620,10 +621,10 @@ var app = {
       $li = $(this).parent();
       
       if($li.hasClass("undone")){
-        app.recordStat.apply(this, app.statParse($(this).attr("rel")));
+        Stat.record.apply(this, Stat.parse($(this).attr("rel")));
         $li.remove();
       }else{
-        app.unRecordStat.apply(this, app.statParse($(this).attr("rel")));
+        Stat.unRecord.apply(this, Stat.parse($(this).attr("rel")));
         $li.find("a").text("REDO");
       }
       $li.toggleClass("undone");
@@ -642,77 +643,37 @@ var app = {
   /* load teams */
     var home = "pandabots";
     var away = "gametime";
-    app.loadTeam("home", home, team.data[home]);  
-    app.loadTeam("away", away, team.data[away]);  
+    App.loadTeam("home", home, Team.data[home]);  
+    App.loadTeam("away", away, Team.data[away]);  
   },
   
   loadTeam : function(side, team, players){
     $("#"+side+"_name").find("span").text(team);
-    app.$players.find("div."+side).empty();
-    app.$playersBench.find("div."+side).empty();
+    App.$players.find("div."+side).empty();
+    App.$playersBench.find("div."+side).empty();
     
-    $.tmpl("playerTemplate", players).appendTo(app.$players.find("div."+side));
-    $.tmpl("playerTemplate", players).appendTo(app.$playersBench.find("div."+side));
+    $.tmpl("playerTemplate", players).appendTo(App.$players.find("div."+side));
+    $.tmpl("playerTemplate", players).appendTo(App.$playersBench.find("div."+side));
   },
   
-  
-  recordStat : function(player, side, action, value){
-    var key = app.toKey(side, action, value);
-    if(typeof localStorage[key] === "undefined"){
-      localStorage[key] = player+"|";
-    }else{
-      localStorage[key] += player+"|";
-    }
-    
-    action = app.actions[action];
-    app.log('<span>'+side+ " #"+ player + " &#10144; " + action.name + (value ? (" "+value) : "") + '!</span> <a href="#" class="undo" rel="'+app.statToString(player, side, action.id, value)+'">UNDO</a>');
-    
-    app.updateScores();
-    app.refresh();
-    console.log("blah");
-    console.log(localStorage);
-  },
-
-  unRecordStat : function(player, side, action, value){
-    var key = app.toKey(side, action, value);
-    if(key && player && typeof localStorage[key] !== "undefined"){
-      localStorage[key] = localStorage[key].replace(player+"|", "");
-      app.updateScores();
-    }
-  },
-
   updateScores : function(){
     var homeScore = 0;
     var awayScore = 0;
-    for(var shot in app.pointValues) {
+    for(var shot in Action.pointValues) {
 
-      var homeKey = app.gameId + ".home." + shot + ".make";
+      var homeKey = App.gameId + ".home." + shot + ".make";
       if(localStorage.hasOwnProperty(homeKey)){
-        homeScore += +app.pointValues[shot] *(localStorage[homeKey].split("|").length - 1);
+        homeScore += +Action.pointValues[shot] *(localStorage[homeKey].split("|").length - 1);
       }
       
-      var awayKey = app.gameId + ".away." + shot + ".make";
+      var awayKey = App.gameId + ".away." + shot + ".make";
       if(localStorage.hasOwnProperty(awayKey)){
-        awayScore += +app.pointValues[shot] *(localStorage[awayKey].split("|").length - 1);
+        awayScore += +Action.pointValues[shot] *(localStorage[awayKey].split("|").length - 1);
       }
     }
 
     $("#home_score").text(homeScore);  
     $("#away_score").text(awayScore);  
-  },
-
-  toKey : function(side, action, value){
-    var key = app.gameId + "." +  side + "." + action;
-    if(value) key += "." + value;
-    return key;
-  },
-  
-  statToString : function(player, side, action, value){
-    return [player, side, action, value].join(".");
-  },
-  
-  statParse : function(stat){
-    return stat.split(".");
   },
   
   log : function(message){
@@ -725,14 +686,14 @@ var app = {
   },
 
   refresh : function(){
-    app.$actions.find("a").removeClass("active");
-    app.$players.find("div.make_miss").hide();
-    app.action = null;
-    app.player = null;
+    App.$actions.find("a").removeClass("active");
+    App.$players.find("div.make_miss").hide();
+    App.action = null;
+    App.player = null;
   }
   
 }
-var game = {
+var Game = {
   data : {
     123 : {
       home : "pandabots",
@@ -779,7 +740,50 @@ var simpleTabs = {
     simpleTabs.$wrapper.hide();
   }
 }
-var team = {
+Stat = {
+  
+  record : function(player, side, action, value){
+    var key = Stat.keyize(side, action, value);
+    if(typeof localStorage[key] === "undefined"){
+      localStorage[key] = player+"|";
+    }else{
+      localStorage[key] += player+"|";
+    }
+    
+    action = Action.data[action];
+    App.log('<span>'+side+ " #"+ player + " &#10144; " + action.name + (value ? (" "+value) : "") + '!</span> <a href="#" class="undo" rel="'+Stat.asString(player, side, action.id, value)+'">UNDO</a>');
+    
+    App.updateScores();
+    App.refresh();
+    console.log("blah");
+    console.log(localStorage);
+  },
+
+  unRecord : function(player, side, action, value){
+    var key = Stat.keyize(side, action, value);
+    if(key && player && typeof localStorage[key] !== "undefined"){
+      localStorage[key] = localStorage[key].replace(player+"|", "");
+      App.updateScores();
+    }
+  },
+
+  keyize : function(side, action, value){
+    var key = App.gameId + "." +  side + "." + action;
+    if(value) key += "." + value;
+    return key;
+  },
+  
+  asString : function(player, side, action, value){
+    return [player, side, action, value].join(".");
+  },
+  
+  parse : function(statString){
+    return statString.split(".");
+  }
+  
+  
+}
+var Team = {
   data : {
     "pandabots" : [
       {name:"Jade", number : "12"},
@@ -808,8 +812,8 @@ var team = {
   },
   
   get : function(name){
-    if(team.data[name]){
-      return team.data[name];
+    if(Team.data[name]){
+      return Team.data[name];
     }
     return [];
   },
@@ -818,8 +822,8 @@ var team = {
     $("#teamTemplate").template("teamTemplate");
 
     var qteams = []
-    for(var name in team.data) {
-      if(team.data.hasOwnProperty(name)){ 
+    for(var name in Team.data) {
+      if(Team.data.hasOwnProperty(name)){ 
         qteams.push({name:name});
       }
     }
@@ -828,42 +832,42 @@ var team = {
 
     $("#teams_pane").find("div.team").click(function(){
       var team = $(this).text().toLowerCase().replace(" ", "-");
-      teamPlayers.init(team);
+      TeamPlayers.init(team);
       
     })
   }
 }
-var teamPlayers = {
+var TeamPlayers = {
   teamName : null,
   
   init : function(teamName){
-    teamPlayers.teamName = teamName;
+    TeamPlayers.teamName = teamName;
     $("#rosterTemplate").template("rosterTemplate");
-    teamPlayers.loadTeam();
+    TeamPlayers.loadTeam();
     
   /* add. */
     $("#team_roster").find("div.add").click(function(){
       var number = $(this).parent().find("input").first().val();
       var name = $(this).parent().find("input").last().val();
       $.tmpl("rosterTemplate", [{name: name, number: number}]).appendTo($("#team_roster").find("div.players"));
-      teamPlayers.update();
+      TeamPlayers.update();
     })
   
   /* delete */  
     $("#team_roster").find("div.delete").live("click", function(){
       $(this).parent().remove();
-      teamPlayers.update();
+      TeamPlayers.update();
     })
   },
 
   loadTeam : function(){
-    $.tmpl("rosterTemplate", team.data[teamPlayers.teamName]).appendTo($("#team_roster").find("div.players").empty());
+    $.tmpl("rosterTemplate", Team.data[TeamPlayers.teamName]).appendTo($("#team_roster").find("div.players").empty());
   /* Keyup. Todo: need to bind this to new players too. */
     $("#team_roster").find("div.players").find("input").keyup(function(){
-      teamPlayers.update();
+      TeamPlayers.update();
     })
     
-    $("#title").addClass("active").text("team: "+ teamPlayers.teamName)
+    $("#title").addClass("active").text("team: "+ TeamPlayers.teamName)
     simpleTabs.clear();
   },
   
@@ -875,7 +879,7 @@ var teamPlayers = {
       players.push({number:number, name:name})
     })
     
-    team.data[teamPlayers.teamName] = players;
-    console.log(team.data[teamPlayers.teamName]);
+    Team.data[TeamPlayers.teamName] = players;
+    console.log(Team.data[TeamPlayers.teamName]);
   }
 }

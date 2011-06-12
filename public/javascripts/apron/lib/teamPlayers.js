@@ -1,34 +1,34 @@
-var teamPlayers = {
+var TeamPlayers = {
   teamName : null,
   
   init : function(teamName){
-    teamPlayers.teamName = teamName;
+    TeamPlayers.teamName = teamName;
     $("#rosterTemplate").template("rosterTemplate");
-    teamPlayers.loadTeam();
+    TeamPlayers.loadTeam();
     
   /* add. */
     $("#team_roster").find("div.add").click(function(){
       var number = $(this).parent().find("input").first().val();
       var name = $(this).parent().find("input").last().val();
       $.tmpl("rosterTemplate", [{name: name, number: number}]).appendTo($("#team_roster").find("div.players"));
-      teamPlayers.update();
+      TeamPlayers.update();
     })
   
   /* delete */  
     $("#team_roster").find("div.delete").live("click", function(){
       $(this).parent().remove();
-      teamPlayers.update();
+      TeamPlayers.update();
     })
   },
 
   loadTeam : function(){
-    $.tmpl("rosterTemplate", team.data[teamPlayers.teamName]).appendTo($("#team_roster").find("div.players").empty());
+    $.tmpl("rosterTemplate", Team.data[TeamPlayers.teamName]).appendTo($("#team_roster").find("div.players").empty());
   /* Keyup. Todo: need to bind this to new players too. */
     $("#team_roster").find("div.players").find("input").keyup(function(){
-      teamPlayers.update();
+      TeamPlayers.update();
     })
     
-    $("#title").addClass("active").text("team: "+ teamPlayers.teamName)
+    $("#title").addClass("active").text("team: "+ TeamPlayers.teamName)
     simpleTabs.clear();
   },
   
@@ -40,7 +40,7 @@ var teamPlayers = {
       players.push({number:number, name:name})
     })
     
-    team.data[teamPlayers.teamName] = players;
-    console.log(team.data[teamPlayers.teamName]);
+    Team.data[TeamPlayers.teamName] = players;
+    console.log(Team.data[TeamPlayers.teamName]);
   }
 }

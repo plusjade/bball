@@ -1,4 +1,4 @@
-var game = {
+var Game = {
   data : {
     123 : {
       home : "pandabots",

@@ -1,4 +1,4 @@
-var team = {
+var Team = {
   data : {
     "pandabots" : [
       {name:"Jade", number : "12"},
@@ -27,8 +27,8 @@ var team = {
   },
   
   get : function(name){
-    if(team.data[name]){
-      return team.data[name];
+    if(Team.data[name]){
+      return Team.data[name];
     }
     return [];
   },
@@ -37,8 +37,8 @@ var team = {
     $("#teamTemplate").template("teamTemplate");
 
     var qteams = []
-    for(var name in team.data) {
-      if(team.data.hasOwnProperty(name)){ 
+    for(var name in Team.data) {
+      if(Team.data.hasOwnProperty(name)){ 
         qteams.push({name:name});
       }
     }
@@ -47,7 +47,7 @@ var team = {
 
     $("#teams_pane").find("div.team").click(function(){
       var team = $(this).text().toLowerCase().replace(" ", "-");
-      teamPlayers.init(team);
+      TeamPlayers.init(team);
       
     })
   }

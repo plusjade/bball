@@ -1,9 +1,11 @@
 var app = {
   gameId : null,
+  action : null,
+  player : null,
   $actions : null,
   $players : null,
   $playersBench : null,
-
+  
   offensiveActions : ["three", "two", "layup", "freethrow", "orebound", "assist", "turnover"],
   defensiveActions : ["steal", "block", "drebound", "foul", "charge"],
   pointValues : {"three": 3, "two": 2, "layup": 2, "freethrow": 1},
@@ -25,7 +27,7 @@ var app = {
   },
   
   start : function(gameId){
-    app.gameId = "game." + gameId;
+    app.gameId = gameId;
     
     console.log(game.data[gameId]);
     
@@ -68,8 +70,9 @@ var app = {
     app.$actions.find("a").live("click", function(e){
       app.$actions.find("a").removeClass("active");
       app.$players.find("a.player").removeClass("active");
-      $(this).addClass("active");
       app.$players.find("div.make_miss").hide();
+      $(this).addClass("active");
+      app.action = this.id;
       
       e.preventDefault();
       return false;
@@ -77,20 +80,17 @@ var app = {
           
   /* select player interface */  
     app.$players.find("a.player").live("click", function(e){
-      if(app.currentAction().length === 0) return false;
-      
+      if(!app.action) return false;
+
     // set active player
+      app.player = this.id;
       app.$players.find("a.player").removeClass("active");
       $(this).addClass("active");
-
-      if(app.currentAction().type === "shot"){
+      
+      if(app.actions[app.action].type === "shot"){
         $(this).parent().siblings("div.make_miss").show();
       }else{
-        var side = $(this).parent().attr("class");
-        app.recordData(app.toKey(app.currentAction(), $(this)[0], side, "assign"));
-
-        app.$actions.find("a").removeClass("active");
-        console.log(localStorage);
+        app.recordStat(app.player, $(this).parent().attr("class"), app.action);
       }
       
       e.preventDefault();
@@ -100,18 +100,14 @@ var app = {
   /* record a make or miss */
     app.$players.find("div.make_miss > a").live("click", function(e){
       var pair = $(this).attr("rel").split(".");
-      app.recordData(app.toKey(app.currentAction(), app.currentPlayer()[0], pair[0], pair[1]));
+      app.recordStat(app.player, pair[0], app.action, pair[1]);
       
-      app.$actions.find("a").removeClass("active");
-      app.$players.find("div.make_miss").hide();
-      
-      console.log(localStorage);
       e.preventDefault();
       return false;
     })
     
   /* bench interface */
-    $("a.bench").click(function(){
+    $("a.bench").click(function(e){
       var side = $(this).hasClass("home") ? "home" : "away";
       app.$playersBench.removeClass("home_bg away_bg").addClass(side+"_bg").show();
     
@@ -120,15 +116,10 @@ var app = {
     
       app.$playersBench.find("div."+side).show();
 
+      e.preventDefault();
       return false;
     });
   
-  /* close bench */
-    $("a.close").click(function(){
-      $(this).parent().hide();
-      return false;
-    });
-
   /* toggle logger */
     $("div.tab").find("span").click(function(){
       $("div.tab").find("span").show();
@@ -139,18 +130,26 @@ var app = {
     });
   
   /* undo/redo logged actions */  
-    $("a.undo").live("click", function(){
+    $("a.undo").live("click", function(e){
       $li = $(this).parent();
-      var key = $li.find("span").text();
-
+      
       if($li.hasClass("undone")){
-        app.recordData(key);
+        app.recordStat.apply(this, app.statParse($(this).attr("rel")));
         $li.remove();
       }else{
-        app.unRecordData(key);
+        app.unRecordStat.apply(this, app.statParse($(this).attr("rel")));
         $li.find("a").text("REDO");
       }
       $li.toggleClass("undone");
+      
+      e.preventDefault();
+      return false;
+    });
+    
+  /* close bench */
+    $("a.close").click(function(e){
+      $(this).parent().hide();
+      e.preventDefault();
       return false;
     });
     
@@ -170,64 +169,64 @@ var app = {
     $.tmpl("playerTemplate", players).appendTo(app.$playersBench.find("div."+side));
   },
   
-  toKey : function(action, player, side, value){
-    return app.gameId + "." +  side + "." + player.id + "." + action.id + "." + value;
-  },
   
-  recordData : function(key){
+  recordStat : function(player, side, action, value){
+    var key = app.toKey(side, action, value);
     if(typeof localStorage[key] === "undefined"){
-      localStorage[key] = 1;
+      localStorage[key] = player+"|";
     }else{
-      localStorage[key] = +localStorage[key] + 1;
+      localStorage[key] += player+"|";
     }
-
+    
+    action = app.actions[action];
+    app.log('<span>'+side+ " #"+ player + " &#10144; " + action.name + (value ? (" "+value) : "") + '!</span> <a href="#" class="undo" rel="'+app.statToString(player, side, action.id, value)+'">UNDO</a>');
+    
     app.updateScores();
-    app.log('<span>'+key+'</span> <a href="#" class="undo">UNDO</a>');
+    app.refresh();
+    console.log("blah");
+    console.log(localStorage);
   },
 
-  unRecordData : function(key){
-    if(!key) return false;
-    if(typeof localStorage[key] !== "undefined"){
-      if(localStorage[key] === 1){
-        localStorage.removeItem(key);
-      }else{
-        localStorage[key] = +localStorage[key] - 1;
-      }
+  unRecordStat : function(player, side, action, value){
+    var key = app.toKey(side, action, value);
+    if(key && player && typeof localStorage[key] !== "undefined"){
+      localStorage[key] = localStorage[key].replace(player+"|", "");
+      app.updateScores();
     }
-    app.updateScores();
   },
 
-  
   updateScores : function(){
     var homeScore = 0;
     var awayScore = 0;
-    for(var key in localStorage) {
-      if(localStorage.hasOwnProperty(key)){
-        var a = key.split(".");
+    for(var shot in app.pointValues) {
 
-        if(a.length === 6){ // 6 length means this is in stat format
-          // TODO: scope to this game only
-          var side = a[2], player = a[3], action = a[4], type = a[5];
-
-          if(type === "make" && app.pointValues.hasOwnProperty(action)){
-            var tally = (+localStorage[key]*app.pointValues[action]);
-            if(side === "home") homeScore += tally;
-            else awayScore += tally;
-          }
-        }
+      var homeKey = app.gameId + ".home." + shot + ".make";
+      if(localStorage.hasOwnProperty(homeKey)){
+        homeScore += +app.pointValues[shot] *(localStorage[homeKey].split("|").length - 1);
+      }
+      
+      var awayKey = app.gameId + ".away." + shot + ".make";
+      if(localStorage.hasOwnProperty(awayKey)){
+        awayScore += +app.pointValues[shot] *(localStorage[awayKey].split("|").length - 1);
       }
     }
+
     $("#home_score").text(homeScore);  
     $("#away_score").text(awayScore);  
   },
-  
-  currentAction : function(){
-    var id = app.$actions.find("a.active").first().attr("id");
-    return app.actions[id];
+
+  toKey : function(side, action, value){
+    var key = app.gameId + "." +  side + "." + action;
+    if(value) key += "." + value;
+    return key;
   },
   
-  currentPlayer : function(){
-    return app.$players.find("a.player.active").first();
+  statToString : function(player, side, action, value){
+    return [player, side, action, value].join(".");
+  },
+  
+  statParse : function(stat){
+    return stat.split(".");
   },
   
   log : function(message){
@@ -237,6 +236,13 @@ var app = {
     $node.animate( {'marginLeft': '+=20px'}, 100, "linear" );
     $node.animate( {'marginLeft': '-=20px'}, 100, "linear" );
     $node.animate( {'marginLeft': '+=20px'}, 100, "linear" );
-  }
+  },
 
+  refresh : function(){
+    app.$actions.find("a").removeClass("active");
+    app.$players.find("div.make_miss").hide();
+    app.action = null;
+    app.player = null;
+  }
+  
 }

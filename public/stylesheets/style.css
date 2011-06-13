@@ -192,6 +192,33 @@ div.away .number{
 }
 
 /* ======================================================
+  analytics */
+
+#analytics {
+  position:absolute;
+  top:0;
+  left:0;
+  width:1000px;
+  height:600px;
+  background:#333;
+  z-index:100;
+}
+
+#analytics table {
+  width:990px;
+  border-collapse:collapse;
+  margin:auto;
+}  
+#analytics table th, #analytics table td{
+  padding:5px;
+  color:#fff;
+  text-align: center;
+}
+
+#analytics table td {
+  border:1px solid #999;
+}
+/* ======================================================
   Logger */
   
 #log {
@@ -265,6 +292,20 @@ div.away .number{
 }
 
 
+/* ======================================================
+  analytics show */
+  
+#licks {
+  position:absolute;
+  top:0px;
+  left:120px;
+  text-align:center;
+  font-size:36px;
+  z-index:50;
+  color:#fff; 
+  text-align:center;
+} 
+ 
 /* ======================================================
   Expand/Contract Logger */
   

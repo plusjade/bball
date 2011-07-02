@@ -201,7 +201,7 @@ var App = {
     var points = 0;
     var totalMiss = 0;
     var totalMake = 0;
-    var tpct;
+    var tpct = 0;
     for(var action in Action.data){
       cache += "<th>"+Action.data[action].id+"</th>";
     }
@@ -229,7 +229,7 @@ var App = {
         }
       }
       
-      tpct = Math.round((parseInt(totalMake)/parseInt(totalMake+totalMiss))*100);
+      if(totalMake >0 ) tpct = Math.round((parseInt(totalMake)/parseInt(totalMake+totalMiss))*100);
       $table.append("<tr><td>"+ player +"</td><td>name</td><td>"+points+"</td><td>"+totalMake+"/"+(+totalMiss+totalMake)+"<br/>"+tpct+"%</td>"+cache+"</tr>");
     }
 

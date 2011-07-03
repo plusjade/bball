@@ -59,9 +59,9 @@ em {font-weight:bold;}
   UI colors and styles */
 
 .round {
-  -webkit-border-radius: 7px;
-  -moz-border-radius: 7px;
-  border-radius: 7px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 .red {
   background:#BD1550;
@@ -90,7 +90,8 @@ div.home a.player {
   box-shadow: inset 0 0 4px #A69574;
 }
 div.home .number{
- color:#5F6350;
+ color:#FFF;
+ background:#ACB28F;
 }
 
 .away_bg{
@@ -109,7 +110,8 @@ div.away a.player {
   box-shadow: inset 0 0 4px #36544F;
 }
 div.away .number{
- color:#4C5A5A;
+ color:#FFF;
+ background:#899E9B;
 }
   
 .offensive_style {
@@ -140,103 +142,114 @@ div.away .number{
   overflow:hidden;
 }
 
-/* ======================================================
-  ACTIONS */
-
-#actions_wrapper {
-  overflow:hidden;
-  margin-bottom:40px;
-}
-#actions_wrapper div {
-  overflow:hidden;
-  text-align:center;
-}
-#actions_wrapper a {
-  display:inline-block;
-  height:60px;
-  width:100px;
-  padding:10px;
-  margin:8px;
-  
-  overflow:hidden;
-  line-height:60px;
-  text-align:center;
-  font-weight:bold;
-  font-size:17px;
-  color:#DEDBB0;
-  cursor:pointer;
-  
-  border-radius:7px;
-}
-
-#actions_wrapper  a {
-  background-color:#6C343F;
-  text-shadow: 0px 1px 0px #331110;
-  -webkit-box-shadow:inset -1px -1px 3px #111;
-  -moz-box-shadow:inset -1px -1px 3px #111;
-  box-shadow:inset -1px -1px 3px #331110;
-}
-#actions_wrapper a.active {
-  background:#7E841C;
-  -webkit-box-shadow:inset -1px -1px 3px #111;
-  -moz-box-shadow:inset -1px -1px 3px #111;
-  box-shadow:inset -1px -1px 3px #231C19;
-}
 
 /* ======================================================
   Tool bar */
 
 
 #toolbar {
-  height:50px;
+  height:60px;
 }
 
 /* ======================================================
-  analytics */
-
-#analytics {
+  Score */
+  
+div.score{
   position:absolute;
+  width:80px;
+  height:60px;
+  line-height:58px;
+  font-size:34px;
+  color:#FFF;
+  text-align:center;
+}
+#home_score {
   top:0;
   left:0;
-  width:1000px;
-  height:600px;
-  background:#333;
-  z-index:100;
+  border-radius: 0 0 0 7px;
+}
+#away_score {
+  top:0;
+  left:80px;
+  border-radius: 0 0 7px 0;
 }
 
-#analytics table {
-  width:990px;
-  border-collapse:collapse;
-  margin:auto;
-}  
-#analytics table th, #analytics table td{
-  padding:5px;
-  color:#fff;
-  text-align: center;
+/* ======================================================
+  analytics show */
+  
+#licks {
+  position:absolute;
+  top:0px;
+  right:0px;
+  width:60px;
+  height:60px;
+  line-height:58px;
+  background:#111;
+  text-align:center;
+  font-size:46px;
+  z-index:50;
+  color:#fff; 
+  text-align:center;
+  border-radius: 0 0 5px 0;
 }
 
-#analytics table td {
-  border:1px solid #999;
+#settings {
+  position:absolute;
+  top:0px;
+  right:60px;
+  width:60px;
+  height:60px;
+  line-height:58px;
+  background:#000;
+  text-align:center;
+  font-size:46px;
+  z-index:50;
+  color:#fff; 
+  text-align:center;
+  border-radius: 0 0 0 5px;
+  border-right:1px solid #999;
+  
 }
+
+/* ======================================================
+  Expand/Contract Logger */
+  
+div.tab {
+  position:absolute;
+  top:0px;
+  right:150px;
+  width:60px;
+  height:60px;
+  z-index:50;
+  border-radius: 0 0 5px 0;
+}
+div.tab span{
+  width:60px;
+  height:60px;
+  font-size:46px;
+  line-height:58px;
+  display:block;
+  text-align:center;
+  
+  z-index:50;
+  cursor:pointer;
+}
+
 /* ======================================================
   Logger */
   
 #log {
   position:absolute;
   top:0px;
-  left:210px;
+  right:210px;
   width:600px;
-  height:38px;
+  height:60px;
   font-size:16px;
   z-index:10;
   overflow:hidden;
   background:#FEEAB6;
   
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -webkit-border-top-left-radius:0;
-  -webkit-border-bottom-left-radius:0;
+  border-radius: 0 0 0 5px;
 }
 #log.expand {
   height:665px;
@@ -292,50 +305,113 @@ div.away .number{
 }
 
 
+
+
 /* ======================================================
-  analytics show */
-  
-#licks {
-  position:absolute;
-  top:0px;
-  left:120px;
-  text-align:center;
-  font-size:36px;
-  z-index:50;
-  color:#fff; 
-  text-align:center;
-} 
- 
-/* ======================================================
-  Expand/Contract Logger */
-  
-div.tab {
-  position:absolute;
-  top:0px;
-  left:170px;
-  text-align:center;
-  font-size:14px;
-  z-index:50;
-  
-  -webkit-border-radius:7px;
-  -moz-border-radius:7px;
-  border-radius:7px;
-  
-  -webkit-border-top-right-radius:0;
-  -webkit-border-bottom-right-radius:0;
-  -moz-border-radius-topright:0;
-  -moz-border-radius-bottomright:0;
+  ACTIONS */
+
+#actions_wrapper {
+  overflow:hidden;
+  margin-bottom:30px;
+  position:relative;
+  top:20px;
 }
-div.tab span{
-  width:40px;
-  height:38px;
-  font-size:30px;
-  line-height:44px;
+#actions_wrapper div {
   display:block;
+  margin-bottom:10px;
+  overflow:hidden;
+  text-align:center;
+}
+#actions_wrapper div.top a {
+  display:inline-block;
+  height:60px;
+  width:100px;
+  padding:10px;
+  margin:8px;
   
-  z-index:50;
+  overflow:hidden;
+  line-height:60px;
+  text-align:center;
+  font-weight:bold;
+  font-size:17px;
+  color:#DEDBB0;
+  cursor:pointer;
+  
+  border-radius:7px;
+}
+
+#actions_wrapper div.top a {
+  background-color:#6C343F;
+  text-shadow: 0px 1px 0px #331110;
+  -webkit-box-shadow:inset -1px -1px 3px #111;
+  -moz-box-shadow:inset -1px -1px 3px #111;
+  box-shadow:inset -1px -1px 3px #331110;
+}
+#actions_wrapper p {
+  display:inline-block;
+  height:95px;
+  width:230px;
+  margin:8px;
+  overflow:hidden;
+  text-align:center;
+  font-weight:bold;
+  font-size:17px;
+  color:#DEDBB0;
+  border-radius:7px;
+}
+
+#actions_wrapper p span.title {
+  display:block;
+  height:30px;
+  line-height:30px;
+  
+  background-color:#6C343F;
+  border-radius:5px;
+  box-shadow:inset -1px -1px 1px #331110;
+}  
+
+#actions_wrapper p a {
+  display:inline-block;
+  width:102px;
+  height:62px;
+  text-align:center;
+  border-radius: 0 0 5px 5px;
   cursor:pointer;
 }
+#actions_wrapper a.miss {
+  background:#AA343F;
+  color:#FEEDD2;  
+}
+#actions_wrapper a.make {
+  background:#7E841C;
+  color:#FEEDD2;  
+}
+#actions_wrapper div.shots a span {
+  display:block;
+  margin:auto;
+  height:40px; 
+  width:33px;
+  position:relative;
+  top:8px;
+}
+#actions_wrapper a.miss span {
+  background: url("/images/thumbs.png") no-repeat -33px 0;
+}
+#actions_wrapper a.make span {
+  background: url("/images/thumbs.png") no-repeat 0 0;
+}
+
+#actions_wrapper div.top .active {
+  background:#7E841C;
+  -webkit-box-shadow:inset -1px -1px 3px #111;
+  -moz-box-shadow:inset -1px -1px 3px #111;
+  box-shadow:inset -1px -1px 3px #231C19;
+}
+
+#actions_wrapper div.shots a.active {
+  background:#D79306;
+}
+
 
 /* ======================================================
   Player Icons */
@@ -355,7 +431,6 @@ a.player .head{
 a.player .number{
   display:block;
   padding:10px 10px;
-  background:#F9F2E7;
   text-align:center;
   font-weight:bold;
   font-size:38px;
@@ -368,107 +443,41 @@ a.player.active .number, a.player:hover .number {
 
 
 /* ======================================================
-  make/miss */
-  
-div.make_miss {
-  display:none;
-  height:130px;
-  width:1000px;
-  position:absolute;
-  top:0;
-  left:0;
-  z-index:10;
-}
-div.make_miss a {
-  float:left;
-  display:block;
-  width:500px;
-  height:150px;
-  font-size:68px;
-  font-weight:bold;
-  line-height:160px;
-  text-align:center;
-  -webkit-border-radius:7px;
-  cursor:pointer;
-}
-div.make_miss a.make {
-  -webkit-border-top-left-radius:0;
-  -webkit-border-bottom-left-radius:0;
-}
-div.make_miss a.miss {
-  -webkit-border-top-right-radius:0;
-  -webkit-border-bottom-right-radius:0;
-}
-
-
-/* ======================================================
   players in game */
-
+#players_game {
+  margin-bottom:20px;
+}
 #players_game div.team{
   position:relative; 
   clear:both;
-  height:130px;
-  padding:10px;
+  height:125px;
   overflow:visible;
   text-align:center;
 }
-#players_game div.team.home_bg {
-  margin-bottom:50px;
-  border-bottom-left-radius:0;
-}
-#players_game div.team.away_bg {
-  border-top-right-radius:0;
-}
+  
 
 /* ======================================================
   Team Name */
   
-#players_game div.team div.name{
- position:absolute;
- width:350px;
- padding:10px;
- text-align:left;
-}
-#players_game div.team.home_bg div.name{
-  bottom:-34px;
-  left:0px;
-  -webkit-border-bottom-left-radius:7px;
-  -webkit-border-bottom-right-radius:7px;
-}
-#players_game div.team.away_bg div.name{
-  top:-34px;
-  right:0px;
-  -webkit-border-top-left-radius:7px;
-  -webkit-border-top-right-radius:7px;
-}
-#players_game div.team div.name a{
- float:right; 
-}
-
-/* ======================================================
-  Score */
-  
-div.score{
-  position:absolute;
-  width:80px;
-  padding:8px;
-
-  text-align:center;
-  line-height:44px;
-  font-size:34px;
+a.bench {
+  display:block;
+  width:350px;
   color:#FFF;
-  
-  border-top-left-radius:0;
-  border-top-right-radius:0;
+  font-size:18px;
+  line-height:38px;
+  text-align:center;
+  border-radius:7px;
 }
-#home_score {
-  top:0px;
-  left:0px;
+#home_name {
+  position:absolute;
+  left:0;
 }
-#away_score {
-  top:0px;
-  right:0px;
+#away_name {
+  position:absolute;
+  right:0;
 }
+
+
 
 /* ======================================================
   PLAYERS BENCH */
@@ -478,14 +487,13 @@ div.score{
   position:absolute;
   height:105px;
   width:1000px;
-  top:160px;
-  right:0px;
+  top:190px;
+  right:0;
     
+  background:#6C343F;
   overflow:visible;
   z-index:50 !important;
   
-  -webkit-box-shadow: 0 0 10px #333;
-  -moz-box-shadow: 0 0 10px #333;
   box-shadow: 0 0 10px #333;
 }
 
@@ -494,12 +502,8 @@ div.score{
   height:80px;
   width:85px;
 
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
-}
-#players_bench a.player { 
   cursor:move;
+  border-radius: 5px;
 }
 #players_bench a.player .head{
   font-size:14px;
@@ -791,4 +795,33 @@ a.close {
   color:red;
   text-align:center;
   cursor:pointer;
+}
+
+
+/* ======================================================
+  analytics */
+
+#analytics {
+  position:absolute;
+  top:0;
+  left:0;
+  width:1000px;
+  height:600px;
+  background:#333;
+  z-index:100;
+}
+
+#analytics table {
+  width:990px;
+  border-collapse:collapse;
+  margin:auto;
+}  
+#analytics table th, #analytics table td{
+  padding:5px;
+  color:#fff;
+  text-align: center;
+}
+
+#analytics table td {
+  border:1px solid #999;
 }

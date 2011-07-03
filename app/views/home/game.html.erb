@@ -3,7 +3,9 @@
   <div id="toolbar">
     <div id="home_score" class="score round home_bg">0</div>
     <div id="away_score" class="score round away_bg">0</div>
+    
     <a href="#" id="licks">&#9783;</a>
+    <a href="#" id="settings">&#8251;</a>
     <div class="tab red">
       <span rel="expand">&#x25BC;</span>
       <span rel="contract" style="display:none">&#x25B2;</span>
@@ -19,47 +21,55 @@
   
   <div id="actions_wrapper">
 
-    <div class="defense">
-      <a id="charge">Charge</a>
-      <a id="drebound">D Rebound</a>
-      <a id="foul">Foul</a>
-      <a id="block">Block</a>
-      <a id="steal">Steal</a>
+    <div class="top">
+      <a id="foul"><span>Foul</span></a>
+
+      <a id="block"><span>Block</span></a>
+      <a id="steal"><span>Steal</span></a>
+      
+      <a id="turnover"><span>Turnover</span></a>
+      <a id="assist"><span>Assist</span></a>
+      <a id="orebound"><span>Off Reb</span></a>
+      <a id="drebound"><span>Def Reb</span></a>
     </div>
 
-    <div class="offense">
-      <a id="assist">Assist</a>
-      <a id="turnover">Turnover</a>
-      <a id="orebound">O Rebound</a>
-      <a id="two">2pt Shot</a>
-      <a id="layup">2pt Layup</a>
-      <a id="three">3pt Shot</a>
-      <a id="freethrow">FreeThrow</a>
+    <div class="shots">
+      <p>
+        <span class="title">FreeThrow</span>
+        <a id="freethrow.miss" class="miss"><span></span></a>
+        <a id="freethrow.make" class="make"><span></span></a>
+      </p>
+      <p>
+        <span class="title">2pt Layup</span>
+        <a id="layup.miss" class="miss"><span></span></a>
+        <a id="layup.make" class="make"><span></span></a>
+      </p>
+      <p>
+        <span class="title">2pt Shot</span>
+        <a id="two.miss" class="miss"><span></span></a>
+        <a id="two.make" class="make"><span></span></a>
+      </p>
+      <p>
+        <span class="title">3pt Shot</span>
+        <a id="three.miss" class="miss"><span></span></a>
+        <a id="three.make" class="make"><span></span></a>
+      </p>
     </div>
 
   </div>  
 
   <div id="players_game">
-
-    <div class="team home_bg round">
-      <div class="make_miss">
-        <a class="miss red" rel="home.miss">MISS? =(</a>
-        <a class="make green" rel="home.make">MAKE? =)</a>
-      </div>
-      <div id="home_name" class="home_bg name"><span>&#160;</span> <a href="#" class="bench home">bench</a></div>
+    <div class="team home">
       <div class="home"></div>
     </div>
       
-    <div class="team away_bg round">
-      <div class="make_miss">
-        <a class="miss red" rel="away.miss">MISS? =(</a>
-        <a class="make green" rel="away.make">MAKE? =(</a>
-      </div>
-      <div id="away_name" class="away_bg name"><span>&#160;</span> <a href="#" class="bench away">bench</a></div>
+    <div class="team away">
       <div class="away"></div>
     </div>
-
-  </div>
+  </div>  
+  
+  <a id="home_name" class="home_bg bench" href="#">&#160;</a>
+  <a id="away_name" class="away_bg bench" href="#">&#160;</a>
 
   <div id="players_bench" class="round" style="display:none">
     <a href="#" class="close red">close</a>

@@ -557,7 +557,6 @@ var App = {
     App.$actions.find("a").live("click", function(e){
       App.$actions.find("a").removeClass("active");
       App.$players.find("a.player").removeClass("active");
-      App.$players.find("div.make_miss").hide();
       $(this).addClass("active");
       App.action = this.id;
       
@@ -565,38 +564,21 @@ var App = {
       return false;
     })
           
-  /* select player interface */  
+  /* record action by selecting player interface */  
     App.$players.find("a.player").live("click", function(e){
       if(!App.action) return false;
-
     // set active player
       App.player = this.id;
-      App.$players.find("a.player").removeClass("active");
-      $(this).addClass("active");
       
-      if(Action.data[App.action].type === "shot"){
-        $(this).parent().siblings("div.make_miss").show();
-      }else{
-        Stat.record(App.player, $(this).parent().attr("class"), App.action);
-      }
-      
+      Stat.record(App.player, $(this).parent().attr("class"), App.action.split(".")[0], App.action.split(".")[1]);
       e.preventDefault();
       return false;
     })
-    
-  /* record a make or miss */
-    App.$players.find("div.make_miss > a").live("click", function(e){
-      var pair = $(this).attr("rel").split(".");
-      Stat.record(App.player, pair[0], App.action, pair[1]);
-      
-      e.preventDefault();
-      return false;
-    })
-    
+        
   /* bench interface */
     $("a.bench").click(function(e){
-      var side = $(this).hasClass("home") ? "home" : "away";
-      App.$playersBench.removeClass("home_bg away_bg").addClass(side+"_bg").show();
+      var side = $(this).hasClass("home_bg") ? "home" : "away";
+      App.$playersBench.show();
     
       App.$playersBench.find("div.home").hide();
       App.$playersBench.find("div.away").hide();
@@ -634,7 +616,13 @@ var App = {
     });
     
   /* close bench */
-    $("a.close, a.close_lick").click(function(e){
+    $("a.close").click(function(e){
+      $(this).parent().hide();
+      e.preventDefault();
+      return false;
+    });
+  
+    $("a.close_lick").click(function(e){
       $("#analytics").hide();
       $("#analytics").find("p").empty();
       e.preventDefault();
@@ -657,7 +645,7 @@ var App = {
   },
   
   loadTeam : function(side, team, players){
-    $("#"+side+"_name").find("span").text(team);
+    $("#"+side+"_name").text(team+ " Bench");
     App.$players.find("div."+side).empty();
     App.$playersBench.find("div."+side).empty();
     
@@ -708,7 +696,7 @@ var App = {
     var points = 0;
     var totalMiss = 0;
     var totalMake = 0;
-    var tpct;
+    var tpct = 0;
     for(var action in Action.data){
       cache += "<th>"+Action.data[action].id+"</th>";
     }
@@ -736,7 +724,7 @@ var App = {
         }
       }
       
-      tpct = Math.round((parseInt(totalMake)/parseInt(totalMake+totalMiss))*100);
+      if(totalMake >0 ) tpct = Math.round((parseInt(totalMake)/parseInt(totalMake+totalMiss))*100);
       $table.append("<tr><td>"+ player +"</td><td>name</td><td>"+points+"</td><td>"+totalMake+"/"+(+totalMiss+totalMake)+"<br/>"+tpct+"%</td>"+cache+"</tr>");
     }
 

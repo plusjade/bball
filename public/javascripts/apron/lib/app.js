@@ -62,8 +62,9 @@ var App = {
       if(!App.action) return false;
     // set active player
       App.player = this.id;
+      var side = $(this).parent().hasClass("home") ? "home" : "away";
       
-      Stat.record(App.player, $(this).parent().attr("class"), App.action.split(".")[0], App.action.split(".")[1]);
+      Stat.record(App.player, side, App.action.split(".")[0], App.action.split(".")[1]);
       e.preventDefault();
       return false;
     })

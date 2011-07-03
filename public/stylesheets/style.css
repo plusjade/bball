@@ -58,11 +58,6 @@ em {font-weight:bold;}
 /* ======================================================
   UI colors and styles */
 
-.round {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
 .red {
   background:#BD1550;
   background:#AA343F;
@@ -424,6 +419,8 @@ a.player {
   overflow:hidden;
   text-align:center;
   cursor:pointer;
+  
+  border-radius:5px;
 }
 a.player .head{
   padding:5px 10px;

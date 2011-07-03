@@ -258,7 +258,8 @@ div.tab span{
 }
 
 #log li:first-child {
-  olor:red !important;
+  font-size:22px;
+  line-height:48px;
 }
 #log li.highlight {
   position:absolute;
@@ -277,26 +278,18 @@ div.tab span{
 }
 #log li a {
   float:right;
-  font-size:12px;
+  width:100px;
   padding:1px 10px;
+  text-align:center;
+  font-size:14px;
   background:#C09866;
   color:#4A3B34;
   
-  -webkit-border-radius:5px;
-  -moz-border-radius:5px;
   border-radius:5px;
-  
-  -webkit-box-shadow: inset -1px -1px 1px #C4C6C6;
-  -moz-box-shadow: inset -1px -1px 1px #C4C6C6;
-  box-shadow: inset -1px -1px 1px #4A3B34;
 }
 #log li.undone a {
   background:#7E841C;
   color:#FEEDD2;
-  
-  -webkit-box-shadow: inset -1px -1px 1px #82AF65;
-  -moz-box-shadow: inset -1px -1px 1px #82AF65;
-  box-shadow: inset -1px -1px 1px #494D10;
 }
 
 

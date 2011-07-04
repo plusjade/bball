@@ -512,7 +512,7 @@ var App = {
   $actions : null,
   $players : null,
   $playersBench : null,
-  
+
   start : function(gameId){
     App.gameId = gameId;
     
@@ -555,23 +555,18 @@ var App = {
 
   /* select action interface */  
     App.$actions.find("a").live("click", function(e){
-      App.$actions.find("a").removeClass("active");
-      App.$players.find("a.player").removeClass("active");
-      $(this).addClass("active");
-      App.action = this.id;
+      App.setAction(this.id);
       
       e.preventDefault();
       return false;
     })
           
-  /* record action by selecting player interface */  
+  /* select player interface */  
     App.$players.find("a.player").live("click", function(e){
-      if(!App.action) return false;
-    // set active player
-      App.player = this.id;
+
       var side = $(this).parent().hasClass("home") ? "home" : "away";
+      App.setPlayer(side, this.id);
       
-      Stat.record(App.player, side, App.action.split(".")[0], App.action.split(".")[1]);
       e.preventDefault();
       return false;
     })
@@ -623,6 +618,7 @@ var App = {
       return false;
     });
   
+  /* close analytics */
     $("a.close_lick").click(function(e){
       $("#analytics").hide();
       $("#analytics").find("p").empty();
@@ -674,6 +670,22 @@ var App = {
     $("#away_score").text(awayScore);  
   },
   
+  setAction : function(action){
+    App.action = action;
+    $("#hopper").show();
+    $("#hopper").find(".action").text(action);
+    
+    if(App.player) Stat.record(App.player, App.action);
+  },  
+  
+  setPlayer : function(side, player){
+    App.player = side+"."+player;
+    $("#hopper").show();
+    $("#hopper").find(".player").html(side+ " #"+ player + " &#10144; ");
+    
+    if(App.action) Stat.record(App.player, App.action);
+  },
+  
   log : function(message){
     $node = $("<li>"+message+"</li>");
     $("#log").prepend($node);
@@ -684,10 +696,10 @@ var App = {
   },
 
   refresh : function(){
-    App.$actions.find("a").removeClass("active");
-    App.$players.find("div.make_miss").hide();
     App.action = null;
     App.player = null;
+    $("#hopper").hide();
+    $("#hopper").find("span").empty();
   },
   
   build : function(){
@@ -824,16 +836,24 @@ var simpleTabs = {
 }
 Stat = {
   
-  record : function(player, side, action, value){
-    var key = Stat.keyize(side, action, value);
+ /* player = "{side}.{number}"
+    action = "{action}{.value}"
+ */
+  record : function(player, action){
+    var key = Stat.keyize(player, action);
+    var playerId = player.split(".")[1];
+    
     if(typeof localStorage[key] === "undefined"){
-      localStorage[key] = player+"|";
+      localStorage[key] = playerId+"|";
     }else{
-      localStorage[key] += player+"|";
+      localStorage[key] += playerId+"|";
     }
     
-    action = Action.data[action];
-    App.log('<span>'+side+ " #"+ player + " &#10144; " + action.name + (value ? (" "+value) : "") + '!</span> <a href="#" class="undo" rel="'+Stat.asString(player, side, action.id, value)+'">UNDO</a>');
+    var side = player.split(".")[0];
+    var actionName = action.split(".")[0];
+    var value = (typeof action.split(".")[1] == "undefined") ? "" : action.split(".")[1];
+    var actionOb = Action.data[actionName];
+    App.log('<span>'+ player + " &#10144; " + actionOb.name + " " + value + '!</span> <a href="#" class="undo" rel="'+Stat.asString(player, action)+'">UNDO</a>');
     
     App.updateScores();
     App.refresh();
@@ -841,26 +861,31 @@ Stat = {
     console.log(localStorage);
   },
 
-  unRecord : function(player, side, action, value){
-    var key = Stat.keyize(side, action, value);
+  unRecord : function(player, action){
+    var key = Stat.keyize(player, action);
+    var playerId = player.split(".")[1];
+    
     if(key && player && typeof localStorage[key] !== "undefined"){
-      localStorage[key] = localStorage[key].replace(player+"|", "");
+      localStorage[key] = localStorage[key].replace(playerId+"|", "");
       App.updateScores();
     }
   },
 
-  keyize : function(side, action, value){
-    var key = App.gameId + "." +  side + "." + action;
-    if(value) key += "." + value;
-    return key;
+  // build the key used to store this player-action
+  keyize : function(player, action){
+    return [App.gameId, player.split(".")[0], action].join(".");
   },
   
-  asString : function(player, side, action, value){
-    return [player, side, action, value].join(".");
+  // stringify a player-action 
+  asString : function(player, action){
+    return [player, action].join(".");
   },
   
+ /* parse asString into player-action  */  
   parse : function(statString){
-    return statString.split(".");
+    var data = statString.split(".");
+    var value = (typeof data[3] === "undefined") ? "" : data[3];
+    return [data[0]+"."+data[1], data[2]+value];
   }
   
   

@@ -5,7 +5,7 @@ var App = {
   $actions : null,
   $players : null,
   $playersBench : null,
-  
+
   start : function(gameId){
     App.gameId = gameId;
     
@@ -48,23 +48,18 @@ var App = {
 
   /* select action interface */  
     App.$actions.find("a").live("click", function(e){
-      App.$actions.find("a").removeClass("active");
-      App.$players.find("a.player").removeClass("active");
-      $(this).addClass("active");
-      App.action = this.id;
+      App.setAction(this.id);
       
       e.preventDefault();
       return false;
     })
           
-  /* record action by selecting player interface */  
+  /* select player interface */  
     App.$players.find("a.player").live("click", function(e){
-      if(!App.action) return false;
-    // set active player
-      App.player = this.id;
+
       var side = $(this).parent().hasClass("home") ? "home" : "away";
+      App.setPlayer(side, this.id);
       
-      Stat.record(App.player, side, App.action.split(".")[0], App.action.split(".")[1]);
       e.preventDefault();
       return false;
     })
@@ -116,6 +111,7 @@ var App = {
       return false;
     });
   
+  /* close analytics */
     $("a.close_lick").click(function(e){
       $("#analytics").hide();
       $("#analytics").find("p").empty();
@@ -167,6 +163,22 @@ var App = {
     $("#away_score").text(awayScore);  
   },
   
+  setAction : function(action){
+    App.action = action;
+    $("#hopper").show();
+    $("#hopper").find(".action").text(action);
+    
+    if(App.player) Stat.record(App.player, App.action);
+  },  
+  
+  setPlayer : function(side, player){
+    App.player = side+"."+player;
+    $("#hopper").show();
+    $("#hopper").find(".player").html(side+ " #"+ player + " &#10144; ");
+    
+    if(App.action) Stat.record(App.player, App.action);
+  },
+  
   log : function(message){
     $node = $("<li>"+message+"</li>");
     $("#log").prepend($node);
@@ -177,10 +189,10 @@ var App = {
   },
 
   refresh : function(){
-    App.$actions.find("a").removeClass("active");
-    App.$players.find("div.make_miss").hide();
     App.action = null;
     App.player = null;
+    $("#hopper").hide();
+    $("#hopper").find("span").empty();
   },
   
   build : function(){

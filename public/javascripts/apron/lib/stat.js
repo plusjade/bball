@@ -1,15 +1,23 @@
 Stat = {
   
-  record : function(player, side, action, value){
-    var key = Stat.keyize(side, action, value);
+ /* player = "{side}.{number}"
+    action = "{action}{.value}"
+ */
+  record : function(player, action){
+    var key = Stat.keyize(player, action);
+    var playerId = player.split(".")[1];
+    
     if(typeof localStorage[key] === "undefined"){
-      localStorage[key] = player+"|";
+      localStorage[key] = playerId+"|";
     }else{
-      localStorage[key] += player+"|";
+      localStorage[key] += playerId+"|";
     }
     
-    action = Action.data[action];
-    App.log('<span>'+side+ " #"+ player + " &#10144; " + action.name + (value ? (" "+value) : "") + '!</span> <a href="#" class="undo" rel="'+Stat.asString(player, side, action.id, value)+'">UNDO</a>');
+    var side = player.split(".")[0];
+    var actionName = action.split(".")[0];
+    var value = (typeof action.split(".")[1] == "undefined") ? "" : action.split(".")[1];
+    var actionOb = Action.data[actionName];
+    App.log('<span>'+ player + " &#10144; " + actionOb.name + " " + value + '!</span> <a href="#" class="undo" rel="'+Stat.asString(player, action)+'">UNDO</a>');
     
     App.updateScores();
     App.refresh();
@@ -17,26 +25,31 @@ Stat = {
     console.log(localStorage);
   },
 
-  unRecord : function(player, side, action, value){
-    var key = Stat.keyize(side, action, value);
+  unRecord : function(player, action){
+    var key = Stat.keyize(player, action);
+    var playerId = player.split(".")[1];
+    
     if(key && player && typeof localStorage[key] !== "undefined"){
-      localStorage[key] = localStorage[key].replace(player+"|", "");
+      localStorage[key] = localStorage[key].replace(playerId+"|", "");
       App.updateScores();
     }
   },
 
-  keyize : function(side, action, value){
-    var key = App.gameId + "." +  side + "." + action;
-    if(value) key += "." + value;
-    return key;
+  // build the key used to store this player-action
+  keyize : function(player, action){
+    return [App.gameId, player.split(".")[0], action].join(".");
   },
   
-  asString : function(player, side, action, value){
-    return [player, side, action, value].join(".");
+  // stringify a player-action 
+  asString : function(player, action){
+    return [player, action].join(".");
   },
   
+ /* parse asString into player-action  */  
   parse : function(statString){
-    return statString.split(".");
+    var data = statString.split(".");
+    var value = (typeof data[3] === "undefined") ? "" : data[3];
+    return [data[0]+"."+data[1], data[2]+value];
   }
   
   

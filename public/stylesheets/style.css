@@ -143,7 +143,15 @@ div.away .number{
 
 
 #toolbar {
+  position:fixed;
+  width:1000px;
   height:60px;
+  z-index:50;
+}
+#spacer {
+  height:60px;
+  width:1000px;
+  z-index:-1;
 }
 
 /* ======================================================
@@ -206,6 +214,13 @@ div.score{
   
 }
 
+.close_lick {
+  color:#fff;
+  float:right;
+  background:red;
+  text-align:center;
+  padding:7px 14px;
+}
 /* ======================================================
   Expand/Contract Logger */
   
@@ -796,9 +811,10 @@ a.close {
   top:0;
   left:0;
   width:1000px;
-  height:600px;
+  height:450px;
   background:#333;
   z-index:100;
+  border-radius:0 0 5px 5px;
 }
 
 #analytics table {

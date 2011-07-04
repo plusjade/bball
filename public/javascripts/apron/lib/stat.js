@@ -48,7 +48,7 @@ Stat = {
  /* parse asString into player-action  */  
   parse : function(statString){
     var data = statString.split(".");
-    var value = (typeof data[3] === "undefined") ? "" : data[3];
+    var value = (typeof data[3] === "undefined") ? "" : "."+data[3];
     return [data[0]+"."+data[1], data[2]+value];
   }
   

@@ -673,7 +673,7 @@ var App = {
   setAction : function(action){
     App.action = action;
     $("#hopper").show();
-    $("#hopper").find(".action").text(action);
+    $("#hopper").find("span").html(action+ " &#10144; <em>now select a player...</em>");
     
     if(App.player) Stat.record(App.player, App.action);
   },  
@@ -681,7 +681,7 @@ var App = {
   setPlayer : function(side, player){
     App.player = side+"."+player;
     $("#hopper").show();
-    $("#hopper").find(".player").html(side+ " #"+ player + " &#10144; ");
+    $("#hopper").find("span").html(side+ " #"+ player + " &#10144; <em>now select an action...</em>");
     
     if(App.action) Stat.record(App.player, App.action);
   },
@@ -689,8 +689,6 @@ var App = {
   log : function(message){
     $node = $("<li>"+message+"</li>");
     $("#log").prepend($node);
-    $node.animate( {'marginLeft': '-=20px'}, 100, "linear" );
-    $node.animate( {'marginLeft': '+=20px'}, 100, "linear" );
     $node.animate( {'marginLeft': '-=20px'}, 100, "linear" );
     $node.animate( {'marginLeft': '+=20px'}, 100, "linear" );
   },
@@ -884,7 +882,7 @@ Stat = {
  /* parse asString into player-action  */  
   parse : function(statString){
     var data = statString.split(".");
-    var value = (typeof data[3] === "undefined") ? "" : data[3];
+    var value = (typeof data[3] === "undefined") ? "" : "."+data[3];
     return [data[0]+"."+data[1], data[2]+value];
   }
   

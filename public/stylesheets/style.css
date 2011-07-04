@@ -257,25 +257,23 @@ div.tab span{
   font-size:16px;
   z-index:21;
   overflow:hidden;
-  background:#FEEAB6;
+  text-align:center;
+  background:#7E841C;
   border-radius: 0 0 0 5px;  
 }
 #hopper span{
-  display:block;
-  float:left;
   padding:0 20px;
   height:60px;
   line-height:52px;
   font-size:24px;
   font-weight:bold;
-  background:#7E841C;
   color:#FEEDD2;
-}
-#hopper span.player {
   border-radius:0 0 0 5px;
 }
-#hopper span.action {
-  padding: 0 40px 0 0;
+#hopper span em{ 
+  font-style:normal;
+  font-weight:normal;
+  color:#A1AD41;
 }
 #log {
   position:absolute;

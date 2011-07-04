@@ -47,7 +47,7 @@ var App = {
     App.$playersBench = $("#players_bench");
 
   /* select action interface */  
-    App.$actions.find("a").live("click", function(e){
+    App.$actions.find("a").live("tap", function(e){
       App.setAction(this.id);
       
       e.preventDefault();
@@ -55,7 +55,7 @@ var App = {
     })
           
   /* select player interface */  
-    App.$players.find("a.player").live("click", function(e){
+    App.$players.find("a.player").live("tap", function(e){
 
       var side = $(this).parent().hasClass("home") ? "home" : "away";
       App.setPlayer(side, this.id);
@@ -65,7 +65,7 @@ var App = {
     })
         
   /* bench interface */
-    $("a.bench").click(function(e){
+    $("a.bench").tap(function(e){
       var side = $(this).hasClass("home_bg") ? "home" : "away";
       App.$playersBench.show();
     
@@ -79,7 +79,7 @@ var App = {
     });
   
   /* toggle logger */
-    $("div.tab").find("span").click(function(){
+    $("div.tab").find("span").tap(function(){
       $("div.tab").find("span").show();
       $(this).hide();
       
@@ -105,14 +105,14 @@ var App = {
     });
     
   /* close bench */
-    $("a.close").click(function(e){
+    $("a.close").tap(function(e){
       $(this).parent().hide();
       e.preventDefault();
       return false;
     });
   
   /* close analytics */
-    $("a.close_lick").click(function(e){
+    $("a.close_lick").tap(function(e){
       $("#analytics").hide();
       $("#analytics").find("p").empty();
       e.preventDefault();
@@ -120,7 +120,7 @@ var App = {
     });
     
   /* open analytics */
-    $("#licks").click(function(e){
+    $("#licks").tap(function(e){
       App.build();
       $("#analytics").show();
       e.preventDefault();

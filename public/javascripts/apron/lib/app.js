@@ -88,7 +88,7 @@ var App = {
     });
   
   /* undo/redo logged actions */  
-    $("a.undo").live("click", function(e){
+    $("a.undo").live("tap", function(e){
       $li = $(this).parent();
       
       if($li.hasClass("undone")){

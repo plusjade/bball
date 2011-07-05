@@ -45,7 +45,7 @@ var Team = {
     $.tmpl("teamTemplate", qteams).appendTo($("#teams_list"));    
 
 
-    $("#teams_pane").find("div.team").click(function(){
+    $("#teams_pane").find("div.team").tap(function(){
       var team = $(this).text().toLowerCase().replace(" ", "-");
       TeamPlayers.init(team);
       

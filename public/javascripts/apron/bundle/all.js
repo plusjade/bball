@@ -741,7 +741,7 @@ var App = {
     });
   
   /* undo/redo logged actions */  
-    $("a.undo").live("click", function(e){
+    $("a.undo").live("tap", function(e){
       $li = $(this).parent();
       
       if($li.hasClass("undone")){
@@ -948,7 +948,7 @@ var simpleTabs = {
     simpleTabs.$list = list;
     simpleTabs.$wrapper = wrapper;
     
-    simpleTabs.$list.find("li").click(function(){
+    simpleTabs.$list.find("li").tap(function(){
       simpleTabs.showTab($(this));
       return false;
     });
@@ -1081,7 +1081,7 @@ var Team = {
     $.tmpl("teamTemplate", qteams).appendTo($("#teams_list"));    
 
 
-    $("#teams_pane").find("div.team").click(function(){
+    $("#teams_pane").find("div.team").tap(function(){
       var team = $(this).text().toLowerCase().replace(" ", "-");
       TeamPlayers.init(team);
       
@@ -1097,7 +1097,7 @@ var TeamPlayers = {
     TeamPlayers.loadTeam();
     
   /* add. */
-    $("#team_roster").find("div.add").click(function(){
+    $("#team_roster").find("div.add").tap(function(){
       var number = $(this).parent().find("input").first().val();
       var name = $(this).parent().find("input").last().val();
       $.tmpl("rosterTemplate", [{name: name, number: number}]).appendTo($("#team_roster").find("div.players"));
@@ -1105,7 +1105,7 @@ var TeamPlayers = {
     })
   
   /* delete */  
-    $("#team_roster").find("div.delete").live("click", function(){
+    $("#team_roster").find("div.delete").live("tap", function(){
       $(this).parent().remove();
       TeamPlayers.update();
     })

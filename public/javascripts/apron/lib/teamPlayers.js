@@ -7,7 +7,7 @@ var TeamPlayers = {
     TeamPlayers.loadTeam();
     
   /* add. */
-    $("#team_roster").find("div.add").click(function(){
+    $("#team_roster").find("div.add").tap(function(){
       var number = $(this).parent().find("input").first().val();
       var name = $(this).parent().find("input").last().val();
       $.tmpl("rosterTemplate", [{name: name, number: number}]).appendTo($("#team_roster").find("div.players"));
@@ -15,7 +15,7 @@ var TeamPlayers = {
     })
   
   /* delete */  
-    $("#team_roster").find("div.delete").live("click", function(){
+    $("#team_roster").find("div.delete").live("tap", function(){
       $(this).parent().remove();
       TeamPlayers.update();
     })

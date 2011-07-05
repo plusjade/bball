@@ -5,7 +5,7 @@ var simpleTabs = {
     simpleTabs.$list = list;
     simpleTabs.$wrapper = wrapper;
     
-    simpleTabs.$list.find("li").click(function(){
+    simpleTabs.$list.find("li").tap(function(){
       simpleTabs.showTab($(this));
       return false;
     });

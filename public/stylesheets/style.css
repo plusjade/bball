@@ -456,7 +456,7 @@ a.player .number{
   font-size:38px;
   line-height:54px;
 }
-a.player.active .number, a.player:hover .number {
+a.player.active .number {
   background:#7E841C;
   color:#FEEDD2;
 }

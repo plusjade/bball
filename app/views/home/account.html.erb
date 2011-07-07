@@ -1,49 +1,36 @@
 <div id="wrapper">
 
-  <div id="title"> </div>
-  
   <ul id="dash_navigation">
-    <li class="active round">Teams</li>
-    <li class="round">Games</li>
-    <li class="round">Account</li>
+    <li class="active"><a href="#">Teams</a></li>
+    <li><a href="#">New Game</a></li>
+    <li><a href="#">Completed Games</a></li>
+    <li><a href="#">Account</a></li>
   </ul>
 
-  <div id="work_wrapper" class="round">
-    <div id="team_roster">
-      
-      <div id="new_player">
-        <div class="row"><div class="number"><input type="text" value="00" maxlength="2" /></div><div class="name"><input type="text" value="name" /></div><div class="add">&#10010;</div></div>
-      </div>
-      
-      <div class="players"> </div>
-      
-    </div>
+  <div id="work_wrapper">
+    <div id="team_roster" style="display:none"> </div>
   </div>
   
-  <div id="tabs_wrapper" class="round">
-  
+  <div id="tabs_wrapper" style="display:none">
     <div id="teams_pane" class="tabs">
-      <div class="left">
-        <div id="new_team" class="defensive_style">
-          <label>Name</label> <input type="text" name="team_name"/>
-          <button>Create New Team</button>
-        </div>
-        <div id="teams_list"> </div>
+      <div id="add_team_wrapper">
+        <input type="text" name="team" /> <button type="submit">Add Team</button>
       </div>
+      <ul id="teams_dropdown">
+      </ul>
+    </div>
+    
+    
+    <div id="new_game_pane" class="tabs">
       
-      <div class="right">
-        <div id="new_game">
-          <div class="drop">
-            <div class="home home_bg round"></div>
-            <div class="vs">VS</div>
-            <div class="away away_bg round"></div>
-          </div>
-          <div class="start">
-            <div>
-              Drag a team into home and away boxes above to start a game.
-            </div>
+      <div id="new_game">
+        <div class="drop">
+          <div class="home home_bg round"></div>
+          <div class="vs">VS</div>
+          <div class="away away_bg round"></div>
+        </div>
+        <div class="start">
           <button>Start New Game</button>
-          </div>
         </div>
       </div>
     
@@ -93,8 +80,8 @@
   /* tab UI */
     simpleTabs.init($("#dash_navigation"), $("#tabs_wrapper"));
     $("#title").tap(function(){
+      $("#teams_dropdown").show();
       $(this).addClass("active")
-      simpleTabs.clear();
     })
     
     Team.init();
@@ -105,6 +92,7 @@
   <div class="row"><div class="number"><input type="text" value="${number}" maxlength="2" /></div><div class="name"><input type="text" value="${name}" /></div><div class="delete">&#10006;</div></div>
 </script>
 
-<script id="teamTemplate" type="text/x-jquery-tmpl">
-  <div class="team round offensive_style">${name}</div>
+
+<script id="teamDropTmpl" type="text/x-jquery-tmpl">
+  <li><a href="#">${name}</a></li>
 </script>

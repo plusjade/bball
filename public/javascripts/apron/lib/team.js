@@ -34,7 +34,7 @@ var Team = {
   },
 
   init : function(){
-    $("#teamTemplate").template("teamTemplate");
+    $("#teamDropTmpl").template("teamDropTmpl");
 
     var qteams = []
     for(var name in Team.data) {
@@ -42,13 +42,12 @@ var Team = {
         qteams.push({name:name});
       }
     }
-    $.tmpl("teamTemplate", qteams).appendTo($("#teams_list"));    
+    $.tmpl("teamDropTmpl", qteams).prependTo($("#teams_dropdown"));    
 
-
-    $("#teams_pane").find("div.team").tap(function(){
+    $("#teams_dropdown").find("a").tap(function(e){
       var team = $(this).text().toLowerCase().replace(" ", "-");
       TeamPlayers.init(team);
-      
+      e.preventDefault();
     })
   }
 }

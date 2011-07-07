@@ -18,8 +18,8 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 body {
 	line-height: 1;
 	color:#3a4c4c;
-	background:#daeded;
-  background:url("/images/darkwood.png") repeat 0 0;
+	background:#1B211F;
+  background:url("/images/darkwood.png") repeat 0 0; 
 	font-family:arial;
 }
 ol, ul {
@@ -566,6 +566,7 @@ a.close {
   top:5px;
   padding:0 50px;
   height:40px;
+  min-width:100px;
   line-height:40px;
   font-weight:bold;
   cursor:pointer;
@@ -583,57 +584,51 @@ a.close {
 #work_wrapper{
   clear:both;
   padding:10px;
-  height:400px;
+  min-height:400px;
   background:transparent;
-  -webkit-border-top-left-radius:0;
+  border:1px solid red;
 }
   
 #dash_navigation{
-  padding:6px;
   text-align:right;
   position:relative;
-  float:right;
-  top:3px;
   z-index:5;
+  text-align:center;
+  ackground:#222;
 }  
 #dash_navigation li{ 
-  display:inline;
+  display:inline-block;
   padding:10px 20px;
-  margin-right:10px;
   font-size:22px;
   color:#F8F5EC;
-  cursor:pointer;
-  -webkit-border-radius:7px;
-  -moz-border-radius:7px;
-  border-radius:7px;
-  
-  -webkit-border-bottom-right-radius:0;
-  -webkit-border-bottom-left-radius:0;
-  -moz-border-radius-bottomright:0;
-  -moz-border-radius-bottomleft:0;
-}
-#dash_navigation li.active{ 
-  background:#F8F5EC;
   color:#333;
+  cursor:pointer;
+  border-radius:0 0 7px 7px;
+  background:#eee;
 }
-
+#dash_navigation a{ color:#333; }
+#dash_navigation li.active{ 
+  background:orange;
+  color:#FFF;
+}
+#dash_navigation li.active a{ 
+}
 
 #tabs_wrapper{
-  height:400px;
-  width:100%;
+  min-height:400px;
+  width:600px;
   position:absolute;
-  top:47px;
-  border:1px solid #ccc;
+  top:60px;
+  left:200px;
 }
 .tabs {
   clear:both;
-  height:400px;
+  min-height:400px;
   padding:10px;
-  background:#F8F5EC;
+  background:#222;
   overflow:hidden;
-  
-  -webkit-box-shadow:2px 2px 8px #ccc;
-  -webkit-border-radius:10px;
+  box-shadow:0px 0px 10px #444;
+  border-radius:10px;
 }
 
 /* ======================================================
@@ -674,8 +669,6 @@ a.close {
 }
 
 #new_game {
-  padding-left:20px;
-  border-left:1px dashed #333;
   overflow:hidden;
 }
 #new_game .drop{ 
@@ -694,25 +687,16 @@ a.close {
   font-size:26px;
   line-height:48px;
   }
-#new_game .start div{   
-  float:left;
-  width:250px;
-  position:relative;
-  top:10px;
-  left:50px;
-  line-height:1.5em;
-}
+
 #new_game button{ 
   display:block;
-  float:right;
-  width:100px;
   padding:20px;
+  margin:auto;
   text-align:center;
   background:green;
   color:#F8F5EC;
   border:0;
-  -webkit-border-radius:10px;
-  
+  border-radius:10px;
 }  
 
 /* ======================================================
@@ -720,11 +704,13 @@ a.close {
 
 #games_pane table {
   border-collapse:collapse;
-  margin-left:220px;
 }
 #games_pane td {
   padding:10px;
-  -webkit-border-radius:10px;
+  vertical-align:middle;
+  border-radius:5px;
+  color:#EBF5F2;
+  background:#222;
 }
 #games_pane td.date { 
   font-size:12px;
@@ -733,21 +719,19 @@ a.close {
 #games_pane td.home { 
   text-align:right;
   width:200px;
-  background:#EBF5F2;
-  border-right:4px solid #F8F5EC;
-  border-bottom:4px solid #F8F5EC;
+  border-right:1px solid #EBF5F2;
+  border-bottom:1px solid #EBF5F2;
 }
 #games_pane td.away { 
   width:200px;
-  background:#EBF5F2;
-  border-left:4px solid #F8F5EC;
-  border-bottom:4px solid #F8F5EC;
+  border-left:1px solid #EBF5F2;
+  border-bottom:1px solid #EBF5F2;
 }
 #games_pane td.vs { 
   width:35px;
-  background:#EBF5F2;
   text-align:center;
-  border-bottom:4px solid #F8F5EC;
+  border:0;
+  border-radius:0;
 }
 #games_pane td.home span { 
   float:left;
@@ -760,22 +744,29 @@ a.close {
 
 /* ======================================================
   Team Breakdown*/
-  
+#team_roster{
+  margin:auto;
+  width:600px;
+}  
+#team_roster h1 {
+  text-align:center;
+  color:#FFF;
+}  
 #team_roster div.players {
   clear:both;
+  width:500px;
 }
 #team_roster div.row{
-  float:left;
-  width:400px;
-  padding:10px; 
+  width:550px;
+  padding: 0 10px; 
   margin:7px 15px;
   overflow:hidden;
 }
 #new_player div.row {
   background:#AACD79; 
   border:1px solid #6F874E;
-  -webkit-border-radius:7px;
   padding:5px 10px;
+  border-radius:7px;
 }
 #new_player div.row input { 
   color:#6F874E;
@@ -783,8 +774,9 @@ a.close {
   border:1px solid #6F874E;
 }
 #team_roster div.row input{
+  width:350px;
   padding:3px;
-  font-size:20px; 
+  font-size:22px; 
   font-weight:bold;
 }
 #team_roster div.number {
@@ -799,7 +791,8 @@ a.close {
 #team_roster div.delete, #team_roster div.add {
   width:50px;
   float:right;
-  line-height:30px;
+  line-height:40px;
+  font-size:40px;
 }
 
 #team_roster div.number input{ width:60px; text-align:center;}
@@ -845,4 +838,35 @@ a.close {
 
 #analytics table td {
   border:1px solid #999;
+}
+
+
+#add_team_wrapper {
+  padding:5px;
+  margin-bottom:10px;
+  text-align:center;
+}
+#add_team_wrapper input{
+  width:350px;
+  padding:3px;
+  font-size:20px;
+  font-weight:bold;
+}
+#teams_dropdown {
+  
+}
+#teams_dropdown li { 
+  margin-bottom:3px;
+}
+#teams_dropdown a{ 
+  display:block;
+  height:50px;
+  padding:0 20px;
+  line-height:50px;
+  font-size:18px;
+  color:#F8F5EC;
+  background:#AACD79;
+  text-shadow: 0px 1px 0px #52633A;
+  border-radius:5px;
+  box-shadow:inset -1px -1px 3px #6F874E;
 }

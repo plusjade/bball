@@ -598,20 +598,20 @@ a.close {
 }  
 #dash_navigation li{ 
   display:inline-block;
+  margin:0 2px;
+}
+#dash_navigation a{ 
+  display:block;
   padding:10px 20px;
   font-size:22px;
-  color:#F8F5EC;
-  color:#333;
+  color:#333; 
   cursor:pointer;
   border-radius:0 0 7px 7px;
-  background:#eee;
+  background:#eee;  
 }
-#dash_navigation a{ color:#333; }
-#dash_navigation li.active{ 
+#dash_navigation a.active{ 
   background:orange;
   color:#FFF;
-}
-#dash_navigation li.active a{ 
 }
 
 #tabs_wrapper{
@@ -670,18 +670,24 @@ a.close {
 
 #new_game {
   overflow:hidden;
-}
-#new_game .drop{ 
-  height:300px;
   margin:10px;
+  text-align:center;
 }
-#new_game .drop .home{ 
+#new_game .wrap{ 
   height:120px;
-  }
-#new_game .drop .away{ 
-  height:120px;
-  }
-#new_game .drop .vs{ 
+  text-align:center;
+  line-height:140px;
+}  
+#new_game select {
+  font-size:40px;
+  font-weight:bold;
+  text-align:center;
+  border:1px solid #333;
+}  
+#new_game select option {
+  text-align:center;
+}
+#new_game .vs{ 
   text-align:center;
   font-weight:bold;
   font-size:26px;
@@ -690,11 +696,16 @@ a.close {
 
 #new_game button{ 
   display:block;
-  padding:20px;
+  width:220px;
+  height:50px;
   margin:auto;
-  text-align:center;
-  background:green;
+  margin-top:30px;
+  line-height:46px;
+  font-size:20px;
   color:#F8F5EC;
+  text-align:center;
+  cursor:pointer;
+  background:green;
   border:0;
   border-radius:10px;
 }  

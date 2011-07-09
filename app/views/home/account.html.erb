@@ -1,10 +1,10 @@
 <div id="wrapper">
 
   <ul id="dash_navigation">
-    <li class="active"><a href="#">Teams</a></li>
-    <li><a href="#">New Game</a></li>
-    <li><a href="#">Completed Games</a></li>
-    <li><a href="#">Account</a></li>
+    <li class="active"><a href="#" rel="teams">Teams</a></li>
+    <li><a href="#" rel="new_game">New Game</a></li>
+    <li><a href="#" rel="completed_games">Completed Games</a></li>
+    <li><a href="#" rel="account">Account</a></li>
   </ul>
 
   <div id="work_wrapper">
@@ -24,14 +24,19 @@
     <div id="new_game_pane" class="tabs">
       
       <div id="new_game">
-        <div class="drop">
-          <div class="home home_bg round"></div>
-          <div class="vs">VS</div>
-          <div class="away away_bg round"></div>
+        <div class="wrap home_bg">
+          <select id="new_game_home" name="home">
+          </select>  
         </div>
-        <div class="start">
-          <button>Start New Game</button>
+        
+        <div class="vs">VS</div>
+        
+        <div class="wrap away_bg">
+          <select id="new_game_away" name="away">
+          </select>
         </div>
+        
+        <button>Start New Game</button>
       </div>
     
     </div>

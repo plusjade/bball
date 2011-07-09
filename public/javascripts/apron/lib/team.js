@@ -33,6 +33,16 @@ var Team = {
     return [];
   },
 
+  names : function(){
+    var names = []
+    for(var name in Team.data) {
+      if(Team.data.hasOwnProperty(name)){ 
+        names.push({name:name});
+      }
+    }
+    return names;
+  },
+  
   init : function(){
     $("#teamDropTmpl").template("teamDropTmpl");
 

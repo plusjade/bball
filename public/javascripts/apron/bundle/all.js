@@ -1083,42 +1083,42 @@ var Team = {
 
     $("#teams_pane").find("div.team").tap(function(){
       var team = $(this).text().toLowerCase().replace(" ", "-");
-      TeamPlayers.init(team);
+      TeamView.init(team);
       
     })
   }
 }
-var TeamPlayers = {
+var TeamView = {
   teamName : null,
   
   init : function(teamName){
-    TeamPlayers.teamName = teamName;
+    TeamView.teamName = teamName;
     $("#rosterTemplate").template("rosterTemplate");
-    TeamPlayers.loadTeam();
+    TeamView.loadTeam();
     
   /* add. */
     $("#team_roster").find("div.add").tap(function(){
       var number = $(this).parent().find("input").first().val();
       var name = $(this).parent().find("input").last().val();
       $.tmpl("rosterTemplate", [{name: name, number: number}]).appendTo($("#team_roster").find("div.players"));
-      TeamPlayers.update();
+      TeamView.update();
     })
   
   /* delete */  
     $("#team_roster").find("div.delete").live("tap", function(){
       $(this).parent().remove();
-      TeamPlayers.update();
+      TeamView.update();
     })
   },
 
   loadTeam : function(){
-    $.tmpl("rosterTemplate", Team.data[TeamPlayers.teamName]).appendTo($("#team_roster").find("div.players").empty());
+    $.tmpl("rosterTemplate", Team.data[TeamView.teamName]).appendTo($("#team_roster").find("div.players").empty());
   /* Keyup. Todo: need to bind this to new players too. */
     $("#team_roster").find("div.players").find("input").keyup(function(){
-      TeamPlayers.update();
+      TeamView.update();
     })
     
-    $("#title").addClass("active").text("team: "+ TeamPlayers.teamName)
+    $("#title").addClass("active").text("team: "+ TeamView.teamName)
     simpleTabs.clear();
   },
   
@@ -1130,7 +1130,7 @@ var TeamPlayers = {
       players.push({number:number, name:name})
     })
     
-    Team.data[TeamPlayers.teamName] = players;
-    console.log(Team.data[TeamPlayers.teamName]);
+    Team.data[TeamView.teamName] = players;
+    console.log(Team.data[TeamView.teamName]);
   }
 }

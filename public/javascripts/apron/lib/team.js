@@ -1,63 +1,141 @@
+/*
+  This is an ad-hoc data model for the UI api.
+  Ideally it will interface between :
+    * localStorage
+    * Javascript Objects
+    * Server Database
+    
+  Properties
+    name, String
+    players, Array
+  
+  Note that there is no Player model, players are currently part of the team Model
+*/
 var Team = {
-  data : {
-    "pandabots" : [
-      {name:"Jade", number : "12"},
-      {name:"Tony", number : "7"},
-      {name:"Bobbert", number : "55"},
-      {name:"Tom", number : "35"},
-      {name:"Brandon", number : "17"},
-    ],
-    "gametime" : [
-      {name:"joe", number : "9"},
-      {name:"mike", number : "7"},
-      {name:"adam", number : "22"},
-      {name:"Paul", number : "80"},
-      {name:"Russel", number : "12"},
-    ],
-    "supernova" : [
-      {name:"cooper", number : "12"},
-      {name:"danny", number : "7"},
-      {name:"brandon", number : "55"},
-    ],
-    "bulkan-ballers" : [
-      {name:"cup", number : "12"},
-      {name:"chair", number : "7"},
-      {name:"samson", number : "55"},
-    ]
-  },
+  data : null,
+  /* deletes is a queuing array that stores deleted teams.
+     the array is sent to the server via the sync function  */
+  deletes : [],
+  errors : [],
   
-  get : function(name){
-    if(Team.data[name]){
-      return Team.data[name];
-    }
-    return [];
-  },
-
-  names : function(){
-    var names = []
-    for(var name in Team.data) {
-      if(Team.data.hasOwnProperty(name)){ 
-        names.push({name:name});
-      }
-    }
-    return names;
-  },
-  
+ /* initialize the Team Model
+    This primarily means fetching the data from the server
+    and preparing the DOM.
+ */
   init : function(){
     $("#teamDropTmpl").template("teamDropTmpl");
 
-    var qteams = []
-    for(var name in Team.data) {
-      if(Team.data.hasOwnProperty(name)){ 
-        qteams.push({name:name});
-      }
-    }
-    $.tmpl("teamDropTmpl", qteams).prependTo($("#teams_dropdown"));    
+    Team.load(function(){
 
-    $("#teams_dropdown").find("a").tap(function(e){
-      var team = $(this).text().toLowerCase().replace(" ", "-");
-      TeamPlayers.init(team);
-      e.preventDefault();
+      /* add a team */
+      $("#add_team_wrapper").find("button").tap(function(e){
+        var name = $(this).siblings("input").val();
+        if(Team.create(name)){
+          Team.refreshList();
+        }
+        else{
+          console.log(Team.errors);
+        }
+        e.preventDefault();
+      })
+     
+      /* build the list and add handler */
+      Team.refreshList();
+      $("#teams_dropdown").find("a").live("tap", function(e){
+        TeamView.show($(this).text().toLowerCase().replace(" ", "-"));
+        e.preventDefault();
+      })
+      
+      console.log("Team model initialized!");
+    });
+  },
+  
+  /* refresh the team list from the data */
+  refreshList : function(){
+    $("#teams_dropdown").empty().prepend($.tmpl("teamDropTmpl", Team.data));
+  },
+   
+ /* intitially load our data from the server */
+  load : function(cb){
+    $.getJSON("/teams", function(data){
+      Team.data = data;
+      if(typeof cb === "function") cb();
+    })
+  },
+  
+ /* get a specific team by teamname */
+  get : function(name){
+    var data = {};
+    $.each(Team.data, function(i,team){
+      if (team.name === name){
+        data = team; return false;
+      }
+    });
+    return data;
+  },
+  
+ /* get players from a team */  
+  getPlayers : function(name){
+    var team = Team.get(name)
+    if(team.hasOwnProperty("players"))
+      return team.players;
+    else
+      return [];
+  },
+
+ /* set a team's name and players */
+  set : function(name, players){
+    $.each(Team.data, function(i, team){
+      if (team.name === name){
+        Team.data[i] = {name : name, players : players}
+        return false;
+      }
+    })
+  },
+  
+  /* create a new team */
+  create : function(name, players){
+    var name = name.toLowerCase();
+    if(Team.exists(name)){
+      Team.errors.push("Team exists");
+      return false;
+    }
+    else {
+      Team.data.push({name : name, players : players ? players : []})
+      return true;
+    }
+  },
+  
+  /* delete a team */
+  destroy : function(name){
+    var name = name.toLowerCase();
+    $.each(Team.data, function(i, team){
+      if (team.name === name){
+        Team.data.splice(i,1);
+        Team.deletes.push(name);
+        return false
+      }
+    })
+    return true;
+  },
+  
+  /* checks if a team exists */
+  exists : function(name){
+    return Team.get(name).hasOwnProperty("name");
+  },
+  
+ /* sync the Team Model to the server */
+  sync : function(){
+    $.ajax({
+      url : "/teams",
+      type : "post",
+      dataType : "json",
+      data : {'teams' : Team.data, "deletes[]" : Team.deletes},
+      success : function(rsp){
+        // remember to refresh the deletes on successful delete
+        console.log(rsp);
+      }
     })
   }
+  
 }

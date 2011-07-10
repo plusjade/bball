@@ -6,7 +6,7 @@ class Player
   property :name, String, :default => ""
   property :number, Integer, :unique => :team_id, :required => true
   
-  belongs_to :team
+  #belongs_to :team
   
   has n, :stats
 end

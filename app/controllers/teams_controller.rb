@@ -17,4 +17,41 @@ class TeamsController < ApplicationController
     }
   end
   
+  def create 
+    teams = params[:teams]
+    teams.each_value do |team|
+      players = []
+      team["players"].each_value do |player|
+        players.push({
+          :name => player["name"],
+          :number => player["number"].to_i
+        })
+      end if team["players"].is_a?(Hash)
+
+      puts team["name"]
+      puts players.to_yaml
+      
+      t = Team.first(:name => team["name"])
+      if t
+        t.update(:players => players)
+      else
+        Team.create(:name => team["name"], :players => players)
+      end  
+    end
+    
+    params[:deletes].each do |name|
+      Team.first(:name => name).destroy
+    end if params[:deletes].is_a?(Array)
+    
+    render :json => {:status => "good", :msg => "yay"}
+  end
+  
+  
+  def update
+    
+    
+    
+  end
+  
+  
 end

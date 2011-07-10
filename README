@@ -1,4 +1,10 @@
 
+Todo: 
+  complete "delete" team functionality
+  add validations for team model
+    unique numbers and names
+  add ability to update team name  
+    
 home : pandabots
 away : lakers
 

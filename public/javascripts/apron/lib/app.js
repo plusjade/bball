@@ -130,8 +130,8 @@ var App = {
   /* load teams */
     var home = "pandabots";
     var away = "gametime";
-    App.loadTeam("home", home, Team.data[home]);  
-    App.loadTeam("away", away, Team.data[away]);  
+    //App.loadTeam("home", home, Team.data[home]);  
+    //App.loadTeam("away", away, Team.data[away]);  
   },
   
   loadTeam : function(side, team, players){

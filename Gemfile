@@ -5,7 +5,7 @@ DM_VERSION    = '~> 1.1.0'
 
 gem 'rails', '3.0.5'
 gem "mysql"
-gem 'rake', '0.8.7'
+gem 'rake' #, '0.8.7'
 gem 'activesupport',      RAILS_VERSION, :require => 'active_support'
 gem 'actionpack',         RAILS_VERSION, :require => 'action_pack'
 gem 'actionmailer',       RAILS_VERSION, :require => 'action_mailer'
@@ -27,7 +27,7 @@ gem 'dm-chunked_query'
 gem 'mime-types', :require => 'mime/types'
 
 gem 'cancan'
-gem 'apron', '0.0.6', :git => 'https://github.com/plusjade/apron.git'
+gem 'apron', '0.0.8', :git => 'https://github.com/plusjade/apron.git'
 
 # Bundle the extra gems:
 # gem 'bj'

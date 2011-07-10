@@ -43,7 +43,7 @@ var simpleTabs = {
     $("#new_game").find("select")
       .empty()
       .append('<option value="">select team</option>')
-      .append($.tmpl("<option>${name}</option>", Team.names));
+      .append($.tmpl("<option>${name}</option>", Team.data));
   }
   
 }

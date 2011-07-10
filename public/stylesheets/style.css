@@ -586,7 +586,6 @@ a.close {
   padding:10px;
   min-height:400px;
   background:transparent;
-  border:1px solid red;
 }
   
 #dash_navigation{
@@ -598,7 +597,7 @@ a.close {
 }  
 #dash_navigation li{ 
   display:inline-block;
-  margin:0 2px;
+  margin:0;
 }
 #dash_navigation a{ 
   display:block;
@@ -650,13 +649,13 @@ a.close {
   text-align:center;
   font-size:16px;
   cursor:pointer;
-  -webkit-border-radius:5px;
+  border-radius:5px;
 } 
 
 #new_team {
   padding:5px;
   margin-bottom:10px;
-  -webkit-border-radius:5px;
+  border-radius:5px;
 }
 
 #new_team input{

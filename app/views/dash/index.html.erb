@@ -1,0 +1,81 @@
+<div id="account_wrapper" class="page" style="display:none">
+  <ul id="dash_navigation">
+    <li class="active"><a href="#" rel="teams">Teams</a></li>
+    <li><a href="#" rel="new_game">New Game</a></li>
+    <li><a href="#" rel="completed_games">Completed Games</a></li>
+    <li><a href="#" rel="account">Account</a></li>
+  </ul>
+
+  <div id="work_wrapper">
+    <div id="team_roster" style="display:none"> </div>
+  </div>
+
+  <div id="tabs_wrapper" style="display:none">
+    <div id="teams_pane" class="tabs">
+      <div id="add_team_wrapper">
+        <input type="text" name="team" /> <button type="submit">Add Team</button>
+      </div>
+      <ul id="teams_dropdown">
+      </ul>
+    </div>
+  
+  
+    <div id="new_game_pane" class="tabs">
+    
+      <div id="new_game">
+        <div class="wrap home_bg">
+          <select id="new_game_home" name="home">
+          </select>  
+        </div>
+      
+        <div class="vs">VS</div>
+      
+        <div class="wrap away_bg">
+          <select id="new_game_away" name="away">
+          </select>
+        </div>
+      
+        <button>Start New Game</button>
+      </div>
+  
+    </div>
+
+    <div id="games_pane" class="tabs">
+      <table>
+    <% 2.times do %>  
+      <tr>
+        <td class="home"><span>55</span>Pandabots</td><td class="vs">vs</td><td class="away">Gametime <span>45</span></td>
+        <td class="date">SUN May 24, 2011</td>
+      </tr>
+      <tr>
+        <td class="home"><span>74</span>Gametime</td><td class="vs">vs</td><td class="away">SuperNova<span>57</span></td>
+        <td class="date">MON JUN 24, 2011</td>
+      </tr>
+      <tr>
+        <td class="home"><span>54</span>SuperNova</td><td class="vs">vs</td><td class="away">Pandabots<span>35</span></td>
+        <td class="date">SUN May 24, 2011</td>
+      </tr>
+      <tr>
+        <td class="home"><span>78</span>BTR</td><td class="vs">vs</td><td class="away">Pandabots<span>45</span></td>
+        <td class="date">SAT APR 24, 2011</td>
+      </tr>
+      <tr>
+        <td class="home"><span>12</span>Pistoleros</td><td class="vs">vs</td><td class="away">SuperNova<span>56</span></td>
+        <td class="date">SUN FEB 24, 2011</td>
+      </tr>
+      <tr>
+        <td class="home"><span>34</span>Pistoleros</td><td class="vs">vs</td><td class="away">Team Supreme<span>58</span></td>
+        <td class="date">TUE JAN 24, 2011</td>
+      </tr>
+    <% end %>
+      </table>
+    </div>
+
+    <div class="tabs">
+      Account
+    </div>
+  
+  </div>
+</div>
+
+<%= render :template => "dash/game" %>

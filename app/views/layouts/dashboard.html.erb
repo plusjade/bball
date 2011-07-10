@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Record Basketball Stats in Real-time</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= stylesheet_link_tag "style" %>
+  <%= render_javascripts %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  <div id="wrapper">
+    <%= yield %>
+  </div>
+
+  <script id="playerTemplate" type="text/x-jquery-tmpl">
+    <a id="${number}" class="player">
+      <div class="head">${name}</div>
+      <span class="number">${number}</span>
+    </a>
+  </script>
+  <script id="rosterTemplate" type="text/x-jquery-tmpl">
+    <div class="row"><div class="number"><input type="text" value="${number}" maxlength="2" /></div><div class="name"><input type="text" value="${name}" /></div><div class="delete">&#10006;</div></div>
+  </script>
+  <script id="teamDropTmpl" type="text/x-jquery-tmpl">
+    <li><a href="#">${name}</a></li>
+  </script>
+  
+  <script>
+  if (Modernizr.localstorage){
+    //localStorage.clear();
+    App.start(123);
+  } else {
+    console.log("Sorry this app is cool so it requires HTML5 support");
+  }
+
+
+  
+  </script>
+  
+  <script type="text/javascript">
+    $(function(){
+      // hack this out.
+      $("#settings").tap(function(){
+        $("#game_wrapper").slideUp("fast", function(){
+          $("#account_wrapper").slideDown("fast");
+        });
+      })
+      $("#new_game").find("button").tap(function(){
+        $("#account_wrapper").slideUp("fast", function(){
+          $("#game_wrapper").slideDown("fast");
+        });
+      })
+
+    /* tab UI */
+      simpleTabs.init($("#dash_navigation"), $("#tabs_wrapper"));
+      $("#title").tap(function(){
+        $("#teams_dropdown").show();
+        $(this).addClass("active")
+      })
+
+      Team.init();
+    })
+  </script>
+    
+</body>
+</html>

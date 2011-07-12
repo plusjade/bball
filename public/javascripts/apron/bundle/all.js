@@ -667,7 +667,7 @@ var App = {
     if(Game.data[gameId]){
       console.log("existing game!");
       App.init();
-      App.updateScores();
+      GameView.updateScores();
     }else{
       console.log("load game from database!");
       /*
@@ -817,19 +817,19 @@ var App = {
   },
   
   setAction : function(action){
-    App.action = action;
+    Game.action = action;
     $("#hopper").show();
     $("#hopper").find("span").html(action+ " &#10144; <em>now select a player...</em>");
     
-    if(App.player) Stat.record(App.player, App.action);
+    if(Game.player) Stat.record(Game.player, Game.action);
   },  
   
   setPlayer : function(side, player){
-    App.player = side+"."+player;
+    Game.player = side+"."+player;
     $("#hopper").show();
     $("#hopper").find("span").html(side+ " #"+ player + " &#10144; <em>now select an action...</em>");
     
-    if(App.action) Stat.record(App.player, App.action);
+    if(Game.action) Stat.record(Game.player, Game.action);
   },
   
   log : function(message){
@@ -840,8 +840,8 @@ var App = {
   },
 
   refresh : function(){
-    App.action = null;
-    App.player = null;
+    Game.action = null;
+    Game.player = null;
     $("#hopper").hide();
     $("#hopper").find("span").empty();
   },
@@ -999,7 +999,7 @@ Stat = {
     var actionOb = Action.data[actionName];
     App.log('<span>'+ player + " &#10144; " + actionOb.name + " " + value + '!</span> <a href="#" class="undo" rel="'+Stat.asString(player, action)+'">UNDO</a>');
     
-    App.updateScores();
+    GameView.updateScores();
     App.refresh();
     console.log("blah");
     console.log(localStorage);
@@ -1011,7 +1011,7 @@ Stat = {
     
     if(key && player && typeof localStorage[key] !== "undefined"){
       localStorage[key] = localStorage[key].replace(playerId+"|", "");
-      App.updateScores();
+      GameView.updateScores();
     }
   },
 

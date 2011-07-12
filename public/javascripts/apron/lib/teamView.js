@@ -9,6 +9,7 @@ var TeamView = {
   
  /* show a team in the DOM */
   show : function(name){
+    name = name.toLowerCase()
     $("#rosterTemplate").template("rosterTemplate");
     TeamView.name = name;
     TeamView.$roster = $("#team_roster");
@@ -16,7 +17,7 @@ var TeamView = {
 
     var $newPlayer = $('<div id="new_player"><div class="row"><div class="number"><input type="text" value="00" maxlength="2" /></div><div class="name"><input type="text" value="name" /></div><div class="add">&#10010;</div></div></div>');
     TeamView.$roster.prepend($newPlayer);
-    TeamView.$roster.prepend('<h1>'+name+'</h1> <button class="sync_team">Save</button> <button class="delete_team">delete</button>');
+    TeamView.$roster.prepend('<h1>'+name+'</h1> <button class="sync_team">Save</button> <button class="delete_team">delete team</button>');
 
     var $playersWrap = $('<div class="players"></div>');  
     $playersWrap.append($.tmpl("rosterTemplate", Team.getPlayers(name)));
@@ -29,6 +30,8 @@ var TeamView = {
       var name = $(this).siblings("h1").text();
       if(Team.destroy(name)){
         Team.refreshList();
+        // change this behavior later
+        simpleTabs.showFirstTab();
         console.log("team destroyed!");
       }
       else{

@@ -40,7 +40,8 @@ class TeamsController < ApplicationController
     end
     
     params[:deletes].each do |name|
-      Team.first(:name => name).destroy
+      team = Team.first(:name => name)
+      team.destroy if team
     end if params[:deletes].is_a?(Array)
     
     render :json => {:status => "good", :msg => "yay"}

@@ -1,3 +1,7 @@
+/* 
+  the Stat Model records stats into localStorage
+  for the current game
+ */
 Stat = {
   
  /* player = "{side}.{number}"
@@ -19,7 +23,7 @@ Stat = {
     var actionOb = Action.data[actionName];
     App.log('<span>'+ player + " &#10144; " + actionOb.name + " " + value + '!</span> <a href="#" class="undo" rel="'+Stat.asString(player, action)+'">UNDO</a>');
     
-    App.updateScores();
+    GameView.updateScores();
     App.refresh();
     console.log("blah");
     console.log(localStorage);
@@ -31,7 +35,7 @@ Stat = {
     
     if(key && player && typeof localStorage[key] !== "undefined"){
       localStorage[key] = localStorage[key].replace(playerId+"|", "");
-      App.updateScores();
+      GameView.updateScores();
     }
   },
 

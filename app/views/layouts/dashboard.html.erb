@@ -3,14 +3,9 @@
 <head>
   <title>Record Basketball Stats in Real-time</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= csrf_meta_tag %>
   <%= stylesheet_link_tag "style" %>
   <%= render_javascripts %>
-  <%= csrf_meta_tag %>
-</head>
-<body>
-  <div id="wrapper">
-    <%= yield %>
-  </div>
 
   <script id="playerTemplate" type="text/x-jquery-tmpl">
     <a id="${number}" class="player">
@@ -25,20 +20,19 @@
     <li><a href="#">${name}</a></li>
   </script>
   
+  
+</head>
+<body>
+  <div id="wrapper">
+    <%= yield %>
+  </div>
+
+
+  
   <script>
   if (Modernizr.localstorage){
     //localStorage.clear();
     
-    App.start(123);
-  } else {
-    console.log("Sorry this app is cool so it requires HTML5 support");
-  }
-
-
-  
-  </script>
-  
-  <script type="text/javascript">
     $(function(){
       // hack this out.
       $("#settings").tap(function(){
@@ -60,8 +54,19 @@
       })
 
       Team.init();
+      
+      if(Game.load()){
+
+      }
+      else{
+        $("#settings").tap();
+      }
+      
     })
+  }
+  else{
+    console.log("Sorry this app is cool so it requires HTML5 support");
+  }
   </script>
-    
 </body>
 </html>

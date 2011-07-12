@@ -42,7 +42,7 @@ var Team = {
       /* build the list and add handler */
       Team.refreshList();
       $("#teams_dropdown").find("a").live("tap", function(e){
-        TeamView.show($(this).text().toLowerCase().replace(" ", "-"));
+        TeamView.show($(this).text());
         e.preventDefault();
       })
       

@@ -652,186 +652,8 @@ Action = {
   }
 }
 var App = {
-  gameId : null,
-  action : null,
-  player : null,
-  $actions : null,
-  $players : null,
-  $playersBench : null,
+  gameId : 123,
 
-  start : function(gameId){
-    App.gameId = gameId;
-    
-    console.log(Game.data[gameId]);
-    
-    if(Game.data[gameId]){
-      console.log("existing game!");
-      App.init();
-      GameView.updateScores();
-    }else{
-      console.log("load game from database!");
-      /*
-      to get to this page a game must have been created so
-      we'll likely have game data in localStorage. actually should be required
-      so we may not need this.
-      */
-      game = {id: gameId}
-      $.getJSON("/teams/1.json", function(data){
-        game["home"] = data["team"];
-        game["homePlayers"] = data["players"];
-      
-        $.getJSON("/teams/2.json", function(data){
-          game["away"] = data["team"];
-          game["awayPlayers"] = data["players"];
-        
-          localStorage[App.gameId] = JSON.stringify(game);
-
-          App.init();
-        });
-      });    
-
-    }
-  },
-
-  init : function(){
-    $("#playerTemplate").template("playerTemplate");
-    App.$actions = $("#actions_wrapper");
-    App.$players = $("#players_game");
-    App.$playersBench = $("#players_bench");
-
-  /* select action interface */  
-    App.$actions.find("a").live("tap", function(e){
-      App.setAction(this.id);
-      
-      e.preventDefault();
-      return false;
-    })
-          
-  /* select player interface */  
-    App.$players.find("a.player").live("tap", function(e){
-
-      var side = $(this).parent().hasClass("home") ? "home" : "away";
-      App.setPlayer(side, this.id);
-      
-      e.preventDefault();
-      return false;
-    })
-        
-  /* bench interface */
-    $("a.bench").tap(function(e){
-      var side = $(this).hasClass("home_bg") ? "home" : "away";
-      App.$playersBench.show();
-    
-      App.$playersBench.find("div.home").hide();
-      App.$playersBench.find("div.away").hide();
-    
-      App.$playersBench.find("div."+side).show();
-
-      e.preventDefault();
-      return false;
-    });
-  
-  /* toggle logger */
-    $("div.tab").find("span").tap(function(){
-      $("div.tab").find("span").show();
-      $(this).hide();
-      
-      var action = $(this).attr("rel");
-      $("#log").removeClass("expand contract").addClass(action);
-    });
-  
-  /* undo/redo logged actions */  
-    $("a.undo").live("tap", function(e){
-      $li = $(this).parent();
-      
-      if($li.hasClass("undone")){
-        Stat.record.apply(this, Stat.parse($(this).attr("rel")));
-        $li.remove();
-      }else{
-        Stat.unRecord.apply(this, Stat.parse($(this).attr("rel")));
-        $li.find("a").text("REDO");
-      }
-      $li.toggleClass("undone");
-      
-      e.preventDefault();
-      return false;
-    });
-    
-  /* close bench */
-    $("a.close").tap(function(e){
-      $(this).parent().hide();
-      e.preventDefault();
-      return false;
-    });
-  
-  /* close analytics */
-    $("a.close_lick").tap(function(e){
-      $("#analytics").hide();
-      $("#analytics").find("p").empty();
-      e.preventDefault();
-      return false;
-    });
-    
-  /* open analytics */
-    $("#licks").tap(function(e){
-      App.build();
-      $("#analytics").show();
-      e.preventDefault();
-      return false;
-    });
-        
-  /* load teams */
-    var home = "pandabots";
-    var away = "gametime";
-    App.loadTeam("home", home, Team.data[home]);  
-    App.loadTeam("away", away, Team.data[away]);  
-  },
-  
-  loadTeam : function(side, team, players){
-    $("#"+side+"_name").text(team+ " Bench");
-    App.$players.find("div."+side).empty();
-    App.$playersBench.find("div."+side).empty();
-    
-    $.tmpl("playerTemplate", players).appendTo(App.$players.find("div."+side));
-    $.tmpl("playerTemplate", players).appendTo(App.$playersBench.find("div."+side));
-  },
-  
-  updateScores : function(){
-    var homeScore = 0;
-    var awayScore = 0;
-    for(var shot in Action.pointValues) {
-
-      var homeKey = App.gameId + ".home." + shot + ".make";
-      if(localStorage.hasOwnProperty(homeKey)){
-        homeScore += +Action.pointValues[shot] *(localStorage[homeKey].split("|").length - 1);
-      }
-      
-      var awayKey = App.gameId + ".away." + shot + ".make";
-      if(localStorage.hasOwnProperty(awayKey)){
-        awayScore += +Action.pointValues[shot] *(localStorage[awayKey].split("|").length - 1);
-      }
-    }
-
-    $("#home_score").text(homeScore);  
-    $("#away_score").text(awayScore);  
-  },
-  
-  setAction : function(action){
-    Game.action = action;
-    $("#hopper").show();
-    $("#hopper").find("span").html(action+ " &#10144; <em>now select a player...</em>");
-    
-    if(Game.player) Stat.record(Game.player, Game.action);
-  },  
-  
-  setPlayer : function(side, player){
-    Game.player = side+"."+player;
-    $("#hopper").show();
-    $("#hopper").find("span").html(side+ " #"+ player + " &#10144; <em>now select an action...</em>");
-    
-    if(Game.action) Stat.record(Game.player, Game.action);
-  },
-  
   log : function(message){
     $node = $("<li>"+message+"</li>");
     $("#log").prepend($node);
@@ -845,6 +667,9 @@ var App = {
     $("#hopper").hide();
     $("#hopper").find("span").empty();
   },
+  
+  
+  
   
   build : function(){
     var $table = $("<table></table>").appendTo($("#analytics").find("p"));
@@ -930,14 +755,209 @@ var App = {
     return analysis;
   }
   
+  
 }
+/*
+  Game model handles Game session creation
+  Game data is stored in localStorage. this is a wrapper
+  for setting and getting the current game session data.
+ */
 var Game = {
-  data : {
-    123 : {
-      home : "pandabots",
-      away : "gametime",
-      timestamp : "2010-10-24 13:07:25"
+  current : {},
+  action : null,
+  player : null,
+  
+  /* Load current game. This should be set in localStorage */
+  load : function(cb){
+    if(localStorage["current"] === null){
+      console.log("No current game");
+      return false;
     }
+    else{
+      console.log("Loading current game.");
+      Game.current = JSON.parse(localStorage["current"]);
+      GameView.show();
+      if(typeof cb === "function") cb();
+      return true;
+    }
+  },
+    
+  
+  /* create a new game session */
+  create : function(home, away){
+    if(Team.exists(home) && Team.exists(away)){
+      Game.current = {
+        home : Team.get(home),
+        away : Team.get(away),
+        timestamp : new Date().toString(),
+        id : Game.makeid()
+      }
+      localStorage["current"] = JSON.stringify(Game.current);
+      return true;
+    }
+    else{
+      return false;
+    }
+  },
+  
+  setAction : function(action){
+    Game.action = action;
+    $("#hopper").show();
+    $("#hopper").find("span").html(action+ " &#10144; <em>now select a player...</em>");
+    
+    if(Game.player) Stat.record(Game.player, Game.action);
+  },  
+  
+  setPlayer : function(side, player){
+    Game.player = side+"."+player;
+    $("#hopper").show();
+    $("#hopper").find("span").html(side+ " #"+ player + " &#10144; <em>now select an action...</em>");
+    
+    if(Game.action) Stat.record(Game.player, Game.action);
+  },
+  
+  /* generate random Game id. namespace to avoid collisions but
+  we aren't storing more than one game currently */
+  makeid : function(){
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 7; i++ )
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    return text;
+  }
+
+
+
+}
+/*
+  Game view is a view class which sets up the DOM for Game session 
+  functionality
+ */
+var GameView = {
+  $actions : null,
+  $players : null,
+  $playersBench : null,
+
+  /* show the GameView panel in the DOM */
+  show : function(){
+    $("#new_game").find("button").tap();
+    
+    $("#playerTemplate").template("playerTemplate");
+    GameView.$actions = $("#actions_wrapper");
+    GameView.$players = $("#players_game");
+    GameView.$playersBench = $("#players_bench");
+
+  /* select action interface */  
+    GameView.$actions.find("a").live("tap", function(e){
+      Game.setAction(this.id);
+      e.preventDefault();
+      return false;
+    })
+          
+  /* select player interface */  
+    GameView.$players.find("a.player").live("tap", function(e){
+      var side = $(this).parent().hasClass("home") ? "home" : "away";
+      Game.setPlayer(side, this.id);
+      e.preventDefault();
+      return false;
+    })
+        
+  /* bench interface */
+    $("a.bench").tap(function(e){
+      var side = $(this).hasClass("home_bg") ? "home" : "away";
+      GameView.$playersBench.show();
+    
+      GameView.$playersBench.find("div.home").hide();
+      GameView.$playersBench.find("div.away").hide();
+      GameView.$playersBench.find("div."+side).show();
+
+      e.preventDefault();
+      return false;
+    });
+  
+  /* toggle logger */
+    $("div.tab").find("span").tap(function(){
+      $("div.tab").find("span").show();
+      $(this).hide();
+      
+      var action = $(this).attr("rel");
+      $("#log").removeClass("expand contract").addClass(action);
+    });
+  
+  /* undo/redo logged actions */  
+    $("a.undo").live("tap", function(e){
+      $li = $(this).parent();
+      
+      if($li.hasClass("undone")){
+        Stat.record.apply(this, Stat.parse($(this).attr("rel")));
+        $li.remove();
+      }else{
+        Stat.unRecord.apply(this, Stat.parse($(this).attr("rel")));
+        $li.find("a").text("REDO");
+      }
+      $li.toggleClass("undone");
+      
+      e.preventDefault();
+      return false;
+    });
+    
+  /* close bench */
+    $("a.close").tap(function(e){
+      $(this).parent().hide();
+      e.preventDefault();
+      return false;
+    });
+  
+  /* close analytics */
+    $("a.close_lick").tap(function(e){
+      $("#analytics").hide();
+      $("#analytics").find("p").empty();
+      e.preventDefault();
+      return false;
+    });
+    
+  /* open analytics */
+    $("#licks").tap(function(e){
+      App.build();
+      $("#analytics").show();
+      e.preventDefault();
+      return false;
+    });
+    
+    /* show teams from the current game in the DOM */
+    $.each(["home", "away"], function(i, side){
+      $("#"+side+"_name").text(Game.current[side].name + " Bench");
+      GameView.$players.find("div."+side).empty().append($.tmpl("playerTemplate", Game.current[side].players));
+      GameView.$playersBench.find("div."+side).empty().append($.tmpl("playerTemplate", Game.current[side].players));
+    })
+    
+    GameView.updateScores();
+  },
+  
+  
+  /* update the scoreboard in the DOM 
+     Note this is a convenience to the user.
+     this doesnt affect logging and storing actual stats
+   */
+  updateScores : function(){
+    var homeScore = 0;
+    var awayScore = 0;
+    for(var shot in Action.pointValues) {
+
+      var homeKey = App.gameId + ".home." + shot + ".make";
+      if(localStorage.hasOwnProperty(homeKey)){
+        homeScore += +Action.pointValues[shot] *(localStorage[homeKey].split("|").length - 1);
+      }
+      
+      var awayKey = App.gameId + ".away." + shot + ".make";
+      if(localStorage.hasOwnProperty(awayKey)){
+        awayScore += +Action.pointValues[shot] *(localStorage[awayKey].split("|").length - 1);
+      }
+    }
+
+    $("#home_score").text(homeScore);  
+    $("#away_score").text(awayScore);  
   }
   
 }
@@ -948,36 +968,52 @@ var simpleTabs = {
     simpleTabs.$list = list;
     simpleTabs.$wrapper = wrapper;
     
-    simpleTabs.$list.find("li").tap(function(){
+    simpleTabs.$list.find("a").tap(function(e){
       simpleTabs.showTab($(this));
-      return false;
+      e.preventDefault();
     });
     
     simpleTabs.showFirstTab();
   },
   
   showFirstTab : function(){
-    var $first = simpleTabs.$list.find("li:first");
-    simpleTabs.showTab($first);
+    simpleTabs.showTab(simpleTabs.$list.find("a").first());
   },
   
   showTab : function(node){
+    var callback = node.attr("rel");
+    if(simpleTabs.hasOwnProperty(callback) && typeof simpleTabs[callback] === "function"){
+      simpleTabs[callback]();
+    }
     simpleTabs.clear();
-    
     simpleTabs.$wrapper.show();
-    var tabIndex = node.index();
+    var tabIndex = node.parent().index();
     simpleTabs.$wrapper.find("div.tabs").eq(tabIndex).show();
     node.addClass("active");
-    
-    $("#title").removeClass("active")
   },
   
   clear : function(){
-    simpleTabs.$list.find("li").removeClass("active");
+    simpleTabs.$list.find("a").removeClass("active");
     simpleTabs.$wrapper.find("div.tabs").hide();
     simpleTabs.$wrapper.hide();
+  },
+  
+ // teams callback
+  teams : function(){
+
+  },
+  new_game : function(){
+    $("#new_game").find("select")
+      .empty()
+      .append('<option value="">select team</option>')
+      .append($.tmpl("<option>${name}</option>", Team.data));
   }
+  
 }
+/* 
+  the Stat Model records stats into localStorage
+  for the current game
+ */
 Stat = {
   
  /* player = "{side}.{number}"
@@ -1034,103 +1070,226 @@ Stat = {
   
   
 }
+/*
+  This is an ad-hoc data model for the UI api.
+  Ideally it will interface between :
+    * localStorage
+    * Javascript Objects
+    * Server Database
+    
+  Properties
+    name, String
+    players, Array
+  
+  Note that there is no Player model, players are currently part of the team Model
+*/
 var Team = {
-  data : {
-    "pandabots" : [
-      {name:"Jade", number : "12"},
-      {name:"Tony", number : "7"},
-      {name:"Bobbert", number : "55"},
-      {name:"Tom", number : "35"},
-      {name:"Brandon", number : "17"},
-    ],
-    "gametime" : [
-      {name:"joe", number : "9"},
-      {name:"mike", number : "7"},
-      {name:"adam", number : "22"},
-      {name:"Paul", number : "80"},
-      {name:"Russel", number : "12"},
-    ],
-    "supernova" : [
-      {name:"cooper", number : "12"},
-      {name:"danny", number : "7"},
-      {name:"brandon", number : "55"},
-    ],
-    "bulkan-ballers" : [
-      {name:"cup", number : "12"},
-      {name:"chair", number : "7"},
-      {name:"samson", number : "55"},
-    ]
+  data : null,
+  /* deletes is a queuing array that stores deleted teams.
+     the array is sent to the server via the sync function  */
+  deletes : [],
+  errors : [],
+  
+ /* initialize the Team Model
+    This primarily means fetching the data from the server
+    and preparing the DOM.
+ */
+  init : function(){
+    $("#teamDropTmpl").template("teamDropTmpl");
+
+    Team.load(function(){
+
+      /* add a team */
+      $("#add_team_wrapper").find("button").tap(function(e){
+        var name = $(this).siblings("input").val();
+        if(Team.create(name)){
+          Team.refreshList();
+        }
+        else{
+          console.log(Team.errors);
+        }
+        e.preventDefault();
+      })
+     
+      /* build the list and add handler */
+      Team.refreshList();
+      $("#teams_dropdown").find("a").live("tap", function(e){
+        TeamView.show($(this).text());
+        e.preventDefault();
+      })
+      
+      console.log("Team model initialized!");
+    });
   },
   
+  /* refresh the team list from the data */
+  refreshList : function(){
+    $("#teams_dropdown").empty().prepend($.tmpl("teamDropTmpl", Team.data));
+  },
+   
+ /* intitially load our data from the server */
+  load : function(cb){
+    $.getJSON("/teams", function(data){
+      Team.data = data;
+      if(typeof cb === "function") cb();
+    })
+  },
+  
+ /* get a specific team by teamname */
   get : function(name){
-    if(Team.data[name]){
-      return Team.data[name];
-    }
-    return [];
+    var data = {};
+    $.each(Team.data, function(i,team){
+      if (team.name === name){
+        data = team; return false;
+      }
+    });
+    return data;
+  },
+  
+ /* get players from a team */  
+  getPlayers : function(name){
+    var team = Team.get(name)
+    if(team.hasOwnProperty("players"))
+      return team.players;
+    else
+      return [];
   },
 
-  init : function(){
-    $("#teamTemplate").template("teamTemplate");
-
-    var qteams = []
-    for(var name in Team.data) {
-      if(Team.data.hasOwnProperty(name)){ 
-        qteams.push({name:name});
+ /* set a team's name and players */
+  set : function(name, players){
+    $.each(Team.data, function(i, team){
+      if (team.name === name){
+        Team.data[i] = {name : name, players : players}
+        return false;
       }
+    })
+  },
+  
+  /* create a new team */
+  create : function(name, players){
+    var name = name.toLowerCase();
+    if(Team.exists(name)){
+      Team.errors.push("Team exists");
+      return false;
     }
-    $.tmpl("teamTemplate", qteams).appendTo($("#teams_list"));    
-
-
-    $("#teams_pane").find("div.team").tap(function(){
-      var team = $(this).text().toLowerCase().replace(" ", "-");
-      TeamView.init(team);
-      
+    else {
+      Team.data.push({name : name, players : players ? players : []})
+      return true;
+    }
+  },
+  
+  /* delete a team */
+  destroy : function(name){
+    var name = name.toLowerCase();
+    $.each(Team.data, function(i, team){
+      if (team.name === name){
+        Team.data.splice(i,1);
+        Team.deletes.push(name);
+        return false
+      }
+    })
+    return true;
+  },
+  
+  /* checks if a team exists */
+  exists : function(name){
+    return Team.get(name).hasOwnProperty("name");
+  },
+  
+ /* sync the Team Model to the server */
+  sync : function(){
+    $.ajax({
+      url : "/teams",
+      type : "post",
+      dataType : "json",
+      data : {'teams' : Team.data, "deletes[]" : Team.deletes},
+      success : function(rsp){
+        // remember to refresh the deletes on successful delete
+        console.log(rsp);
+      }
     })
   }
-}
-var TeamView = {
-  teamName : null,
   
-  init : function(teamName){
-    TeamView.teamName = teamName;
+}
+/* 
+  Views help help display the corresponding data model in the DOM 
+
+*/
+
+var TeamView = {
+  name : null,
+  $roster : null,
+  
+ /* show a team in the DOM */
+  show : function(name){
+    name = name.toLowerCase()
     $("#rosterTemplate").template("rosterTemplate");
-    TeamView.loadTeam();
+    TeamView.name = name;
+    TeamView.$roster = $("#team_roster");
+    TeamView.$roster.empty();
+
+    var $newPlayer = $('<div id="new_player"><div class="row"><div class="number"><input type="text" value="00" maxlength="2" /></div><div class="name"><input type="text" value="name" /></div><div class="add">&#10010;</div></div></div>');
+    TeamView.$roster.prepend($newPlayer);
+    TeamView.$roster.prepend('<h1>'+name+'</h1> <button class="sync_team">Save</button> <button class="delete_team">delete team</button>');
+
+    var $playersWrap = $('<div class="players"></div>');  
+    $playersWrap.append($.tmpl("rosterTemplate", Team.getPlayers(name)));
+    TeamView.$roster.append($playersWrap).show();
+    simpleTabs.clear();
+
     
-  /* add. */
-    $("#team_roster").find("div.add").tap(function(){
+    /* delete a team */
+    TeamView.$roster.find("button.delete_team").tap(function(e){
+      var name = $(this).siblings("h1").text();
+      if(Team.destroy(name)){
+        Team.refreshList();
+        // change this behavior later
+        simpleTabs.showFirstTab();
+        console.log("team destroyed!");
+      }
+      else{
+        console.log(Team.errors);
+      }
+      e.preventDefault();
+    })
+    
+    /* add a player */
+    $newPlayer.find("div.add").tap(function(){
       var number = $(this).parent().find("input").first().val();
       var name = $(this).parent().find("input").last().val();
       $.tmpl("rosterTemplate", [{name: name, number: number}]).appendTo($("#team_roster").find("div.players"));
       TeamView.update();
     })
-  
-  /* delete */  
-    $("#team_roster").find("div.delete").live("tap", function(){
+
+    /* delete a player */  
+    TeamView.$roster.find("div.delete").live("tap", function(){
       $(this).parent().remove();
       TeamView.update();
     })
-  },
-
-  loadTeam : function(){
-    $.tmpl("rosterTemplate", Team.data[TeamView.teamName]).appendTo($("#team_roster").find("div.players").empty());
-  /* Keyup. Todo: need to bind this to new players too. */
-    $("#team_roster").find("div.players").find("input").keyup(function(){
-      TeamView.update();
-    })
     
-    $("#title").addClass("active").text("team: "+ TeamView.teamName)
-    simpleTabs.clear();
+    /* sync to server (probably want to automate this) */
+    TeamView.$roster.find("button.sync_team").tap(function(e){
+      Team.sync();
+      e.preventDefault();
+    });
   },
   
-  update : function (){
+  
+ /* extract the player input-data from the DOM */  
+  extract : function(){
     var players = []
-    $("#team_roster").find("div.players").find("div.row").each(function(){
+    TeamView.$roster.find("div.players").find("div.row").each(function(){
       var number = $(this).find("input").first().val();
       var name = $(this).find("input").last().val();
       players.push({number:number, name:name})
     })
-    
-    Team.data[TeamView.teamName] = players;
-    console.log(Team.data[TeamView.teamName]);
+    return players;
+  },
+
+ /* update the Team Model with data extracted from the DOM */  
+  update : function (){
+    Team.set(TeamView.name, TeamView.extract());
   }
+  
+  
 }

@@ -27,14 +27,16 @@ var Team = {
 
       /* add a team */
       $("#add_team_wrapper").find("button").tap(function(e){
-        var name = $(this).siblings("input").val();
+        var name = $("#add_team_wrapper").find("input").val();
         if(Team.create(name)){
           Team.refreshList();
+          Status.show("Team Created!");
         }
         else{
-          console.log(Team.errors);
+          Status.show(Team.errors.join(", "));
         }
         e.preventDefault();
+        return false;
       })
      
       /* build the list and add handler */
@@ -42,6 +44,7 @@ var Team = {
       $("#teams_dropdown").find("a").live("tap", function(e){
         TeamView.show($(this).text());
         e.preventDefault();
+        return false;
       })
       
       console.log("Team model initialized!");
@@ -51,6 +54,7 @@ var Team = {
   /* refresh the team list from the data */
   refreshList : function(){
     $("#teams_dropdown").empty().prepend($.tmpl("teamDropTmpl", Team.data));
+    $("#teams_dropdown").listview("refresh");
   },
    
  /* intitially load our data from the server */

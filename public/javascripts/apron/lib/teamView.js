@@ -9,6 +9,7 @@ var TeamView = {
   
  /* show a team in the DOM */
   show : function(name){
+    $.mobile.changePage("#team_roster_page", {changeHash : false});
     name = name.toLowerCase()
     TeamView.name = name;
     TeamView.$roster = $("#team_roster");
@@ -21,7 +22,6 @@ var TeamView = {
     var $playersWrap = $('<div class="players"></div>');  
     $playersWrap.append($.tmpl("rosterTemplate", Team.getPlayers(name)));
     TeamView.$roster.append($playersWrap).show();
-    simpleTabs.clear();
 
     
     /* delete a team */
@@ -29,8 +29,7 @@ var TeamView = {
       var name = $(this).siblings("h1").text();
       if(Team.destroy(name)){
         Team.refreshList();
-        // change this behavior later
-        simpleTabs.showFirstTab();
+        $.mobile.changePage("#teams")
         console.log("team destroyed!");
       }
       else{

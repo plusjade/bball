@@ -1,59 +1,96 @@
-<div id="account_wrapper" class="page" style="display:none">
-  <ul id="dash_navigation">
-    <li class="active" rel="teams"><a href="#">Teams</a></li>
-    <li rel="new_game"><a href="#">New Game</a></li>
-    <li rel="completed_games"><a href="#">Completed Games</a></li>
-    <li rel="account"><a href="#">Account</a></li>
-  </ul>
 
-  <div id="work_wrapper">
-    <div id="team_roster" style="display:none"> </div>
-  </div>
+<div id="teams" class="page" data-role="page" data-theme="a">
+	<div data-role="header">
+		<div data-role="navbar">
+  		<ul><a href="#menu" data-rel="dialog" data-transition="slidedown">Menu</a></ul>
+    </div>
+	</div>
 
-  <div id="tabs_wrapper" style="display:none">
-    <div id="teams_pane" class="tabs">
-      <div id="add_team_wrapper">
-        <input type="text" name="team" /> <button type="submit">Add Team</button>
+	<div id="add_team_wrapper" data-role="content" style="text-align:center">	
+    <input type="text" name="team" style="width:40%"/> <button type="submit" data-inline="true">Add Team</button>
+    <ul id="teams_dropdown" data-role="listview" data-inset="true" data-theme="b"> </ul>
+	</div>
+</div>
+
+
+<div id="new_game" class="page" data-role="page" data-theme="a">
+  <div data-role="header">
+		<div data-role="navbar">
+  		<ul><a href="#menu" data-rel="dialog" data-transition="slidedown">Menu</a></ul>
+    </div>
+	</div>
+
+	<div id="new_game_pane" data-role="content">	
+    <div id="existing_game" style="text-align:center">
+      You have an existing game in progress.
+      What would you like to do?
+      
+      <button rel="continue">Continue Game</button>
+      <button rel="complete">Complete Game</button>
+      <button rel="destroy">Destroy Game</button>
+    </div>
+    
+    <div id="new_game">
+      <div class="wrap home_bg" style="text-align:center">
+        <select id="new_game_home" name="home" data-theme="b"> </select>  
       </div>
-      <ul id="teams_dropdown">
-      </ul>
-    </div>
-  
-    <div id="new_game_pane" class="tabs">
-      <div id="existing_game">
-        You have an existing game in progress.
-        What would you like to do?
-        
-        <button class="continue">Continue Game</button>
-        <button class="complete">Complete Game</button>
-        <button class="destroy">Destroy Game</button>
+    
+      <div class="vs" style="text-align:center">VS</div>
+    
+      <div class="wrap away_bg" style="text-align:center">
+        <select id="new_game_away" name="away" data-theme="c"> </select>
       </div>
-      
-      <div id="new_game">
-        <div class="wrap home_bg">
-          <select id="new_game_home" name="home"> </select>  
-        </div>
-      
-        <div class="vs">VS</div>
-      
-        <div class="wrap away_bg">
-          <select id="new_game_away" name="away"> </select>
-        </div>
-      
-        <button class="create">Start New Game</button>
-      </div>
-  
+    
+      <button rel="create">Start New Game</button>
     </div>
 
-    <div id="games_pane" class="tabs">
-      <table> </table>
-    </div>
-
-    <div class="tabs">
-      Account
-    </div>
-  
   </div>
 </div>
 
-<%= render :template => "dash/game" %>
+<div data-role="page" id="completed_games" class="page" data-theme="a">
+  <div data-role="header">
+		<div data-role="navbar">
+  		<ul>
+  		  <a href="#menu" data-rel="dialog" data-transition="slidedown">Menu</a>
+  		</ul>
+    </div>
+	</div>
+
+	<div data-role="content">	
+    <div id="games_pane" class="tabs">
+      <table> </table>
+    </div>
+	</div>
+</div>
+
+<div data-role="page" id="account" class="page" data-theme="a">
+  <div data-role="header">
+		<div data-role="navbar">
+  		<ul>
+  		  <a href="#menu" data-rel="dialog" data-transition="slidedown">Menu</a>
+  		</ul>
+    </div>
+	</div>
+
+	<div data-role="content">	
+    Account stuff
+	</div>
+</div>
+
+<div data-role="page" id="team_roster_page" class="page" data-theme="a">
+  <div data-role="header">
+		<div data-role="navbar">
+  		<ul>
+  		  <a href="#menu" data-rel="dialog" data-transition="slidedown">Menu</a>
+  		</ul>
+    </div>
+	</div>
+
+	<div data-role="content">	
+    <div id="team_roster"> </div>
+	</div>
+</div>
+
+  
+
+<%#= render :template => "dash/game" %>

@@ -4,7 +4,12 @@
   <title>Record Basketball Stats in Real-time</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= csrf_meta_tag %>
-  <%= stylesheet_link_tag "style" %>
+  <%#= stylesheet_link_tag "style" %>
+  <link rel="stylesheet"  href="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css" /> 
+  <style type="text/css">
+
+  </style>
+
   <%= render_javascripts %>
 
   <script id="playerTemplate" type="text/x-jquery-tmpl">
@@ -28,11 +33,17 @@
   
 </head>
 <body>
-  <div id="wrapper">
-    <%= yield %>
-  </div>
 
 
+  <%= yield %>
+
+
+  <div data-role="page" id="menu" class="page" data-theme="a">
+    <a href="#teams" data-role="button">Teams</a>
+    <a href="#new_game" data-role="button">New Game</a>
+    <a href="#completed_games"data-role="button">Completed Games</a>
+  	<a href="#account" data-role="button">Account</a>
+	</div>
   
   <script>
   if (Modernizr.localstorage){
@@ -40,26 +51,32 @@
     $("#teamDropTmpl").template("teamDropTmpl");
     $("#rosterTemplate").template("rosterTemplate");
     $("#completedGamesTmpl").template("completedGamesTmpl");
+
+    /* page rendering callbacks */
+    $('#new_game').live('pageshow',function(event, ui){
+      simpleTabs.new_game();
+    });
+    
+    $('#completed_games').live('pageshow',function(event, ui){
+      simpleTabs.completed_games();
+    });
     
     $(function(){
-      // hack this out.
-      $("#settings").tap(function(){
-        $("#game_wrapper").slideUp("fast", function(){
-          $("#account_wrapper").slideDown("fast");
-          simpleTabs.showTabByName("teams");
+      
+      $("#menu").find("a").tap(function(e){
+        console.log("hello");
+        $.mobile.changePage(this.href, {
+
         });
+        e.preventDefault();
+        return false;
       })
 
-      /* tab UI */
-      simpleTabs.init($("#dash_navigation"), $("#tabs_wrapper"));
-      $("#title").tap(function(){
-        $("#teams_dropdown").show();
-        $(this).addClass("active")
-      })
 
       /* current game interface */
-      $("#new_game_pane").find("button").tap(function(){
-        var klass = $(this).attr("class");
+      $("#new_game_pane").find("button").tap(function(e){
+        var klass = $(this).attr("rel");
+        console.log(klass);
         switch(klass){
           case "continue" :
             $("#account_wrapper").slideUp("fast", function(){
@@ -67,29 +84,28 @@
             });
             break;
           case "complete" :
-            console.log("complete");
             Game.sync();
             break;
           case "destroy" :
-            console.log("destroy");
             Game.destroy();
-            simpleTabs.showTabByName("new_game");
+            $.mobile.changePage("#new_game")
             break;
           case "create" :
-            console.log("create");
-
             var home = $("#new_game_home").val();
             var away = $("#new_game_away").val();
             if(home && away){
               if(Game.create(home, away)){
                 GameView.show();
               }
-              else{
-                console.log("Teams do not exist");
-              }
+              else
+                Status.show("Teams do not exist")
             }
+            else
+              Status.show("Please select two teams.")
             break;
         }
+        e.preventDefault();
+        return false;
       })
       
       
@@ -101,10 +117,14 @@
 
       }
       else{
-        $("#settings").tap();
+
       }
       
     })
+    
+    
+    
+    
   }
   else{
     console.log("Sorry this app is cool so it requires HTML5 support");

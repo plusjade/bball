@@ -6,15 +6,18 @@ var simpleTabs = {
     simpleTabs.$wrapper = wrapper;
     
     simpleTabs.$list.find("a").tap(function(e){
-      simpleTabs.showTab($(this));
+      simpleTabs.showTab($(this).parent());
       e.preventDefault();
     });
     
-    simpleTabs.showFirstTab();
+    simpleTabs.showTabByName("teams");
   },
-  
-  showFirstTab : function(){
-    simpleTabs.showTab(simpleTabs.$list.find("a").first());
+    
+  showTabByName : function(name){
+    var node = simpleTabs.$list.find("li[rel='"+name+"']")
+    if(node.length > 0){
+      simpleTabs.showTab(node);
+    }
   },
   
   showTab : function(node){
@@ -24,7 +27,7 @@ var simpleTabs = {
     }
     simpleTabs.clear();
     simpleTabs.$wrapper.show();
-    var tabIndex = node.parent().index();
+    var tabIndex = node.index();
     simpleTabs.$wrapper.find("div.tabs").eq(tabIndex).show();
     node.addClass("active");
   },
@@ -39,11 +42,21 @@ var simpleTabs = {
   teams : function(){
 
   },
+  
   new_game : function(){
-    $("#new_game").find("select")
-      .empty()
-      .append('<option value="">select team</option>')
-      .append($.tmpl("<option>${name}</option>", Team.data));
+    if (Game.exists()){
+      $("#new_game").hide();
+      $("#existing_game").show();
+    }
+    else{
+      $("#new_game").show();
+      $("#existing_game").hide();
+      
+      $("#new_game").find("select")
+        .empty()
+        .append('<option value="">select team</option>')
+        .append($.tmpl("<option>${name}</option>", Team.data));
+    }
   }
   
 }

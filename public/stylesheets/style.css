@@ -18,8 +18,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 body {
 	line-height: 1;
 	color:#3a4c4c;
-	background:#1B211F;
-  background:url("/images/darkwood.png") repeat 0 0; 
+  background:#333 url("/images/linen.png") repeat 0 0; 
 	font-family:arial;
 }
 ol, ul {
@@ -693,7 +692,7 @@ a.close {
   line-height:48px;
   }
 
-#new_game button{ 
+#new_game button { 
   display:block;
   width:220px;
   height:50px;
@@ -879,4 +878,25 @@ a.close {
   text-shadow: 0px 1px 0px #52633A;
   border-radius:5px;
   box-shadow:inset -1px -1px 3px #6F874E;
+}
+
+
+#existing_game {
+  color:#DDD;
+  text-align:center;
+}
+#existing_game button {
+  display:block;
+  width:220px;
+  height:50px;
+  margin:auto;
+  margin-top:30px;
+  line-height:46px;
+  font-size:20px;
+  color:#F8F5EC;
+  text-align:center;
+  cursor:pointer;
+  background:green;
+  border:0;
+  border-radius:10px;
 }

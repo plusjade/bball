@@ -1,9 +1,9 @@
 <div id="account_wrapper" class="page" style="display:none">
   <ul id="dash_navigation">
-    <li class="active"><a href="#" rel="teams">Teams</a></li>
-    <li><a href="#" rel="new_game">New Game</a></li>
-    <li><a href="#" rel="completed_games">Completed Games</a></li>
-    <li><a href="#" rel="account">Account</a></li>
+    <li class="active" rel="teams"><a href="#">Teams</a></li>
+    <li rel="new_game"><a href="#">New Game</a></li>
+    <li rel="completed_games"><a href="#">Completed Games</a></li>
+    <li rel="account"><a href="#">Account</a></li>
   </ul>
 
   <div id="work_wrapper">
@@ -19,9 +19,18 @@
       </ul>
     </div>
   
-  
     <div id="new_game_pane" class="tabs">
-    
+      <div id="existing_game">
+        You have an existing game in progress.
+        What would you like to do?
+        
+        <button class="continue">Continue Game</button>
+        
+        <button class="complete">Complete Game</button>
+        
+        <button class="destroy">Destroy Game</button>
+      </div>
+      
       <div id="new_game">
         <div class="wrap home_bg">
           <select id="new_game_home" name="home">
@@ -35,7 +44,7 @@
           </select>
         </div>
       
-        <button>Start New Game</button>
+        <button class="create">Start New Game</button>
       </div>
   
     </div>

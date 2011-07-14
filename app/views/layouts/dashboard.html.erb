@@ -34,25 +34,59 @@
     //localStorage.clear();
     
     $(function(){
+      
       // hack this out.
       $("#settings").tap(function(){
         $("#game_wrapper").slideUp("fast", function(){
           $("#account_wrapper").slideDown("fast");
-        });
-      })
-      $("#new_game").find("button").tap(function(){
-        $("#account_wrapper").slideUp("fast", function(){
-          $("#game_wrapper").slideDown("fast");
+          simpleTabs.showTabByName("teams");
         });
       })
 
-    /* tab UI */
+      /* tab UI */
       simpleTabs.init($("#dash_navigation"), $("#tabs_wrapper"));
       $("#title").tap(function(){
         $("#teams_dropdown").show();
         $(this).addClass("active")
       })
 
+      /* current game interface */
+      $("#new_game_pane").find("button").tap(function(){
+        var klass = $(this).attr("class");
+        switch(klass){
+          case "continue" :
+            $("#account_wrapper").slideUp("fast", function(){
+              $("#game_wrapper").slideDown("fast");
+            });
+            break;
+          case "complete" :
+            console.log("complete");
+            break;
+          case "destroy" :
+            console.log("destroy");
+            Game.destroy();
+            simpleTabs.showTabByName("new_game");
+            break;
+          case "create" :
+            console.log("create");
+
+            var home = $("#new_game_home").val();
+            var away = $("#new_game_away").val();
+            if(home && away){
+              if(Game.create(home, away)){
+                GameView.show();
+              }
+              else{
+                console.log("Teams do not exist");
+              }
+            }
+            break;
+        }
+      })
+      
+      
+      /* initialize */
+      
       Team.init();
       
       if(Game.load()){

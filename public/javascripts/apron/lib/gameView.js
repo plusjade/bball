@@ -9,7 +9,11 @@ var GameView = {
 
   /* show the GameView panel in the DOM */
   show : function(){
-    $("#new_game").find("button").tap();
+    if(!Game.exists()) return false;
+    
+    $("#account_wrapper").slideUp("fast", function(){
+      $("#game_wrapper").slideDown("fast");
+    })
     
     $("#playerTemplate").template("playerTemplate");
     GameView.$actions = $("#actions_wrapper");

@@ -10,7 +10,7 @@ var Game = {
   
   /* Load current game. This should be set in localStorage */
   load : function(cb){
-    if(localStorage["current"] === null){
+    if(localStorage["current"] === null || typeof localStorage["current"] === "undefined"){
       console.log("No current game");
       return false;
     }
@@ -41,6 +41,11 @@ var Game = {
     }
   },
   
+  destroy : function(){
+    localStorage.removeItem("current");
+    Game.current = {}
+  },
+  
   setAction : function(action){
     Game.action = action;
     $("#hopper").show();
@@ -55,6 +60,10 @@ var Game = {
     $("#hopper").find("span").html(side+ " #"+ player + " &#10144; <em>now select an action...</em>");
     
     if(Game.action) Stat.record(Game.player, Game.action);
+  },
+  
+  exists : function(){
+    return Game.current.hasOwnProperty("id");
   },
   
   /* generate random Game id. namespace to avoid collisions but

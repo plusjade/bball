@@ -973,13 +973,11 @@ var simpleTabs = {
       e.preventDefault();
     });
     
-    simpleTabs.showFirstTab();
+    simpleTabs.showTabByName("teams");
   },
   
-  showFirstTab : function(){
-    simpleTabs.showTab(simpleTabs.$list.find("a").first());
-  },
   
+  // node is the "li" not the "a"
   showTab : function(node){
     var callback = node.attr("rel");
     if(simpleTabs.hasOwnProperty(callback) && typeof simpleTabs[callback] === "function"){

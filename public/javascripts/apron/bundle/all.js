@@ -690,8 +690,8 @@ var App = {
       
       for(var action in Action.data){
         if(Action.data[action].type === "shot"){
-          var miss = data[player][action+".miss"];
-          var make = data[player][action+".make"];
+          var miss = data[player][action+"-miss"];
+          var make = data[player][action+"-make"];
           var pct = 0
           miss = miss?miss:0;
           make = make?make:0;
@@ -757,6 +757,20 @@ var App = {
   
   
 }
+
+
+var CompletedGame = {
+  data : null,
+  
+  /* intitially load our data from the server */
+   load : function(cb){
+     $.getJSON("/games", function(data){
+       CompletedGame.data = data;
+       if(typeof cb === "function") cb();
+     })
+   }
+  
+}
 /*
   Game model handles Game session creation
   Game data is stored in localStorage. this is a wrapper
@@ -769,7 +783,7 @@ var Game = {
   
   /* Load current game. This should be set in localStorage */
   load : function(cb){
-    if(localStorage["current"] === null){
+    if(localStorage["current"] === null || typeof localStorage["current"] === "undefined"){
       console.log("No current game");
       return false;
     }
@@ -800,6 +814,27 @@ var Game = {
     }
   },
   
+  destroy : function(){
+    localStorage.removeItem("current");
+    Game.current = {}
+  },
+  
+  /* send game data to the server */
+  sync : function(){
+    if(!Game.exists()) return false;
+
+    $.ajax({
+      url : "/games",
+      type : "post",
+      dataType : "json",
+      data : {"data" : localStorage},
+      success : function(rsp){
+        console.log(rsp);
+      }
+    })
+  },
+  
+  
   setAction : function(action){
     Game.action = action;
     $("#hopper").show();
@@ -814,6 +849,10 @@ var Game = {
     $("#hopper").find("span").html(side+ " #"+ player + " &#10144; <em>now select an action...</em>");
     
     if(Game.action) Stat.record(Game.player, Game.action);
+  },
+  
+  exists : function(){
+    return Game.current.hasOwnProperty("id");
   },
   
   /* generate random Game id. namespace to avoid collisions but
@@ -841,9 +880,12 @@ var GameView = {
 
   /* show the GameView panel in the DOM */
   show : function(){
-    $("#new_game").find("button").tap();
+    if(!Game.exists()) return false;
     
-    $("#playerTemplate").template("playerTemplate");
+    $("#account_wrapper").slideUp("fast", function(){
+      $("#game_wrapper").slideDown("fast");
+    })
+    
     GameView.$actions = $("#actions_wrapper");
     GameView.$players = $("#players_game");
     GameView.$playersBench = $("#players_bench");
@@ -945,12 +987,12 @@ var GameView = {
     var awayScore = 0;
     for(var shot in Action.pointValues) {
 
-      var homeKey = Game.current.id + ".home." + shot + ".make";
+      var homeKey = Game.current.id + ".home." + shot + "-make";
       if(localStorage.hasOwnProperty(homeKey)){
         homeScore += +Action.pointValues[shot] *(localStorage[homeKey].split("|").length - 1);
       }
       
-      var awayKey = Game.current.id + ".away." + shot + ".make";
+      var awayKey = Game.current.id + ".away." + shot + "-make";
       if(localStorage.hasOwnProperty(awayKey)){
         awayScore += +Action.pointValues[shot] *(localStorage[awayKey].split("|").length - 1);
       }
@@ -961,50 +1003,28 @@ var GameView = {
   }
   
 }
-var simpleTabs = {
-  $list : null,
-  $wrapper : null,
-  init : function(list, wrapper){
-    simpleTabs.$list = list;
-    simpleTabs.$wrapper = wrapper;
-    
-    simpleTabs.$list.find("a").tap(function(e){
-      simpleTabs.showTab($(this));
-      e.preventDefault();
-    });
-    
-    simpleTabs.showTabByName("teams");
-  },
-  
-  
-  // node is the "li" not the "a"
-  showTab : function(node){
-    var callback = node.attr("rel");
-    if(simpleTabs.hasOwnProperty(callback) && typeof simpleTabs[callback] === "function"){
-      simpleTabs[callback]();
-    }
-    simpleTabs.clear();
-    simpleTabs.$wrapper.show();
-    var tabIndex = node.parent().index();
-    simpleTabs.$wrapper.find("div.tabs").eq(tabIndex).show();
-    node.addClass("active");
-  },
-  
-  clear : function(){
-    simpleTabs.$list.find("a").removeClass("active");
-    simpleTabs.$wrapper.find("div.tabs").hide();
-    simpleTabs.$wrapper.hide();
-  },
-  
- // teams callback
-  teams : function(){
-
-  },
+var simpleTabs = {  
   new_game : function(){
-    $("#new_game").find("select")
-      .empty()
-      .append('<option value="">select team</option>')
-      .append($.tmpl("<option>${name}</option>", Team.data));
+    if (Game.exists()){
+      $("#new_game").hide();
+      $("#existing_game").show();
+    }
+    else{
+      $("#new_game").show();
+      $("#existing_game").hide();
+      
+      $("#new_game").find("select")
+        .empty()
+        .append('<option value="">select team</option>')
+        .append($.tmpl("<option>${name}</option>", Team.data));
+    }
+  },
+  
+  completed_games : function(){
+    CompletedGame.load(function(){
+      console.log("loaded completd games");
+      $("#games_pane").find("table").empty().append($.tmpl("completedGamesTmpl", CompletedGame.data));
+    })
   }
   
 }
@@ -1028,15 +1048,13 @@ Stat = {
     }
     
     var side = player.split(".")[0];
-    var actionName = action.split(".")[0];
-    var value = (typeof action.split(".")[1] == "undefined") ? "" : action.split(".")[1];
+    var actionName = action.split("-")[0];
+    var value = (typeof action.split("-")[1] == "undefined") ? "" : action.split(".")[1];
     var actionOb = Action.data[actionName];
-    App.log('<span>'+ player + " &#10144; " + actionOb.name + " " + value + '!</span> <a href="#" class="undo" rel="'+Stat.asString(player, action)+'">UNDO</a>');
+    App.log('<span>'+ player + " &#10144; " + action + '!</span> <a href="#" class="undo" rel="'+Stat.asString(player, action)+'">UNDO</a>');
     
     GameView.updateScores();
     App.refresh();
-    console.log("blah");
-    console.log(localStorage);
   },
 
   unRecord : function(player, action){
@@ -1068,6 +1086,34 @@ Stat = {
   
   
 }
+var Status = {
+
+  // hack this out better later
+  show : function(msg){
+    $("div.ui-loader").find("h1").text(msg);
+    $("div.ui-loader").find("span").hide();
+    $.mobile.showPageLoadingMsg();
+    setTimeout("$.mobile.hidePageLoadingMsg()", 1500);
+  },
+  
+  
+  bak_showSubmit: function(){
+    $('#status-bar div.responding.active').remove();
+    $('#submitting').show();
+  },
+  
+  bak_showResponse: function(rsp){
+    var blah = { status: "bad", msg: "There was a problem!"};
+    if (rsp && rsp.status) blah.status = rsp.status;
+    if (rsp && rsp.msg) blah.msg = rsp.msg;
+
+    $('#submitting').hide();
+    $('div.responding.active').remove();
+    $('div.responding').hide().clone().addClass('active ' + blah.status).html(blah.msg).show().insertAfter('div.responding');
+    setTimeout('$("div.responding.active").fadeOut(4000)', 1900);    
+  },
+  
+}
 /*
   This is an ad-hoc data model for the UI api.
   Ideally it will interface between :
@@ -1093,20 +1139,20 @@ var Team = {
     and preparing the DOM.
  */
   init : function(){
-    $("#teamDropTmpl").template("teamDropTmpl");
-
     Team.load(function(){
 
       /* add a team */
       $("#add_team_wrapper").find("button").tap(function(e){
-        var name = $(this).siblings("input").val();
+        var name = $("#add_team_wrapper").find("input").val();
         if(Team.create(name)){
           Team.refreshList();
+          Status.show("Team Created!");
         }
         else{
-          console.log(Team.errors);
+          Status.show(Team.errors.join(", "));
         }
         e.preventDefault();
+        return false;
       })
      
       /* build the list and add handler */
@@ -1114,6 +1160,7 @@ var Team = {
       $("#teams_dropdown").find("a").live("tap", function(e){
         TeamView.show($(this).text());
         e.preventDefault();
+        return false;
       })
       
       console.log("Team model initialized!");
@@ -1123,6 +1170,7 @@ var Team = {
   /* refresh the team list from the data */
   refreshList : function(){
     $("#teams_dropdown").empty().prepend($.tmpl("teamDropTmpl", Team.data));
+    $("#teams_dropdown").listview("refresh");
   },
    
  /* intitially load our data from the server */
@@ -1220,8 +1268,8 @@ var TeamView = {
   
  /* show a team in the DOM */
   show : function(name){
+    $.mobile.changePage("#team_roster_page", {changeHash : false});
     name = name.toLowerCase()
-    $("#rosterTemplate").template("rosterTemplate");
     TeamView.name = name;
     TeamView.$roster = $("#team_roster");
     TeamView.$roster.empty();
@@ -1233,7 +1281,6 @@ var TeamView = {
     var $playersWrap = $('<div class="players"></div>');  
     $playersWrap.append($.tmpl("rosterTemplate", Team.getPlayers(name)));
     TeamView.$roster.append($playersWrap).show();
-    simpleTabs.clear();
 
     
     /* delete a team */
@@ -1241,8 +1288,7 @@ var TeamView = {
       var name = $(this).siblings("h1").text();
       if(Team.destroy(name)){
         Team.refreshList();
-        // change this behavior later
-        simpleTabs.showFirstTab();
+        $.mobile.changePage("#teams")
         console.log("team destroyed!");
       }
       else{

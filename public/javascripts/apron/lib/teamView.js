@@ -10,7 +10,6 @@ var TeamView = {
  /* show a team in the DOM */
   show : function(name){
     name = name.toLowerCase()
-    $("#rosterTemplate").template("rosterTemplate");
     TeamView.name = name;
     TeamView.$roster = $("#team_roster");
     TeamView.$roster.empty();

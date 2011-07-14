@@ -15,7 +15,6 @@ var GameView = {
       $("#game_wrapper").slideDown("fast");
     })
     
-    $("#playerTemplate").template("playerTemplate");
     GameView.$actions = $("#actions_wrapper");
     GameView.$players = $("#players_game");
     GameView.$playersBench = $("#players_bench");

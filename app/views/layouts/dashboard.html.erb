@@ -36,12 +36,12 @@
   
   <script>
   if (Modernizr.localstorage){
-    //localStorage.clear();
+    $("#playerTemplate").template("playerTemplate");
+    $("#teamDropTmpl").template("teamDropTmpl");
+    $("#rosterTemplate").template("rosterTemplate");
     $("#completedGamesTmpl").template("completedGamesTmpl");
     
     $(function(){
-      
-      
       // hack this out.
       $("#settings").tap(function(){
         $("#game_wrapper").slideUp("fast", function(){

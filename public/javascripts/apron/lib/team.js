@@ -23,8 +23,6 @@ var Team = {
     and preparing the DOM.
  */
   init : function(){
-    $("#teamDropTmpl").template("teamDropTmpl");
-
     Team.load(function(){
 
       /* add a team */

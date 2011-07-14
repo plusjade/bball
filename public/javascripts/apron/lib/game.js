@@ -46,6 +46,22 @@ var Game = {
     Game.current = {}
   },
   
+  /* send game data to the server */
+  sync : function(){
+    if(!Game.exists()) return false;
+
+    $.ajax({
+      url : "/games",
+      type : "post",
+      dataType : "json",
+      data : {"data" : localStorage},
+      success : function(rsp){
+        console.log(rsp);
+      }
+    })
+  },
+  
+  
   setAction : function(action){
     Game.action = action;
     $("#hopper").show();

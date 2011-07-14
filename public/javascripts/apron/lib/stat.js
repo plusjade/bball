@@ -18,15 +18,13 @@ Stat = {
     }
     
     var side = player.split(".")[0];
-    var actionName = action.split(".")[0];
-    var value = (typeof action.split(".")[1] == "undefined") ? "" : action.split(".")[1];
+    var actionName = action.split("-")[0];
+    var value = (typeof action.split("-")[1] == "undefined") ? "" : action.split(".")[1];
     var actionOb = Action.data[actionName];
-    App.log('<span>'+ player + " &#10144; " + actionOb.name + " " + value + '!</span> <a href="#" class="undo" rel="'+Stat.asString(player, action)+'">UNDO</a>');
+    App.log('<span>'+ player + " &#10144; " + action + '!</span> <a href="#" class="undo" rel="'+Stat.asString(player, action)+'">UNDO</a>');
     
     GameView.updateScores();
     App.refresh();
-    console.log("blah");
-    console.log(localStorage);
   },
 
   unRecord : function(player, action){
@@ -41,7 +39,7 @@ Stat = {
 
   // build the key used to store this player-action
   keyize : function(player, action){
-    return [App.gameId, player.split(".")[0], action].join(".");
+    return [Game.current.id, player.split(".")[0], action].join(".");
   },
   
   // stringify a player-action 

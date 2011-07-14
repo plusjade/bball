@@ -117,12 +117,12 @@ var GameView = {
     var awayScore = 0;
     for(var shot in Action.pointValues) {
 
-      var homeKey = App.gameId + ".home." + shot + ".make";
+      var homeKey = Game.current.id + ".home." + shot + "-make";
       if(localStorage.hasOwnProperty(homeKey)){
         homeScore += +Action.pointValues[shot] *(localStorage[homeKey].split("|").length - 1);
       }
       
-      var awayKey = App.gameId + ".away." + shot + ".make";
+      var awayKey = Game.current.id + ".away." + shot + "-make";
       if(localStorage.hasOwnProperty(awayKey)){
         awayScore += +Action.pointValues[shot] *(localStorage[awayKey].split("|").length - 1);
       }

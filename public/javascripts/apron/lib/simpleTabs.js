@@ -57,6 +57,13 @@ var simpleTabs = {
         .append('<option value="">select team</option>')
         .append($.tmpl("<option>${name}</option>", Team.data));
     }
+  },
+  
+  completed_games : function(){
+    CompletedGame.load(function(){
+      console.log("loaded completd games");
+      $("#games_pane").find("table").empty().append($.tmpl("completedGamesTmpl", CompletedGame.data));
+    })
   }
   
 }

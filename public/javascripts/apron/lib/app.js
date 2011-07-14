@@ -37,8 +37,8 @@ var App = {
       
       for(var action in Action.data){
         if(Action.data[action].type === "shot"){
-          var miss = data[player][action+".miss"];
-          var make = data[player][action+".make"];
+          var miss = data[player][action+"-miss"];
+          var make = data[player][action+"-make"];
           var pct = 0
           miss = miss?miss:0;
           make = make?make:0;
@@ -66,7 +66,7 @@ var App = {
   
   // aggregate all actions from the given Action.data object.
     for(var action in Action.data){
-      var homeKey = App.gameId + ".home." + Action.data[action].id;
+      var homeKey = Game.current.id + ".home." + Action.data[action].id;
       if(Action.data[action].type === "shot"){
         aggregate(homeKey, "make");
         aggregate(homeKey, "miss");

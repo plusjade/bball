@@ -1,6 +1,7 @@
 Bball::Application.routes.draw do
   root :to => "home#index"
   match "dash" => "dash#index"
+  resources :games
   resources :teams do
     resources :players
   end

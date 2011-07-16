@@ -53,10 +53,7 @@ var Team = {
   
   /* refresh the team list from the data */
   refreshList : function(){
-    $("#teams_dropdown")
-      .empty()
-      .prepend($.tmpl("teamDropTmpl", Team.data))
-      .listview("refresh");
+    $("#teams_dropdown").empty().prepend($.tmpl("teamDropTmpl", Team.data))
   },
    
  /* intitially load our data from the server */

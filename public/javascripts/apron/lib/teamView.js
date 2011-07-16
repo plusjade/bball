@@ -17,7 +17,6 @@ var TeamView = {
     TeamView.$roster = $("#team_roster").empty();
     TeamView.$roster.append($.tmpl("rosterTemplate", Team.getPlayers(name))).show();
     TeamView.$roster.prepend($newPlayer);
-    TeamView.$roster.listview("refresh");
     
     /* delete a team */
     $("#team_roster_wrapper").find("button.delete_team").tap(function(e){

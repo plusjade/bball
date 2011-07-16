@@ -10,7 +10,7 @@ var GameView = {
   /* show the GameView panel in the DOM */
   show : function(){
     if(!Game.exists()) return false;
-    
+
     GameView.$actions = $("#actions_wrapper");
     GameView.$players = $("#players_game");
     GameView.$playersBench = $("#players_bench");
@@ -76,14 +76,6 @@ var GameView = {
       return false;
     });
   
-  /* close analytics */
-    $("a.close_lick").tap(function(e){
-      $("#analytics").hide();
-      $("#analytics").find("p").empty();
-      e.preventDefault();
-      return false;
-    });
-    
     
     /* show teams from the current game in the DOM */
     $.each(["home", "away"], function(i, side){

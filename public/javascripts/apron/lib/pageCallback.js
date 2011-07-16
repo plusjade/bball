@@ -2,6 +2,15 @@
    by defining a function named for the page name.
  */
 var pageCallback = {  
+  teams : function(){
+    console.log("teams page callback");
+    $("#teams_dropdown").listview("refresh");
+  },
+  
+  team_roster_page : function(){
+    $("#team_roster").listview("refresh");
+  },
+  
   new_game : function(){
     if (Game.exists()){
       $("#new_game_box").hide();
@@ -29,6 +38,11 @@ var pageCallback = {
   
   analytics : function(){
     App.build();
+  },
+  
+  log_page : function(){
+    console.log("log_page");
+    $("#log").listview("refresh");
   }
   
 }

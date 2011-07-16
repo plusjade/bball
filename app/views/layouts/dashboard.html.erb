@@ -84,6 +84,12 @@
     $("#completedGamesTmpl").template("completedGamesTmpl");
 
     /* page rendering callbacks */
+    $('#teams').live('pageshow',function(event, ui){
+      pageCallback.teams();
+    });
+    $('#team_roster_page').live('pageshow',function(event, ui){
+      pageCallback.team_roster_page();
+    });
     $('#new_game').live('pageshow',function(event, ui){
       pageCallback.new_game();
     });
@@ -93,14 +99,14 @@
     $('#analytics').live('pageshow',function(event, ui){
       pageCallback.analytics();
     });
+    $('#log_page').live('pageshow',function(event, ui){
+      pageCallback.log_page();
+    });
     
     $(function(){
-      
-      $("#menu").find("a").tap(function(e){
-        console.log("hello");
-        $.mobile.changePage(this.href, {
 
-        });
+      $("#menu").find("a").tap(function(e){
+        $.mobile.changePage(this.href, {});
         e.preventDefault();
         return false;
       })
@@ -127,6 +133,7 @@
             if(home && away){
               if(Game.create(home, away)){
                 GameView.show();
+                $.mobile.changePage("#game_wrapper");
               }
               else
                 Status.show("Teams do not exist")

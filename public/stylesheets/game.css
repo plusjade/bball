@@ -351,19 +351,8 @@ a.close {
 /* ======================================================
   analytics */
 
-#__analytics {
-  position:absolute;
-  top:0;
-  left:0;
-  width:1000px;
-  height:450px;
-  background:#333;
-  z-index:1000;
-  border-radius:0 0 5px 5px;
-}
-
 #analytics table {
-  width:990px;
+  width:100%;
   border-collapse:collapse;
   margin:auto;
 }  

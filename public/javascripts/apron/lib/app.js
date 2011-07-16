@@ -1,26 +1,15 @@
 var App = {
-  gameId : 123,
 
   log : function(message){
     $("#hop").html(message);
     $node = $("<li>"+message+"</li>");
-    $("#log").append($node).listview("refresh");
+    $("#log").append($node);
     $node.animate( {'marginLeft': '-=20px'}, 100, "linear" );
     $node.animate( {'marginLeft': '+=20px'}, 100, "linear" );
   },
-
-  refresh : function(){
-    Game.action = null;
-    Game.player = null;
-    $("#hopper").hide();
-    $("#hopper").find("span").empty();
-  },
-  
-  
-  
   
   build : function(){
-    var $table = $("<table></table>").appendTo($("#analytics").find("p").empty());
+    var $table = $("<table></table>").appendTo($("#analytics").find("div.stat_grid").empty());
     var data = Game.parseStats();
     var cache = "";
     var points = 0;
@@ -33,29 +22,37 @@ var App = {
     $table.append("<tr><th></th><th></th><th>pts</th><th>TOT</th>"+cache+"</tr>");
     
 
-    for(var player in data){
+    for(var playerNum in data){
       points = 0, totalMiss = 0, totalMake = 0, cache = "";
+      var player = Game.getPlayer("home", playerNum);
       
       for(var action in Action.data){
         if(Action.data[action].type === "shot"){
-          var miss = data[player][action+"-miss"];
-          var make = data[player][action+"-make"];
+          var miss = data[playerNum][action+"-miss"];
+          var make = data[playerNum][action+"-make"];
           var pct = 0
           miss = miss?miss:0;
           make = make?make:0;
-          totalMiss += miss;
-          totalMake += make;
+          
+          // don't count freethow's in total percentage
+          if(action !== "freethrow"){
+            totalMiss += miss;
+            totalMake += make;
+          }
           points += +make*Action.data[action].value;
-          if(make >0) pct = Math.round((parseInt(make)/parseInt(make+miss))*100);
+          if(+make >0){
+            pct = Math.round((parseInt(make)/parseInt(make+miss))*100);
+          }
 
           cache += "<td>"+make+"/"+(+make+miss)+"<br/>"+ pct +"%</td>";
         }else{
-          cache += "<td>"+(data[player][action]?data[player][action]:0)+"</td>";
+          cache += "<td>"+(data[playerNum][action]?data[playerNum][action]:0)+"</td>";
         }
       }
       
-      if(totalMake >0 ) tpct = Math.round((parseInt(totalMake)/parseInt(totalMake+totalMiss))*100);
-      $table.append("<tr><td>"+ player +"</td><td>name</td><td>"+points+"</td><td>"+totalMake+"/"+(+totalMiss+totalMake)+"<br/>"+tpct+"%</td>"+cache+"</tr>");
+      tpct = (totalMake>0) ? Math.round((parseInt(totalMake)/parseInt(totalMake+totalMiss))*100) : 0 ;
+      
+      $table.append("<tr><td>#"+ player.number +"</td><td>"+ player.name +"</td><td>"+points+"</td><td>"+totalMake+"/"+(+totalMiss+totalMake)+"<br/>"+tpct+"%</td>"+cache+"</tr>");
     }
 
   }

@@ -76,6 +76,11 @@ var Game = {
     if(Game.action) Stat.record(Game.player, Game.action);
   },
   
+  refresh : function(){
+    Game.action = null;
+    Game.player = null;
+  },
+  
   exists : function(){
     return Game.current.hasOwnProperty("id");
   },
@@ -102,6 +107,7 @@ var Game = {
         }
      }
    */
+   // TODO: should need to pass home/away to parse both sides.
   parseStats : function(){
   // defensive actions only  
     var analysis = {}    
@@ -141,8 +147,19 @@ var Game = {
         }
       }
     }
-    console.log(analysis);
     return analysis;
+  },
+  
+  // gets a player from the current game
+  getPlayer : function(side, number){
+    var foundPlayer = {}
+    $.each(Game.current[side].players, function(i, player){
+      if (player.number === +number){
+        foundPlayer = player;
+        return false;
+      }
+    })
+    return foundPlayer;
   }
 
 

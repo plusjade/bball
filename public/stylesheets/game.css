@@ -95,11 +95,6 @@ div.away .number{
 
 
 /* ======================================================
-  Score */
-  
-
-
-/* ======================================================
   Logger */
 #hop {
 
@@ -132,7 +127,7 @@ div.away .number{
 
 #actions_wrapper {
   overflow:hidden;
-  margin-bottom:30px;
+  margin-bottom:10px;
   position:relative;
   top:20px;
 }
@@ -147,7 +142,6 @@ div.away .number{
   height:60px;
   width:100px;
   padding:10px;
-  margin:8px;
   
   overflow:hidden;
   line-height:60px;
@@ -171,7 +165,6 @@ div.away .number{
   display:inline-block;
   height:95px;
   width:230px;
-  margin:8px;
   overflow:hidden;
   text-align:center;
   font-weight:bold;
@@ -226,7 +219,7 @@ div.away .number{
 
 a.player {
   display:inline-block;
-  margin:10px;
+  margin:5px;
   height:100px;
   width:170px;
   overflow:hidden;

@@ -652,29 +652,18 @@ Action = {
   }
 }
 var App = {
-  gameId : 123,
 
   log : function(message){
     $("#hop").html(message);
     $node = $("<li>"+message+"</li>");
-    $("#log").append($node).listview("refresh");
+    $("#log").append($node);
     $node.animate( {'marginLeft': '-=20px'}, 100, "linear" );
     $node.animate( {'marginLeft': '+=20px'}, 100, "linear" );
   },
-
-  refresh : function(){
-    Game.action = null;
-    Game.player = null;
-    $("#hopper").hide();
-    $("#hopper").find("span").empty();
-  },
-  
-  
-  
   
   build : function(){
-    var $table = $("<table></table>").appendTo($("#analytics").find("p"));
-    var data = App.analyze();
+    var $table = $("<table></table>").appendTo($("#analytics").find("div.stat_grid").empty());
+    var data = Game.parseStats();
     var cache = "";
     var points = 0;
     var totalMiss = 0;
@@ -686,74 +675,39 @@ var App = {
     $table.append("<tr><th></th><th></th><th>pts</th><th>TOT</th>"+cache+"</tr>");
     
 
-    for(var player in data){
+    for(var playerNum in data){
       points = 0, totalMiss = 0, totalMake = 0, cache = "";
+      var player = Game.getPlayer("home", playerNum);
       
       for(var action in Action.data){
         if(Action.data[action].type === "shot"){
-          var miss = data[player][action+"-miss"];
-          var make = data[player][action+"-make"];
+          var miss = data[playerNum][action+"-miss"];
+          var make = data[playerNum][action+"-make"];
           var pct = 0
           miss = miss?miss:0;
           make = make?make:0;
-          totalMiss += miss;
-          totalMake += make;
+          
+          // don't count freethow's in total percentage
+          if(action !== "freethrow"){
+            totalMiss += miss;
+            totalMake += make;
+          }
           points += +make*Action.data[action].value;
-          if(make >0) pct = Math.round((parseInt(make)/parseInt(make+miss))*100);
+          if(+make >0){
+            pct = Math.round((parseInt(make)/parseInt(make+miss))*100);
+          }
 
           cache += "<td>"+make+"/"+(+make+miss)+"<br/>"+ pct +"%</td>";
         }else{
-          cache += "<td>"+(data[player][action]?data[player][action]:0)+"</td>";
+          cache += "<td>"+(data[playerNum][action]?data[playerNum][action]:0)+"</td>";
         }
       }
       
-      if(totalMake >0 ) tpct = Math.round((parseInt(totalMake)/parseInt(totalMake+totalMiss))*100);
-      $table.append("<tr><td>"+ player +"</td><td>name</td><td>"+points+"</td><td>"+totalMake+"/"+(+totalMiss+totalMake)+"<br/>"+tpct+"%</td>"+cache+"</tr>");
+      tpct = (totalMake>0) ? Math.round((parseInt(totalMake)/parseInt(totalMake+totalMiss))*100) : 0 ;
+      
+      $table.append("<tr><td>#"+ player.number +"</td><td>"+ player.name +"</td><td>"+points+"</td><td>"+totalMake+"/"+(+totalMiss+totalMake)+"<br/>"+tpct+"%</td>"+cache+"</tr>");
     }
 
-  },
-  
-  analyze : function(){
-  // defensive actions only  
-    var analysis = {}    
-    var x = Action.data.length;
-  
-  // aggregate all actions from the given Action.data object.
-    for(var action in Action.data){
-      var homeKey = Game.current.id + ".home." + Action.data[action].id;
-      if(Action.data[action].type === "shot"){
-        aggregate(homeKey, "make");
-        aggregate(homeKey, "miss");
-      }else{
-        aggregate(homeKey);
-      }
-    }
-
-  // aggregate player action counts from the specified action key/value
-    function aggregate(homeKey, value){
-      if(value) homeKey += ("."+value);
-      if(localStorage.hasOwnProperty(homeKey)){
-        var data = localStorage[homeKey].split("|"); 
-        var counts = {}
-        var x = data.length-1; // subtract empty last array val.
-        var val; 
-        
-      // parse data to retrive players => action counts
-        while(x--){
-          val = data[x];
-          if (counts[val]) counts[val] += 1;
-          else counts[val] = 1;
-        }
-        
-      // add action's counts to player object
-        for(var player in counts){
-          if(!analysis[player]) analysis[player] = {}
-          analysis[player][value?action+"."+value:action] = counts[player];
-        }
-      }
-    }
-    
-    return analysis;
   }
   
   
@@ -850,6 +804,11 @@ var Game = {
     if(Game.action) Stat.record(Game.player, Game.action);
   },
   
+  refresh : function(){
+    Game.action = null;
+    Game.player = null;
+  },
+  
   exists : function(){
     return Game.current.hasOwnProperty("id");
   },
@@ -863,8 +822,73 @@ var Game = {
     for( var i=0; i < 7; i++ )
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     return text;
-  }
+  },
+  
+  /* parse recorded stats into an object that is used to render the data nicely
+     Note how localStorage is a key : value store.
+     This basically parses localStorage stat key:values into 
+     an more convenient object :
+     {
+        player# : {
+          action1 : aggregrate count,
+          action2 : aggregrate count,
+        }
+     }
+   */
+   // TODO: should need to pass home/away to parse both sides.
+  parseStats : function(){
+  // defensive actions only  
+    var analysis = {}    
+    var x = Action.data.length;
+  
+  // aggregate all actions from the given Action.data object.
+    for(var action in Action.data){
+      var homeKey = Game.current.id + ".home." + Action.data[action].id;
+      if(Action.data[action].type === "shot"){
+        aggregate(homeKey, "make");
+        aggregate(homeKey, "miss");
+      }else{
+        aggregate(homeKey);
+      }
+    }
 
+  // aggregate player action counts from the specified action key/value
+    function aggregate(homeKey, value){
+      if(value) homeKey += ("-"+value);
+      if(localStorage.hasOwnProperty(homeKey)){
+        var data = localStorage[homeKey].split("|");
+        var counts = {}
+        var x = data.length-1; // subtract empty last array val.
+        var val; 
+        
+      // parse data to retrive players => action counts
+        while(x--){
+          val = data[x];
+          if (counts[val]) counts[val] += 1;
+          else counts[val] = 1;
+        }
+        
+      // add action's counts to player object
+        for(var player in counts){
+          if(!analysis[player]) analysis[player] = {}
+          analysis[player][value?action+"-"+value:action] = counts[player];
+        }
+      }
+    }
+    return analysis;
+  },
+  
+  // gets a player from the current game
+  getPlayer : function(side, number){
+    var foundPlayer = {}
+    $.each(Game.current[side].players, function(i, player){
+      if (player.number === +number){
+        foundPlayer = player;
+        return false;
+      }
+    })
+    return foundPlayer;
+  }
 
 
 }
@@ -880,7 +904,7 @@ var GameView = {
   /* show the GameView panel in the DOM */
   show : function(){
     if(!Game.exists()) return false;
-    
+
     GameView.$actions = $("#actions_wrapper");
     GameView.$players = $("#players_game");
     GameView.$playersBench = $("#players_bench");
@@ -946,21 +970,6 @@ var GameView = {
       return false;
     });
   
-  /* close analytics */
-    $("a.close_lick").tap(function(e){
-      $("#analytics").hide();
-      $("#analytics").find("p").empty();
-      e.preventDefault();
-      return false;
-    });
-    
-  /* open analytics */
-    $("#licks").tap(function(e){
-      App.build();
-      $("#analytics").show();
-      e.preventDefault();
-      return false;
-    });
     
     /* show teams from the current game in the DOM */
     $.each(["home", "away"], function(i, side){
@@ -998,16 +1007,27 @@ var GameView = {
   }
   
 }
+/* register a callback for whenever a page is loaded
+   by defining a function named for the page name.
+ */
 var pageCallback = {  
+  teams : function(){
+    console.log("teams page callback");
+    $("#teams_dropdown").listview("refresh");
+  },
+  
+  team_roster_page : function(){
+    $("#team_roster").listview("refresh");
+  },
+  
   new_game : function(){
     if (Game.exists()){
       $("#new_game_box").hide();
       $("#existing_game_box").show();
     }
     else{
-      $("#new_game_box").show();
       $("#existing_game_box").hide();
-      
+      $("#new_game_box").show();
       $("#new_game").find("select")
         .empty()
         .append('<option value="">select team</option>')
@@ -1023,6 +1043,15 @@ var pageCallback = {
         .append($.tmpl("completedGamesTmpl", CompletedGame.data))
         .listview("refresh");
     })
+  },
+  
+  analytics : function(){
+    App.build();
+  },
+  
+  log_page : function(){
+    console.log("log_page");
+    $("#log").listview("refresh");
   }
   
 }
@@ -1044,15 +1073,12 @@ Stat = {
     }else{
       localStorage[key] += playerId+"|";
     }
-    
-    var side = player.split(".")[0];
-    var actionName = action.split("-")[0];
-    var value = (typeof action.split("-")[1] == "undefined") ? "" : action.split(".")[1];
-    var actionOb = Action.data[actionName];
-    App.log('<span class="ui-btn-text">'+ player + " &#10144; " + action + '!</span> <span class="undo" rel="'+Stat.asString(player, action)+'">UNDO</span>');
-    
+    Game.refresh();
     GameView.updateScores();
-    App.refresh();
+
+    // update the log
+    var side = player.split(".")[0];
+    App.log('<span class="ui-btn-text">'+ player + " &#10144; " + action + '!</span> <span class="undo" rel="'+Stat.asString(player, action)+'">UNDO</span>');
   },
 
   unRecord : function(player, action){
@@ -1081,6 +1107,8 @@ Stat = {
     var value = (typeof data[3] === "undefined") ? "" : "."+data[3];
     return [data[0]+"."+data[1], data[2]+value];
   }
+  
+  
   
   
 }
@@ -1167,10 +1195,7 @@ var Team = {
   
   /* refresh the team list from the data */
   refreshList : function(){
-    $("#teams_dropdown")
-      .empty()
-      .prepend($.tmpl("teamDropTmpl", Team.data))
-      .listview("refresh");
+    $("#teams_dropdown").empty().prepend($.tmpl("teamDropTmpl", Team.data))
   },
    
  /* intitially load our data from the server */
@@ -1276,7 +1301,6 @@ var TeamView = {
     TeamView.$roster = $("#team_roster").empty();
     TeamView.$roster.append($.tmpl("rosterTemplate", Team.getPlayers(name))).show();
     TeamView.$roster.prepend($newPlayer);
-    TeamView.$roster.listview("refresh");
     
     /* delete a team */
     $("#team_roster_wrapper").find("button.delete_team").tap(function(e){

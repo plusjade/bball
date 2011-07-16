@@ -81,7 +81,7 @@ div.away .number{
   display:inline-block;
 }
 .head_group a {
-  font-size:24px !important;
+  ont-size:24px !important;
 }
 #score_wrap {
   margin-right:40px;
@@ -100,55 +100,8 @@ div.away .number{
 
 
 /* ======================================================
-  analytics show */
-  
-#__licks {
-  position:absolute;
-  top:0px;
-  right:0px;
-  width:60px;
-  height:60px;
-  line-height:58px;
-  background:#111;
-  text-align:center;
-  font-size:46px;
-  z-index:50;
-  color:#F8F5EC; 
-  text-align:center;
-  border-radius: 0 0 5px 0;
-}
-
-#__settings {
-  position:absolute;
-  top:0px;
-  right:60px;
-  width:60px;
-  height:60px;
-  line-height:58px;
-  background:#000;
-  text-align:center;
-  font-size:46px;
-  z-index:50;
-  color:#F8F5EC; 
-  text-align:center;
-  border-radius: 0 0 0 5px;
-  border-right:1px solid #999;
-  
-}
-
-.close_lick {
-  color:#F8F5EC;
-  float:right;
-  background:red;
-  text-align:center;
-  padding:7px 14px;
-}
-
-
-/* ======================================================
   Logger */
 #hop {
-  width:400px;
 }  
 #__log li.undone span {
   text-decoration:line-through;

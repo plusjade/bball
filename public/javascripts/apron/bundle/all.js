@@ -1003,7 +1003,7 @@ var GameView = {
   }
   
 }
-var simpleTabs = {  
+var pageCallback = {  
   new_game : function(){
     if (Game.exists()){
       $("#new_game").hide();

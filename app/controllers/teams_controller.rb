@@ -44,7 +44,7 @@ class TeamsController < ApplicationController
       team.destroy if team
     end if params[:deletes].is_a?(Array)
     
-    render :json => {:status => "good", :msg => "yay"}
+    render :json => {:status => "good", :msg => "Team Synced"}
   end
   
   

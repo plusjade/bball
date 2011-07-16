@@ -52,10 +52,12 @@
     <li><a href="#">${name}</a></li>
   </script>
   <script id="completedGamesTmpl" type="text/x-jquery-tmpl">
-    <tr>
-      <td class="home"><span>00</span><a href="/games/${id}">${home.name}</a></td><td class="vs">vs</td><td class="away">${away.name} <span>00</span></td>
-      <td class="date">${timestamp}</td>
-    </tr>
+    <li>
+      <a href="#/games/${id}">
+        <p class="ui-li-aside">${timestamp}</p>
+        <h3>${home.name} vs ${away.name} :: 55 - 99</h3>
+      </a>
+    </li>
   </script>
   
 </head>
@@ -81,11 +83,11 @@
 
     /* page rendering callbacks */
     $('#new_game').live('pageshow',function(event, ui){
-      simpleTabs.new_game();
+      pageCallback.new_game();
     });
     
     $('#completed_games').live('pageshow',function(event, ui){
-      simpleTabs.completed_games();
+      pageCallback.completed_games();
     });
     
     $(function(){

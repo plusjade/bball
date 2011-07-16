@@ -53,8 +53,10 @@ var Team = {
   
   /* refresh the team list from the data */
   refreshList : function(){
-    $("#teams_dropdown").empty().prepend($.tmpl("teamDropTmpl", Team.data));
-    $("#teams_dropdown").listview("refresh");
+    $("#teams_dropdown")
+      .empty()
+      .prepend($.tmpl("teamDropTmpl", Team.data))
+      .listview("refresh");
   },
    
  /* intitially load our data from the server */
@@ -135,7 +137,7 @@ var Team = {
       data : {'teams' : Team.data, "deletes[]" : Team.deletes},
       success : function(rsp){
         // remember to refresh the deletes on successful delete
-        console.log(rsp);
+        Status.show(rsp.msg);
       }
     })
   }

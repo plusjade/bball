@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Record Basketball Stats in Real-time</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= csrf_meta_tag %>
-  <%#= stylesheet_link_tag "style" %>
   <link rel="stylesheet"  href="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css" /> 
+  <%= stylesheet_link_tag "game" %>
+
   <style type="text/css">
     #team_roster_wrapper {
       margin:0 40px;
@@ -108,9 +110,7 @@
         console.log(klass);
         switch(klass){
           case "continue" :
-            $("#account_wrapper").slideUp("fast", function(){
-              $("#game_wrapper").slideDown("fast");
-            });
+            $.mobile.changePage("#game_wrapper");
             break;
           case "complete" :
             Game.sync();

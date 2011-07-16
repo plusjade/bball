@@ -1,0 +1,424 @@
+
+/* ======================================================
+  UI colors and styles */
+/* FEEAB6 main text color */
+.red {
+  background:#BD1550;
+  background:#AA343F;
+  color:#FEEDD2;
+}
+.green {
+  background:#7E841C;
+  color:#FEEDD2;
+}
+
+.home_bg{
+  background:#ACB28F;
+  _-webkit-box-shadow: inset 0 0 4px #AFA381;  
+  _-moz-box-shadow: inset 0 0 4px #AFA381;  
+  _box-shadow: inset 0 0 4px #4A3B34;  
+}
+div.home div.head{
+  background:#5F6350;
+  color:#F8F5EC;
+}
+
+div.home a.player {
+  -webkit-box-shadow: inset 0 0 4px #9F824B;
+  -moz-box-shadow: inset 0 0 4px #9F824B;
+  box-shadow: inset 0 0 4px #A69574;
+}
+div.home .number{
+ color:#F8F5EC;
+ background:#ACB28F;
+}
+
+.away_bg{
+  background:#899E9B;
+  _-webkit-box-shadow: inset 0 0 4px #392749;  
+  _-moz-box-shadow: inset 0 0 4px #392749;  
+  _box-shadow: inset 0 0 4px #4A3B34;  
+}
+div.away div.head{
+  background:#4C5A5A;
+  color:#F8F5EC;
+}
+div.away a.player {
+  -webkit-box-shadow: inset 0 0 4px #392749;
+  -moz-box-shadow: inset 0 0 4px #392749;
+  box-shadow: inset 0 0 4px #36544F;
+}
+div.away .number{
+ color:#F8F5EC;
+ background:#899E9B;
+}
+  
+.offensive_style {
+  color:#F8F5EC;
+  background-color:#AACD79;
+  text-shadow: 0px 1px 0px #52633A;
+  -webkit-box-shadow:inset -1px -1px 3px #6F874E;
+  -moz-box-shadow:inset -1px -1px 3px #6F874E;
+  box-shadow:inset -1px -1px 3px #6F874E;
+}
+
+.defensive_style {
+  color:#F8F5EC;
+  background:#9AC1D6;
+  text-shadow: 0px 1px 0px #4B5E69;
+  -webkit-box-shadow:inset -1px -1px 3px #627B88;
+  -moz-box-shadow:inset -1px -1px 3px #627B88;
+  box-shadow:inset -1px -1px 3px #627B88;
+}
+
+/* ======================================================
+  Tool bar */
+
+#toolbar {
+  text-align:center;
+}
+.head_group {
+  display:inline-block;
+}
+.head_group a {
+  font-size:24px !important;
+}
+#score_wrap {
+  margin-right:40px;
+}
+#logger {
+  margin-right:40px;
+}
+#game_buttons {
+  
+}
+
+
+/* ======================================================
+  Score */
+  
+
+
+/* ======================================================
+  analytics show */
+  
+#__licks {
+  position:absolute;
+  top:0px;
+  right:0px;
+  width:60px;
+  height:60px;
+  line-height:58px;
+  background:#111;
+  text-align:center;
+  font-size:46px;
+  z-index:50;
+  color:#F8F5EC; 
+  text-align:center;
+  border-radius: 0 0 5px 0;
+}
+
+#__settings {
+  position:absolute;
+  top:0px;
+  right:60px;
+  width:60px;
+  height:60px;
+  line-height:58px;
+  background:#000;
+  text-align:center;
+  font-size:46px;
+  z-index:50;
+  color:#F8F5EC; 
+  text-align:center;
+  border-radius: 0 0 0 5px;
+  border-right:1px solid #999;
+  
+}
+
+.close_lick {
+  color:#F8F5EC;
+  float:right;
+  background:red;
+  text-align:center;
+  padding:7px 14px;
+}
+
+
+/* ======================================================
+  Logger */
+#hop {
+  width:400px;
+}  
+#__log li.undone span {
+  text-decoration:line-through;
+  color:#AA343F;
+}
+#__log li a {
+  float:right;
+  width:100px;
+  padding:1px 10px;
+  text-align:center;
+  font-size:14px;
+  background:#C09866;
+  color:#4A3B34;
+  
+  border-radius:5px;
+}
+#__log li.undone a {
+  background:#7E841C;
+  color:#FEEDD2;
+}
+
+
+
+
+/* ======================================================
+  ACTIONS */
+
+#actions_wrapper {
+  overflow:hidden;
+  margin-bottom:30px;
+  position:relative;
+  top:20px;
+}
+#actions_wrapper div {
+  display:block;
+  margin-bottom:10px;
+  overflow:hidden;
+  text-align:center;
+}
+#actions_wrapper div.top a {
+  display:inline-block;
+  height:60px;
+  width:100px;
+  padding:10px;
+  margin:8px;
+  
+  overflow:hidden;
+  line-height:60px;
+  text-align:center;
+  font-weight:bold;
+  font-size:17px;
+  color:#DEDBB0;
+  cursor:pointer;
+  
+  border-radius:7px;
+}
+
+#actions_wrapper div.top a {
+  background-color:#6C343F;
+  text-shadow: 0px 1px 0px #331110;
+  -webkit-box-shadow:inset -1px -1px 3px #111;
+  -moz-box-shadow:inset -1px -1px 3px #111;
+  box-shadow:inset -1px -1px 3px #331110;
+}
+#actions_wrapper p {
+  display:inline-block;
+  height:95px;
+  width:230px;
+  margin:8px;
+  overflow:hidden;
+  text-align:center;
+  font-weight:bold;
+  font-size:17px;
+  color:#DEDBB0;
+  border-radius:7px;
+}
+
+#actions_wrapper p span.title {
+  display:block;
+  height:30px;
+  line-height:30px;
+  
+  background-color:#6C343F;
+  border-radius:5px;
+  box-shadow:inset -1px -1px 1px #331110;
+}  
+
+#actions_wrapper p a {
+  display:inline-block;
+  width:102px;
+  height:62px;
+  text-align:center;
+  border-radius: 0 0 5px 5px;
+  cursor:pointer;
+}
+#actions_wrapper a.miss {
+  background:#AA343F;
+  color:#FEEDD2;  
+}
+#actions_wrapper a.make {
+  background:#7E841C;
+  color:#FEEDD2;  
+}
+#actions_wrapper div.shots a span {
+  display:block;
+  margin:auto;
+  height:40px; 
+  width:33px;
+  position:relative;
+  top:8px;
+}
+#actions_wrapper a.miss span {
+  background: url("/images/thumbs.png") no-repeat -33px 0;
+}
+#actions_wrapper a.make span {
+  background: url("/images/thumbs.png") no-repeat 0 0;
+}
+
+/* ======================================================
+  Player Icons */
+
+a.player {
+  display:inline-block;
+  margin:10px;
+  height:100px;
+  width:170px;
+  overflow:hidden;
+  text-align:center;
+  cursor:pointer;
+  
+  border-radius:5px;
+}
+a.player .head{
+  padding:5px 10px;
+}
+a.player .number{
+  display:block;
+  padding:10px 10px;
+  text-align:center;
+  font-weight:bold;
+  font-size:38px;
+  line-height:54px;
+}
+a.player.active .number {
+  background:#7E841C;
+  color:#FEEDD2;
+}
+
+
+/* ======================================================
+  players in game */
+#players_game {
+  margin-bottom:20px;
+}
+#players_game div.team{
+  position:relative; 
+  clear:both;
+  height:125px;
+  overflow:visible;
+  text-align:center;
+}
+  
+
+/* ======================================================
+  Team Name */
+  
+a.bench {
+  display:block;
+  width:350px;
+  color:#F8F5EC;
+  font-size:18px;
+  line-height:38px;
+  text-align:center;
+  border-radius:7px;
+}
+#home_name {
+  position:absolute;
+  left:0;
+}
+#away_name {
+  position:absolute;
+  right:0;
+}
+
+
+
+/* ======================================================
+  PLAYERS BENCH */
+
+#players_bench {
+  clear:both;
+  position:absolute;
+  height:105px;
+  width:1000px;
+  top:190px;
+  right:0;
+    
+  background:#6C343F;
+  overflow:visible;
+  z-index:50 !important;
+  
+  box-shadow: 0 0 10px #333;
+}
+
+#players_bench a.player {
+  margin:10px 7px;
+  height:80px;
+  width:85px;
+
+  cursor:move;
+  border-radius: 5px;
+}
+#players_bench a.player .head{
+  font-size:14px;
+}
+#players_bench a.player .number {
+  font-size:30px;
+  line-height:36px;
+}
+
+
+/* ======================================================
+  Close Bench */
+
+a.close {
+  position:absolute;
+  top:-26px;
+  right:15px;
+  padding:5px;
+  display:block;
+  width:165px;
+  text-align:center;
+  z-index:5;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border-radius:5px;
+  
+  -webkit-border-bottom-right-radius:0;
+  -webkit-border-bottom-left-radius:0;
+  -moz-border-radius-bottomright:0;
+  -moz-border-radius-bottomleft:0;
+}
+
+
+
+/* ======================================================
+  analytics */
+
+#__analytics {
+  position:absolute;
+  top:0;
+  left:0;
+  width:1000px;
+  height:450px;
+  background:#333;
+  z-index:1000;
+  border-radius:0 0 5px 5px;
+}
+
+#analytics table {
+  width:990px;
+  border-collapse:collapse;
+  margin:auto;
+}  
+#analytics table th, #analytics table td{
+  padding:5px;
+  color:#F8F5EC;
+  text-align: center;
+}
+
+#analytics table td {
+  border:1px solid #999;
+}

@@ -1,12 +1,12 @@
 var pageCallback = {  
   new_game : function(){
     if (Game.exists()){
-      $("#new_game").hide();
-      $("#existing_game").show();
+      $("#new_game_box").hide();
+      $("#existing_game_box").show();
     }
     else{
-      $("#new_game").show();
-      $("#existing_game").hide();
+      $("#new_game_box").show();
+      $("#existing_game_box").hide();
       
       $("#new_game").find("select")
         .empty()

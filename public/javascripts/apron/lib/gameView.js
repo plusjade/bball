@@ -11,10 +11,6 @@ var GameView = {
   show : function(){
     if(!Game.exists()) return false;
     
-    $("#account_wrapper").slideUp("fast", function(){
-      $("#game_wrapper").slideDown("fast");
-    })
-    
     GameView.$actions = $("#actions_wrapper");
     GameView.$players = $("#players_game");
     GameView.$playersBench = $("#players_bench");

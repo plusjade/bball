@@ -64,16 +64,14 @@ var Game = {
   
   setAction : function(action){
     Game.action = action;
-    $("#hopper").show();
-    $("#hopper").find("span").html(action+ " &#10144; <em>now select a player...</em>");
+    $("#hop").html('<span class="ui-btn-text">' + action+ " &#10144; <em>now select a player...</em></span>");
     
     if(Game.player) Stat.record(Game.player, Game.action);
   },  
   
   setPlayer : function(side, player){
     Game.player = side+"."+player;
-    $("#hopper").show();
-    $("#hopper").find("span").html(side+ " #"+ player + " &#10144; <em>now select an action...</em>");
+    $("#hop").html('<span">' + side+ " #"+ player + " &#10144; <em>now select an action...</em></span>");
     
     if(Game.action) Stat.record(Game.player, Game.action);
   },

@@ -38,7 +38,7 @@
 	</div>
 
 	<div id="new_game_pane" data-role="content">	
-    <div id="existing_game" style="text-align:center">
+    <div id="existing_game_box" style="text-align:center">
       You have an existing game in progress.
       What would you like to do?
       
@@ -47,7 +47,7 @@
       <button rel="destroy">Destroy Game</button>
     </div>
     
-    <div id="new_game">
+    <div id="new_game_box">
       <div class="wrap home_bg" style="text-align:center">
         <select id="new_game_home" name="home" data-theme="b"> </select>  
       </div>
@@ -93,6 +93,4 @@
 </div>
 
 
-  
-
-<%#= render :template => "dash/game" %>
+<%= render :template => "dash/game" %>

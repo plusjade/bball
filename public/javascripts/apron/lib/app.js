@@ -2,8 +2,9 @@ var App = {
   gameId : 123,
 
   log : function(message){
+    $("#hop").html(message);
     $node = $("<li>"+message+"</li>");
-    $("#log").prepend($node);
+    $("#log").append($node).listview("refresh");
     $node.animate( {'marginLeft': '-=20px'}, 100, "linear" );
     $node.animate( {'marginLeft': '+=20px'}, 100, "linear" );
   },

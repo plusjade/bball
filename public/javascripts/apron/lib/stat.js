@@ -21,7 +21,7 @@ Stat = {
     var actionName = action.split("-")[0];
     var value = (typeof action.split("-")[1] == "undefined") ? "" : action.split(".")[1];
     var actionOb = Action.data[actionName];
-    App.log('<span>'+ player + " &#10144; " + action + '!</span> <a href="#" class="undo" rel="'+Stat.asString(player, action)+'">UNDO</a>');
+    App.log('<span class="ui-btn-text">'+ player + " &#10144; " + action + '!</span> <span class="undo" rel="'+Stat.asString(player, action)+'">UNDO</span>');
     
     GameView.updateScores();
     App.refresh();

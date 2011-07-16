@@ -1,3 +1,6 @@
+/* register a callback for whenever a page is loaded
+   by defining a function named for the page name.
+ */
 var pageCallback = {  
   new_game : function(){
     if (Game.exists()){
@@ -5,9 +8,8 @@ var pageCallback = {
       $("#existing_game_box").show();
     }
     else{
-      $("#new_game_box").show();
       $("#existing_game_box").hide();
-      
+      $("#new_game_box").show();
       $("#new_game").find("select")
         .empty()
         .append('<option value="">select team</option>')

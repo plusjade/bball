@@ -1,20 +1,14 @@
 <div data-role="page" id="game_wrapper" class="page" data-theme="a">
   <div id="toolbar" data-role="header" data-position="fixed">
-
-    <div id="score_wrap" class="head_group" data-role="controlgroup" data-type="horizontal">
-      <a id="home_score" data-role="button" class="_home_bg">00</a>
-      <a id="away_score" data-role="button" class="_away_bg">00</a>
-    </div>
-
+    <a href="#teams" data-role="button" data-icon="home" > Home</a>
+    <a href="#analytics" data-rel="dialog" data-transition="slidedown" data-role="button" data-icon="grid"> Stats</a>
+    
     <div id="logger" class="head_group" data-role="controlgroup" data-type="horizontal">
+      <a id="home_score" data-role="button" class="home_bg">00</a>
+      <a id="away_score" data-role="button" class="away_bg">00</a>
       <a id="hop" data-role="button" data-theme="b">[Actions Log]</a>
       <a href="#log_page" data-role="button" data-rel="dialog" data-transition="slidedown">&#x25BC;</a>
     </div>  
-    
-    <div id="game_buttons" class="head_group" data-role="controlgroup" data-type="horizontal">
-      <a href="#analytics" data-rel="dialog" data-transition="slidedown" data-role="button" data-icon="grid"> Stats</a>
-      <a href="#teams" data-role="button" data-icon="home"> Home</a>
-    </div>
   </div>
   
   <div id="actions_wrapper">

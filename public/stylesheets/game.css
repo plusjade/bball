@@ -73,24 +73,24 @@ div.away .number{
 
 /* ======================================================
   Tool bar */
-
+#navbar a {
+  font-size:20px;
+}
 #toolbar {
   text-align:center;
 }
 .head_group {
   display:inline-block;
+  margin:5px;
 }
-.head_group a {
-  ont-size:24px !important;
+#game_wrapper a {
+  font-size:14px !important;
 }
-#score_wrap {
-  margin-right:40px;
-}
+
 #logger {
   margin-right:40px;
 }
 #game_buttons {
-  
 }
 
 
@@ -102,6 +102,7 @@ div.away .number{
 /* ======================================================
   Logger */
 #hop {
+
 }  
 #__log li.undone span {
   text-decoration:line-through;

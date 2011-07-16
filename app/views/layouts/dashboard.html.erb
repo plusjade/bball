@@ -7,6 +7,27 @@
   <%#= stylesheet_link_tag "style" %>
   <link rel="stylesheet"  href="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css" /> 
   <style type="text/css">
+    #team_roster_wrapper {
+      margin:0 40px;
+    }
+    #team_roster_wrapper h1{
+      text-align:center;
+    }
+    #team_roster_wrapper fieldset {
+      overflow:hidden;
+      display:block;
+      margin-bottom:10px;
+    }
+    
+    #team_roster {
+      clear:both;
+      position:relative;
+    }
+    #team_roster input{
+      padding:3px;
+      font-size:22px; 
+      font-weight:bold;
+    }
 
   </style>
 
@@ -19,7 +40,13 @@
     </a>
   </script>
   <script id="rosterTemplate" type="text/x-jquery-tmpl">
-    <div class="row"><div class="number"><input type="text" value="${number}" maxlength="2" /></div><div class="name"><input type="text" value="${name}" /></div><div class="delete">&#10006;</div></div>
+    <li class="player">
+      <a>
+        <input type="text" value="${number}" maxlength="2" />
+        <input type="text" value="${name}" />
+      </a>
+      <a href="#" class="delete" data-icon="delete" data-theme="a"> </a>
+    </li>
   </script>
   <script id="teamDropTmpl" type="text/x-jquery-tmpl">
     <li><a href="#">${name}</a></li>

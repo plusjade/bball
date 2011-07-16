@@ -7,8 +7,25 @@
 	</div>
 
 	<div id="add_team_wrapper" data-role="content" style="text-align:center">	
-    <input type="text" name="team" style="width:40%"/> <button type="submit" data-inline="true">Add Team</button>
+    <input type="text" name="team" style="width:200px" data-theme="d" /> <button type="submit" data-inline="true" data-icon="plus" data-iconpos="right" data-theme="e">Add Team</button>
     <ul id="teams_dropdown" data-role="listview" data-inset="true" data-theme="b"> </ul>
+	</div>
+</div>
+
+<div data-role="page" id="team_roster_page" class="page" data-theme="a">
+  <div data-role="header">
+		<div data-role="navbar">
+  		<ul><a href="#menu" data-rel="dialog" data-transition="slidedown">Menu</a></ul>
+    </div>
+	</div>
+
+	<div id="team_roster_wrapper" data-role="content">	
+	  <h1>Name</h1>
+	  <fieldset class="ui-grid-a">
+    	<div class="ui-block-a"><button class="sync_team" data-theme="e">Save</button></div>
+    	<div class="ui-block-b"><button class="delete_team" data-theme="b" data-icon="delete" data-iconpos="right">Delete Team</button></div>	   
+    </fieldset>
+    <ul id="team_roster" data-role="listview"> </ul>
 	</div>
 </div>
 
@@ -77,19 +94,6 @@
 	</div>
 </div>
 
-<div data-role="page" id="team_roster_page" class="page" data-theme="a">
-  <div data-role="header">
-		<div data-role="navbar">
-  		<ul>
-  		  <a href="#menu" data-rel="dialog" data-transition="slidedown">Menu</a>
-  		</ul>
-    </div>
-	</div>
-
-	<div data-role="content">	
-    <div id="team_roster"> </div>
-	</div>
-</div>
 
   
 

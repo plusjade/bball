@@ -12,58 +12,58 @@ var TeamView = {
     $.mobile.changePage("#team_roster_page", {changeHash : false});
     name = name.toLowerCase()
     TeamView.name = name;
-    TeamView.$roster = $("#team_roster");
-    TeamView.$roster.empty();
-
-    var $newPlayer = $('<div id="new_player"><div class="row"><div class="number"><input type="text" value="00" maxlength="2" /></div><div class="name"><input type="text" value="name" /></div><div class="add">&#10010;</div></div></div>');
+    $("#team_roster_wrapper").find("h1").text(name);
+    var $newPlayer = '<li data-theme="d"><a><input type="text" value="" maxlength="2" /><input type="text" value="" /></a><a href="#" class="add" data-icon="plus" data-theme="a"></a></li>';
+    TeamView.$roster = $("#team_roster").empty();
+    TeamView.$roster.append($.tmpl("rosterTemplate", Team.getPlayers(name))).show();
     TeamView.$roster.prepend($newPlayer);
-    TeamView.$roster.prepend('<h1>'+name+'</h1> <button class="sync_team">Save</button> <button class="delete_team">delete team</button>');
-
-    var $playersWrap = $('<div class="players"></div>');  
-    $playersWrap.append($.tmpl("rosterTemplate", Team.getPlayers(name)));
-    TeamView.$roster.append($playersWrap).show();
-
+    TeamView.$roster.listview("refresh");
     
     /* delete a team */
-    TeamView.$roster.find("button.delete_team").tap(function(e){
+    $("#team_roster_wrapper").find("button.delete_team").tap(function(e){
       var name = $(this).siblings("h1").text();
       if(Team.destroy(name)){
         Team.refreshList();
         $.mobile.changePage("#teams")
-        console.log("team destroyed!");
+        Status.show("Team destroyed!")
       }
       else{
-        console.log(Team.errors);
+        Status.show(Team.errors);
       }
       e.preventDefault();
-    })
-    
-    /* add a player */
-    $newPlayer.find("div.add").tap(function(){
-      var number = $(this).parent().find("input").first().val();
-      var name = $(this).parent().find("input").last().val();
-      $.tmpl("rosterTemplate", [{name: name, number: number}]).appendTo($("#team_roster").find("div.players"));
-      TeamView.update();
-    })
-
-    /* delete a player */  
-    TeamView.$roster.find("div.delete").live("tap", function(){
-      $(this).parent().remove();
-      TeamView.update();
     })
     
     /* sync to server (probably want to automate this) */
-    TeamView.$roster.find("button.sync_team").tap(function(e){
+    $("#team_roster_wrapper").find("button.sync_team").tap(function(e){
       Team.sync();
       e.preventDefault();
+      return false;
     });
+    
+    /* add a player */
+    TeamView.$roster.find("a.add").tap(function(){
+      var number = $(this).parent().find("input").first().val();
+      var name = $(this).parent().find("input").last().val();
+      TeamView.$roster.append($.tmpl("rosterTemplate", [{name: name, number: number}]));
+      TeamView.update();
+      TeamView.$roster.listview("refresh");
+      $(this).parent().find("input").val("");
+      return false;
+    })
+
+    /* delete a player */  
+    TeamView.$roster.find("a.delete").live("tap", function(){
+      $(this).parent().remove();
+      TeamView.update();
+      return false;
+    })
   },
   
   
  /* extract the player input-data from the DOM */  
   extract : function(){
     var players = []
-    TeamView.$roster.find("div.players").find("div.row").each(function(){
+    TeamView.$roster.find("li.player").each(function(){
       var number = $(this).find("input").first().val();
       var name = $(this).find("input").last().val();
       players.push({number:number, name:name})

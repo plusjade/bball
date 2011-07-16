@@ -89,8 +89,61 @@ var Game = {
     for( var i=0; i < 7; i++ )
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     return text;
-  }
+  },
+  
+  /* parse recorded stats into an object that is used to render the data nicely
+     Note how localStorage is a key : value store.
+     This basically parses localStorage stat key:values into 
+     an more convenient object :
+     {
+        player# : {
+          action1 : aggregrate count,
+          action2 : aggregrate count,
+        }
+     }
+   */
+  parseStats : function(){
+  // defensive actions only  
+    var analysis = {}    
+    var x = Action.data.length;
+  
+  // aggregate all actions from the given Action.data object.
+    for(var action in Action.data){
+      var homeKey = Game.current.id + ".home." + Action.data[action].id;
+      if(Action.data[action].type === "shot"){
+        aggregate(homeKey, "make");
+        aggregate(homeKey, "miss");
+      }else{
+        aggregate(homeKey);
+      }
+    }
 
+  // aggregate player action counts from the specified action key/value
+    function aggregate(homeKey, value){
+      if(value) homeKey += ("-"+value);
+      if(localStorage.hasOwnProperty(homeKey)){
+        var data = localStorage[homeKey].split("|");
+        var counts = {}
+        var x = data.length-1; // subtract empty last array val.
+        var val; 
+        
+      // parse data to retrive players => action counts
+        while(x--){
+          val = data[x];
+          if (counts[val]) counts[val] += 1;
+          else counts[val] = 1;
+        }
+        
+      // add action's counts to player object
+        for(var player in counts){
+          if(!analysis[player]) analysis[player] = {}
+          analysis[player][value?action+"-"+value:action] = counts[player];
+        }
+      }
+    }
+    console.log(analysis);
+    return analysis;
+  }
 
 
 }

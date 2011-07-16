@@ -84,13 +84,6 @@ var GameView = {
       return false;
     });
     
-  /* open analytics */
-    $("#licks").tap(function(e){
-      App.build();
-      $("#analytics").show();
-      e.preventDefault();
-      return false;
-    });
     
     /* show teams from the current game in the DOM */
     $.each(["home", "away"], function(i, side){

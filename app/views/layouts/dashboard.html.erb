@@ -87,9 +87,11 @@
     $('#new_game').live('pageshow',function(event, ui){
       pageCallback.new_game();
     });
-    
     $('#completed_games').live('pageshow',function(event, ui){
       pageCallback.completed_games();
+    });
+    $('#analytics').live('pageshow',function(event, ui){
+      pageCallback.analytics();
     });
     
     $(function(){

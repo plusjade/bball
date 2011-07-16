@@ -25,6 +25,10 @@ var pageCallback = {
         .append($.tmpl("completedGamesTmpl", CompletedGame.data))
         .listview("refresh");
     })
+  },
+  
+  analytics : function(){
+    App.build();
   }
   
 }

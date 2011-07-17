@@ -139,12 +139,11 @@ div.away .number{
 }
 #actions_wrapper div.top a {
   display:inline-block;
-  height:60px;
-  width:100px;
-  padding:10px;
+  height:80px;
+  width:13%;
   
   overflow:hidden;
-  line-height:60px;
+  line-height:80px;
   text-align:center;
   font-weight:bold;
   font-size:17px;
@@ -157,14 +156,12 @@ div.away .number{
 #actions_wrapper div.top a {
   background-color:#6C343F;
   text-shadow: 0px 1px 0px #331110;
-  -webkit-box-shadow:inset -1px -1px 3px #111;
-  -moz-box-shadow:inset -1px -1px 3px #111;
   box-shadow:inset -1px -1px 3px #331110;
 }
 #actions_wrapper p {
   display:inline-block;
   height:95px;
-  width:230px;
+  width:24%;
   overflow:hidden;
   text-align:center;
   font-weight:bold;
@@ -185,7 +182,7 @@ div.away .number{
 
 #actions_wrapper p a {
   display:inline-block;
-  width:102px;
+  width:45%;
   height:62px;
   text-align:center;
   border-radius: 0 0 5px 5px;
@@ -221,7 +218,7 @@ a.player {
   display:inline-block;
   margin:5px;
   height:100px;
-  width:170px;
+  width:18%;
   overflow:hidden;
   text-align:center;
   cursor:pointer;

@@ -352,21 +352,24 @@ a.close {
   text-align: center;
 }
 #analytics_page table th {
-  background:#4E7C93;
-  border-right:1px solid #2E4957;
+  
 }
 #analytics_page table td {
-  padding:10px 2px;
+  padding:2px;
   background:#333;
   border-right:1px solid #111;
 }
-#analytics_page table tr.odd td {
-  ackground:#555;
-  order-right:1px solid #333;
-}
 #analytics_page table td.name {
-  background:#355465;
-}  
+  background:#222;
+  padding:0;
+  padding-top:4px;
+  text-align:left;
+} 
+#analytics_page table td.name span{
+  background:#333;
+  padding:2px 10px;
+  border-radius:5px 5px 0 0;
+}
 span.ratio {
   display:block;
   padding:4px;

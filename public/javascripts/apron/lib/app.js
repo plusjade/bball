@@ -48,7 +48,7 @@ var App = {
       }
       
       tpct = (totalMake>0) ? Math.round((parseInt(totalMake)/parseInt(totalMake+totalMiss))*100) : 0 ;
-      $table.append('<tr><td class="name" colspan="9">#' +player.number+ " - " +player.name+ '</td></tr>');
+      $table.append('<tr><td class="name" colspan="9"><span>#' +player.number+ " - " +player.name+ '</span></td></tr>');
       $table.append("<tr class='"+((x%2===0) ? "even" : "odd")+ "'><td>"+points+"</td><td><span class='ratio'>"+totalMake+"/"+(+totalMiss+totalMake)+"</span><span class='pct'>"+tpct+"%</span></td>"+cache+"</tr>");
       ++x;
     }

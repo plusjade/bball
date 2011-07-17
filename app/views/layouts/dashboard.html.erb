@@ -89,6 +89,7 @@
             break;
           case "destroy" :
             Game.destroy();
+            Status.show("Game deleted!");
             $.mobile.changePage("#new_game_page");
             pageCallback.new_game_page();
             break;

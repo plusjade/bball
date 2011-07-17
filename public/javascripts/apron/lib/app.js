@@ -11,7 +11,7 @@ var App = {
     for(var action in Action.data){
       if(Action.data[action].state !== "offense")
         continue;      
-      cache += "<th>"+Action.data[action].id+"</th>";
+      cache += "<th>"+Action.data[action].short+"</th>";
     }
     $table.append("<tr><th>Pts</th><th>Total %</th>"+cache+"</tr>");
     
@@ -41,7 +41,7 @@ var App = {
             pct = Math.round((parseInt(make)/parseInt(make+miss))*100);
           }
 
-          cache += "<td><span class='ratio'>"+make+"/"+(+make+miss)+"</span> - <span class='pct'>"+pct+"%</span></td>";
+          cache += "<td><span class='ratio'>"+make+"/"+(+make+miss)+"</span><span class='pct'>"+pct+"%</span></td>";
         }else{
           cache += "<td>"+(data[playerNum][action]?data[playerNum][action]:0)+"</td>";
         }
@@ -49,7 +49,7 @@ var App = {
       
       tpct = (totalMake>0) ? Math.round((parseInt(totalMake)/parseInt(totalMake+totalMiss))*100) : 0 ;
       $table.append('<tr><td class="name" colspan="9">#' +player.number+ " - " +player.name+ '</td></tr>');
-      $table.append("<tr class='"+((x%2===0) ? "even" : "odd")+ "'><td>"+points+"</td><td><span class='ratio'>"+totalMake+"/"+(+totalMiss+totalMake)+"</span> - <span class='pct'>"+tpct+"%</span></td>"+cache+"</tr>");
+      $table.append("<tr class='"+((x%2===0) ? "even" : "odd")+ "'><td>"+points+"</td><td><span class='ratio'>"+totalMake+"/"+(+totalMiss+totalMake)+"</span><span class='pct'>"+tpct+"%</span></td>"+cache+"</tr>");
       ++x;
     }
     

@@ -647,20 +647,11 @@ Action = {
     "steal" : {id: "steal", name : "Steal", state : "defense", type : "bool", value : null},
     "block" : {id: "block", name : "Block", state : "defense", type : "bool", value : null},
     "drebound" : {id: "drebound", name : "D Rebound", state : "defense", type : "bool", value : null},
-    "charge" : {id: "charge", name : "Charge", state : "defense", type : "bool", value : null},
     "foul" : {id: "foul", name : "Foul", state : "defense", type : "bool", value : null}
   }
 }
 var App = {
 
-  log : function(message){
-    $("#hop").html(message);
-    $node = $("<li>"+message+"</li>");
-    $("#log").append($node);
-    $node.animate( {'marginLeft': '-=20px'}, 100, "linear" );
-    $node.animate( {'marginLeft': '+=20px'}, 100, "linear" );
-  },
-  
   build : function(){
     var $table = $("<table></table>").appendTo($("#analytics_page").find("div.stat_grid").empty());
     var data = Game.parseStats();
@@ -670,16 +661,21 @@ var App = {
     var totalMake = 0;
     var tpct = 0;
     for(var action in Action.data){
+      if(Action.data[action].state !== "offense")
+        continue;      
       cache += "<th>"+Action.data[action].id+"</th>";
     }
-    $table.append("<tr><th></th><th></th><th>pts</th><th>TOT</th>"+cache+"</tr>");
+    $table.append("<tr><th>Name</th><th>Pts</th><th>Total %</th>"+cache+"</tr>");
     
-
+    var x = 0;
     for(var playerNum in data){
       points = 0, totalMiss = 0, totalMake = 0, cache = "";
       var player = Game.getPlayer("home", playerNum);
-      
+
       for(var action in Action.data){
+        if(Action.data[action].state !== "offense")
+          continue;
+          
         if(Action.data[action].type === "shot"){
           var miss = data[playerNum][action+"-miss"];
           var make = data[playerNum][action+"-make"];
@@ -697,7 +693,7 @@ var App = {
             pct = Math.round((parseInt(make)/parseInt(make+miss))*100);
           }
 
-          cache += "<td>"+make+"/"+(+make+miss)+"<br/>"+ pct +"%</td>";
+          cache += "<td><span class='ratio'>"+make+"/"+(+make+miss)+"</span> - <span class='pct'>"+pct+"%</span></td>";
         }else{
           cache += "<td>"+(data[playerNum][action]?data[playerNum][action]:0)+"</td>";
         }
@@ -705,9 +701,10 @@ var App = {
       
       tpct = (totalMake>0) ? Math.round((parseInt(totalMake)/parseInt(totalMake+totalMiss))*100) : 0 ;
       
-      $table.append("<tr><td>#"+ player.number +"</td><td>"+ player.name +"</td><td>"+points+"</td><td>"+totalMake+"/"+(+totalMiss+totalMake)+"<br/>"+tpct+"%</td>"+cache+"</tr>");
+      $table.append("<tr class='"+((x%2===0) ? "even" : "odd")+ "'><td style='text-align:left'>#"+ player.number +" - "+ player.name +"</td><td>"+points+"</td><td><span class='ratio'>"+totalMake+"/"+(+totalMiss+totalMake)+"</span> - <span class='pct'>"+tpct+"%</span></td>"+cache+"</tr>");
+      ++x;
     }
-
+    
   }
   
   
@@ -789,19 +786,30 @@ var Game = {
     })
   },
   
-  
   setAction : function(action){
     Game.action = action;
-    $("#hop").html('<span class="ui-btn-text">' + action+ " &#10144; <em>now select a player...</em></span>");
+    $("#hop").html('<span>--- ' +action+ " ---</span>");
     
     if(Game.player) Stat.record(Game.player, Game.action);
   },  
   
-  setPlayer : function(side, player){
-    Game.player = side+"."+player;
-    $("#hop").html('<span">' + side+ " #"+ player + " &#10144; <em>now select an action...</em></span>");
+  setPlayer : function(side, playerNum){
+    Game.player = side+"."+playerNum;
+    var player = Game.getPlayer(side, playerNum);
+    $("#hop").html('<span>--- ' +player.name+ " #" +player.number+ " ---</span>");
     
     if(Game.action) Stat.record(Game.player, Game.action);
+  },
+  
+  log : function(player, action){
+    var playa = Game.getPlayer(player.split(".")[0], player.split(".")[1]);
+    var greet = "#" +playa.number+ "-" +playa.name+ " " +action+ "!";
+    $("#hop").html(greet)
+      .animate({'marginLeft': '-=20px'}, 100, "linear")
+      .animate({'marginLeft': '+=20px'}, 100, "linear");
+    var message = '<a href="#" rel="'+Stat.asString(player, action)+'">' +greet+ ' <span class="statjoy">UNDO</span></a>';
+    $node = $("<li>"+message+"</li>");
+    $("#log").prepend($node).listview("refresh");
   },
   
   refresh : function(){
@@ -947,15 +955,16 @@ var GameView = {
     });
   
   /* undo/redo logged actions */  
-    $("a.undo").live("tap", function(e){
-      $li = $(this).parent();
+    $("#log").find("a").live("tap", function(e){
+      $li = $(this).closest("li");
       
       if($li.hasClass("undone")){
         Stat.record.apply(this, Stat.parse($(this).attr("rel")));
         $li.remove();
-      }else{
+      }
+      else{
         Stat.unRecord.apply(this, Stat.parse($(this).attr("rel")));
-        $li.find("a").text("REDO");
+        $(this).find("span.statjoy").text("REDO");
       }
       $li.toggleClass("undone");
       
@@ -1011,6 +1020,9 @@ var GameView = {
    by defining a function named for the page name.
  */
 var pageCallback = {  
+  menu : function(){
+
+  },
   teams_page : function(){
     console.log("teams page callback");
     $("#teams_dropdown").listview("refresh");
@@ -1084,7 +1096,7 @@ Stat = {
 
     // update the log
     var side = player.split(".")[0];
-    Game.log('<span class="ui-btn-text">'+ player + " &#10144; " + action + '!</span> <span class="undo" rel="'+Stat.asString(player, action)+'">UNDO</span>');
+    Game.log(player, action);
   },
 
   unRecord : function(player, action){

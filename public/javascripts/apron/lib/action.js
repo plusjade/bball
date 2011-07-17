@@ -15,7 +15,6 @@ Action = {
     "steal" : {id: "steal", name : "Steal", state : "defense", type : "bool", value : null},
     "block" : {id: "block", name : "Block", state : "defense", type : "bool", value : null},
     "drebound" : {id: "drebound", name : "D Rebound", state : "defense", type : "bool", value : null},
-    "charge" : {id: "charge", name : "Charge", state : "defense", type : "bool", value : null},
     "foul" : {id: "foul", name : "Foul", state : "defense", type : "bool", value : null}
   }
 }

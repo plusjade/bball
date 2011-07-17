@@ -9,16 +9,21 @@ var App = {
     var totalMake = 0;
     var tpct = 0;
     for(var action in Action.data){
+      if(Action.data[action].state !== "offense")
+        continue;      
       cache += "<th>"+Action.data[action].id+"</th>";
     }
-    $table.append("<tr><th></th><th></th><th>pts</th><th>TOT</th>"+cache+"</tr>");
+    $table.append("<tr><th>Name</th><th>Pts</th><th>Total %</th>"+cache+"</tr>");
     
-
+    var x = 0;
     for(var playerNum in data){
       points = 0, totalMiss = 0, totalMake = 0, cache = "";
       var player = Game.getPlayer("home", playerNum);
-      
+
       for(var action in Action.data){
+        if(Action.data[action].state !== "offense")
+          continue;
+          
         if(Action.data[action].type === "shot"){
           var miss = data[playerNum][action+"-miss"];
           var make = data[playerNum][action+"-make"];
@@ -36,7 +41,7 @@ var App = {
             pct = Math.round((parseInt(make)/parseInt(make+miss))*100);
           }
 
-          cache += "<td>"+make+"/"+(+make+miss)+"<br/>"+ pct +"%</td>";
+          cache += "<td><span class='ratio'>"+make+"/"+(+make+miss)+"</span> - <span class='pct'>"+pct+"%</span></td>";
         }else{
           cache += "<td>"+(data[playerNum][action]?data[playerNum][action]:0)+"</td>";
         }
@@ -44,9 +49,10 @@ var App = {
       
       tpct = (totalMake>0) ? Math.round((parseInt(totalMake)/parseInt(totalMake+totalMiss))*100) : 0 ;
       
-      $table.append("<tr><td>#"+ player.number +"</td><td>"+ player.name +"</td><td>"+points+"</td><td>"+totalMake+"/"+(+totalMiss+totalMake)+"<br/>"+tpct+"%</td>"+cache+"</tr>");
+      $table.append("<tr class='"+((x%2===0) ? "even" : "odd")+ "'><td style='text-align:left'>#"+ player.number +" - "+ player.name +"</td><td>"+points+"</td><td><span class='ratio'>"+totalMake+"/"+(+totalMiss+totalMake)+"</span> - <span class='pct'>"+tpct+"%</span></td>"+cache+"</tr>");
+      ++x;
     }
-
+    
   }
   
   

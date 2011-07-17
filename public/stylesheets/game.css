@@ -361,10 +361,12 @@ a.close {
   border-right:1px solid #111;
 }
 #analytics_page table tr.odd td {
-  background:#555;
-  border-right:1px solid #333;
+  ackground:#555;
+  order-right:1px solid #333;
 }
-
+#analytics_page table td.name {
+  background:#355465;
+}  
 span.ratio {
   display:inline-block;
   width:30%;

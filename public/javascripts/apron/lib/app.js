@@ -13,7 +13,7 @@ var App = {
         continue;      
       cache += "<th>"+Action.data[action].id+"</th>";
     }
-    $table.append("<tr><th>Name</th><th>Pts</th><th>Total %</th>"+cache+"</tr>");
+    $table.append("<tr><th>Pts</th><th>Total %</th>"+cache+"</tr>");
     
     var x = 0;
     for(var playerNum in data){
@@ -48,8 +48,8 @@ var App = {
       }
       
       tpct = (totalMake>0) ? Math.round((parseInt(totalMake)/parseInt(totalMake+totalMiss))*100) : 0 ;
-      
-      $table.append("<tr class='"+((x%2===0) ? "even" : "odd")+ "'><td style='text-align:left'>#"+ player.number +" - "+ player.name +"</td><td>"+points+"</td><td><span class='ratio'>"+totalMake+"/"+(+totalMiss+totalMake)+"</span> - <span class='pct'>"+tpct+"%</span></td>"+cache+"</tr>");
+      $table.append('<tr><td class="name" colspan="9">#' +player.number+ " - " +player.name+ '</td></tr>');
+      $table.append("<tr class='"+((x%2===0) ? "even" : "odd")+ "'><td>"+points+"</td><td><span class='ratio'>"+totalMake+"/"+(+totalMiss+totalMake)+"</span> - <span class='pct'>"+tpct+"%</span></td>"+cache+"</tr>");
       ++x;
     }
     

@@ -41,17 +41,8 @@
 </head>
 <body>
 
-
   <%= yield %>
 
-
-  <div data-role="page" id="menu" class="page" data-theme="a">
-    <a href="#teams_page" data-role="button">Teams</a>
-    <a href="#new_game_page" data-role="button">New Game</a>
-    <a href="#completed_games"data-role="button">Completed Games</a>
-  	<a href="#account" data-role="button">Account</a>
-	</div>
-  
   <script>
   if (Modernizr.localstorage){
     $("#playerTemplate").template("playerTemplate");

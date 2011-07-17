@@ -128,7 +128,6 @@ div.away .number{
 #actions_wrapper {
   position:relative;
   top:10px;
-  margin-bottom:10px;
 }
 #actions_wrapper div {
   display:block;
@@ -211,7 +210,7 @@ div.away .number{
 
 a.player {
   display:inline-block;
-  margin:5px;
+  margin:2px;
   height:60px;
   width:18%;
   overflow:hidden;
@@ -222,6 +221,14 @@ a.player {
 }
 a.player .head{
   padding:2px 0;
+}
+a.player .head input{
+  width:100%;
+  padding:0;
+  margin:0;
+  background: transparent;
+  border:0;
+  text-align:center;
 }
 a.player .number{
   display:block;

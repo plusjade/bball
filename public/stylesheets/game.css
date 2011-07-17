@@ -97,7 +97,7 @@ div.away .number{
 /* ======================================================
   Logger */
 #hop {
-
+  display:block;
 }  
 #log li.undone  {
   text-decoration:line-through;
@@ -225,7 +225,8 @@ a.player .head input{
   background: transparent;
   border:0;
   color:#FFF;
-  font-size:15px;
+  font-size:12px;
+  font-weight:normal;
   text-align:center;
 }
 a.player .number{

@@ -80,8 +80,8 @@ var Game = {
     var playa = Game.getPlayer(player.split(".")[0], player.split(".")[1]);
     var greet = "#" +playa.number+ "-" +playa.name+ " " +action+ "!";
     $("#hop").html(greet)
-      .animate({'marginLeft': '-=20px'}, 100, "linear")
-      .animate({'marginLeft': '+=20px'}, 100, "linear");
+      .animate({'marginTop': '-=35px'}, 100, "linear")
+      .animate({'marginTop': '+=35px'}, 100, "linear");
     var message = '<a href="#" rel="'+Stat.asString(player, action)+'">' +greet+ ' <span class="statjoy">UNDO</span></a>';
     $node = $("<li>"+message+"</li>");
     $("#log").prepend($node).listview("refresh");

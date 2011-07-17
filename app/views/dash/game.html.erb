@@ -1,14 +1,14 @@
 <% # game_page %>
 <div id="game_page" class="page" data-role="page" data-theme="a">
-  <div id="toolbar" data-role="header" data-position="fixed">
-    <a href="#menu" data-role="button" data-icon="home" data-theme="a" data-transition="slidedown"> H</a>
-    <a href="#analytics_page" class="ui-btn-right" data-transition="slidedown" data-role="button" data-icon="gear" data-theme="a">More</a>
+  <div id="toolbar" data-role="header" data-position="fixed" style="height:40px">
+    <a data-role="button">
+      <span id="home_score">00</span> | 
+      <span id="away_score">00</span>
+    </a>
+    <a href="#log_page" data-role="button" data-icon="arrow-d" data-transition="slidedown">Log</a>
     
     <div id="logger" class="head_group" data-role="controlgroup" data-type="horizontal">
-      <a id="home_score" data-role="button">00</a>
-      <a id="away_score" data-role="button">00</a>
-      <a id="hop" data-role="button" data-theme="e">..............</a>
-      <a href="#log_page" data-role="button" data-icon="arrow-d" data-transition="slidedown">Log</a>
+      <a id="hop" data-role="button" data-theme="e"><span>..............</span></a>
     </div>  
   </div>
   
@@ -65,7 +65,13 @@
     <div class="home">&#160;</div>
     <div class="away">&#160;</div>
   </div>
+
   
+  <div data-role="footer" data-position="fixed">
+    <a href="#menu" data-role="button" data-icon="home" data-theme="a" data-transition="slidedown"> H</a>
+    <a href="#analytics_page" style="float:right" data-transition="slidedown" data-role="button" data-icon="gear" data-theme="a">More</a>
+	</div>
+
 </div>
 
 

@@ -89,7 +89,8 @@
             break;
           case "destroy" :
             Game.destroy();
-            $.mobile.changePage("#new_game_page")
+            $.mobile.changePage("#new_game_page");
+            pageCallback.new_game_page();
             break;
           case "create" :
             var home = $("#new_game_home").val();

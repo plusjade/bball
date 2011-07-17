@@ -19,11 +19,17 @@ var pageCallback = {
     else{
       $("#existing_game_box").hide();
       $("#new_game_box").show();
-      $("#new_game").find("select")
-        .empty()
-        .append('<option value="">select team</option>')
-        .append($.tmpl("<option>${name}</option>", Team.data))
-        .selectmenu("refresh");
+      
+      if(Team.data) populate();
+      else Team.load(function(){populate()})
+
+      function populate(){
+        $("#new_game_box").find("select")
+          .empty()
+          .append('<option value="">select team</option>')
+          .append($.tmpl("<option>${name}</option>", Team.data))
+          .selectmenu("refresh");
+      }
     }
   },
   

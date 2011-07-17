@@ -87,8 +87,15 @@ div.away .number{
   font-size:14px !important;
 }
 
-#logger {
-  margin-right:40px;
+#hop {
+  height:40px;
+  line-height:38px;
+  text-align:center;
+}
+#hop span {
+  background:#676B5E;
+  padding:3px 10px;
+  border-radius:7px;
 }
 #game_buttons {
 }
@@ -105,13 +112,12 @@ div.away .number{
 }
 #log li span.statjoy {
   float:right;
-  width:100px;
-  padding:1px 10px;
+  padding:2px;
   text-align:center;
   font-size:14px;
   background:#C09866;
   color:#4A3B34;
-  border-radius:5px;
+  border-radius:3px;
 }
 #log li.undone span.statjoy {
   background:#7E841C;

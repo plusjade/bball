@@ -53,15 +53,16 @@ var GameView = {
     });
   
   /* undo/redo logged actions */  
-    $("a.undo").live("tap", function(e){
-      $li = $(this).parent();
+    $("#log").find("a").live("tap", function(e){
+      $li = $(this).closest("li");
       
       if($li.hasClass("undone")){
         Stat.record.apply(this, Stat.parse($(this).attr("rel")));
         $li.remove();
-      }else{
+      }
+      else{
         Stat.unRecord.apply(this, Stat.parse($(this).attr("rel")));
-        $li.find("a").text("REDO");
+        $(this).find("span.statjoy").text("REDO");
       }
       $li.toggleClass("undone");
       

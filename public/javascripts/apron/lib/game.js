@@ -61,19 +61,30 @@ var Game = {
     })
   },
   
-  
   setAction : function(action){
     Game.action = action;
-    $("#hop").html('<span class="ui-btn-text">' + action+ " &#10144; <em>now select a player...</em></span>");
+    $("#hop").html('<span>--- ' +action+ " ---</span>");
     
     if(Game.player) Stat.record(Game.player, Game.action);
   },  
   
-  setPlayer : function(side, player){
-    Game.player = side+"."+player;
-    $("#hop").html('<span">' + side+ " #"+ player + " &#10144; <em>now select an action...</em></span>");
+  setPlayer : function(side, playerNum){
+    Game.player = side+"."+playerNum;
+    var player = Game.getPlayer(side, playerNum);
+    $("#hop").html('<span>--- ' +player.name+ " #" +player.number+ " ---</span>");
     
     if(Game.action) Stat.record(Game.player, Game.action);
+  },
+  
+  log : function(player, action){
+    var playa = Game.getPlayer(player.split(".")[0], player.split(".")[1]);
+    var greet = "#" +playa.number+ "-" +playa.name+ " " +action+ "!";
+    $("#hop").html(greet)
+      .animate({'marginLeft': '-=20px'}, 100, "linear")
+      .animate({'marginLeft': '+=20px'}, 100, "linear");
+    var message = '<a href="#" rel="'+Stat.asString(player, action)+'">' +greet+ ' <span class="statjoy">UNDO</span></a>';
+    $node = $("<li>"+message+"</li>");
+    $("#log").prepend($node).listview("refresh");
   },
   
   refresh : function(){

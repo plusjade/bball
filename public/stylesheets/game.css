@@ -99,11 +99,11 @@ div.away .number{
 #hop {
 
 }  
-#__log li.undone span {
+#log li.undone  {
   text-decoration:line-through;
   color:#AA343F;
 }
-#__log li a {
+#log li span.statjoy {
   float:right;
   width:100px;
   padding:1px 10px;
@@ -111,12 +111,12 @@ div.away .number{
   font-size:14px;
   background:#C09866;
   color:#4A3B34;
-  
   border-radius:5px;
 }
-#__log li.undone a {
+#log li.undone span.statjoy {
   background:#7E841C;
   color:#FEEDD2;
+  text-decoration: none !important;
 }
 
 

@@ -1084,7 +1084,7 @@ Stat = {
 
     // update the log
     var side = player.split(".")[0];
-    App.log('<span class="ui-btn-text">'+ player + " &#10144; " + action + '!</span> <span class="undo" rel="'+Stat.asString(player, action)+'">UNDO</span>');
+    Game.log('<span class="ui-btn-text">'+ player + " &#10144; " + action + '!</span> <span class="undo" rel="'+Stat.asString(player, action)+'">UNDO</span>');
   },
 
   unRecord : function(player, action){

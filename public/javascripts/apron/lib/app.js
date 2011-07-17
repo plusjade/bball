@@ -1,13 +1,5 @@
 var App = {
 
-  log : function(message){
-    $("#hop").html(message);
-    $node = $("<li>"+message+"</li>");
-    $("#log").append($node);
-    $node.animate( {'marginLeft': '-=20px'}, 100, "linear" );
-    $node.animate( {'marginLeft': '+=20px'}, 100, "linear" );
-  },
-  
   build : function(){
     var $table = $("<table></table>").appendTo($("#analytics_page").find("div.stat_grid").empty());
     var data = Game.parseStats();

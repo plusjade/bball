@@ -1,14 +1,14 @@
 <% # game_page %>
 <div id="game_page" class="page" data-role="page" data-theme="a">
   <div id="toolbar" data-role="header" data-position="fixed">
-    <a href="#menu" data-role="button" data-icon="home" data-theme="a" data-transition="slidedown">Home</a>
+    <a href="#menu" data-role="button" data-icon="home" data-theme="a" data-transition="slidedown"> H</a>
     <a href="#analytics_page" class="ui-btn-right" data-transition="slidedown" data-role="button" data-icon="gear" data-theme="a">More</a>
     
     <div id="logger" class="head_group" data-role="controlgroup" data-type="horizontal">
-      <a id="home_score" data-role="button" class="home_bg">00</a>
-      <a id="away_score" data-role="button" class="away_bg">00</a>
-      <a id="hop" data-role="button" data-theme="b">[Actions Log]</a>
-      <a href="#log_page" data-role="button" data-transition="slidedown">&#x25BC;</a>
+      <a id="home_score" data-role="button">00</a>
+      <a id="away_score" data-role="button">00</a>
+      <a id="hop" data-role="button" data-theme="e">..............</a>
+      <a href="#log_page" data-role="button" data-icon="arrow-d" data-transition="slidedown">Log</a>
     </div>  
   </div>
   
@@ -72,10 +72,8 @@
 <% # log_page %>
 <div data-role="page" id="log_page" class="page" data-theme="a">
   <a href="#game_page" data-role="button" data-transition="slideup">Back</a>
-
-  <ul id="log" data-role="listview" data-inset="true">
-    <li data-role="list-divider" role="heading" style="text-align:center">&#x263C; Actions Log</li>
-  </ul>
+  <h2 style="text-align:center">Actions Log</h2>
+  <ul id="log" data-role="listview" data-icon="false" data-inset="true"> </ul>
 </div>
 
 

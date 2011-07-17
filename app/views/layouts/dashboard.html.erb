@@ -49,28 +49,29 @@
     $("#teamDropTmpl").template("teamDropTmpl");
     $("#rosterTemplate").template("rosterTemplate");
     $("#completedGamesTmpl").template("completedGamesTmpl");
-
-
-    /* page rendering callbacks */
-    $('div.page').live('pageshow',function(event, ui){
-      if(typeof pageCallback[event.target.id] === "function")
-        pageCallback[event.target.id]();
-    });
-
     
     $(function(){
-
-      $("#menu").find("a").tap(function(e){
+      /* page rendering callbacks */
+      $('div.page').live('pageshow',function(event, ui){
+        if(typeof pageCallback[event.target.id] === "function")
+          pageCallback[event.target.id]();
+      });
+      
+      $("#menu").find("a.blah").tap(function(e){
         $.mobile.changePage(this.href, {});
         e.preventDefault();
         return false;
       })
-
+      $("#game_button").tap(function(e){
+        $.mobile.changePage(Game.exists() ? "#game_page" : "#new_game_page");
+        e.preventDefault();
+        return false;
+      });
 
       /* current game interface */
-      $("#new_game_pane").find("button").tap(function(e){
+      $("#new_game_pane, #analytics_page").find("button").tap(function(e){
         var klass = $(this).attr("rel");
-        console.log(klass);
+
         switch(klass){
           case "continue" :
             $.mobile.changePage("#game_page");
@@ -80,9 +81,8 @@
             break;
           case "destroy" :
             Game.destroy();
+            $.mobile.changePage("#menu");
             Status.show("Game deleted!");
-            $.mobile.changePage("#new_game_page");
-            pageCallback.new_game_page();
             break;
           case "create" :
             var home = $("#new_game_home").val();
@@ -105,20 +105,9 @@
       
       
       /* initialize */
-      
       Team.init();
-      
-      if(Game.load()){
-
-      }
-      else{
-
-      }
-      
+      Game.load();
     })
-    
-    
-    
     
   }
   else{

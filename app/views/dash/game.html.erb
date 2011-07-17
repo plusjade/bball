@@ -1,8 +1,8 @@
 <% # game_page %>
 <div id="game_page" class="page" data-role="page" data-theme="a">
   <div id="toolbar" data-role="header" data-position="fixed">
-    <a href="#menu" data-role="button" data-icon="home" data-theme="a" data-transition="slidedown"> Home</a>
-    <a href="#analytics_page" data-transition="slidedown" data-role="button" data-icon="grid" data-theme="a"> Stats</a>
+    <a href="#menu" data-role="button" data-icon="home" data-theme="a" data-transition="slidedown">Home</a>
+    <a href="#analytics_page" class="ui-btn-right" data-transition="slidedown" data-role="button" data-icon="gear" data-theme="a">More</a>
     
     <div id="logger" class="head_group" data-role="controlgroup" data-type="horizontal">
       <a id="home_score" data-role="button" class="home_bg">00</a>
@@ -81,6 +81,12 @@
 
 <% # analytics_page %>
 <div data-role="page" id="analytics_page" class="page" data-theme="a">
-  <a href="#game_page" data-role="button" data-transition="slideup">Back</a>
+  <div data-role="header" style="padding-bottom:10px; text-align:center">
+  	<a href="#game_page" data-role="button" data-transition="slideup">Back to Game</a>
+  	<button rel="destroy" data-role="button">Delete Game</button>
+  	<button rel="complete" data-role="button" data-theme="b">Complete and Save Game</button>
+  </div>
+  
+  <h2 style="text-align:center">Current Game Stats</h2>
   <div class="stat_grid"></div>
 </div>

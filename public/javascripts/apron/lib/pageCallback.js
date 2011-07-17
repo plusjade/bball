@@ -2,6 +2,9 @@
    by defining a function named for the page name.
  */
 var pageCallback = {  
+  menu : function(){
+
+  },
   teams_page : function(){
     console.log("teams page callback");
     $("#teams_dropdown").listview("refresh");

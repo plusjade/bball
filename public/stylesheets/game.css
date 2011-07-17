@@ -83,7 +83,7 @@ div.away .number{
   display:inline-block;
   margin:5px;
 }
-#game_page a {
+#toolbar a, #analytics_page a {
   font-size:14px !important;
 }
 

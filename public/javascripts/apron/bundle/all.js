@@ -1011,7 +1011,7 @@ var GameView = {
    by defining a function named for the page name.
  */
 var pageCallback = {  
-  teams : function(){
+  teams_page : function(){
     console.log("teams page callback");
     $("#teams_dropdown").listview("refresh");
   },
@@ -1020,7 +1020,7 @@ var pageCallback = {
     $("#team_roster").listview("refresh");
   },
   
-  new_game : function(){
+  new_game_page : function(){
     if (Game.exists()){
       $("#new_game_box").hide();
       $("#existing_game_box").show();
@@ -1307,7 +1307,7 @@ var TeamView = {
       var name = $(this).siblings("h1").text();
       if(Team.destroy(name)){
         Team.refreshList();
-        $.mobile.changePage("#teams")
+        $.mobile.changePage("#teams_page")
         Status.show("Team destroyed!")
       }
       else{

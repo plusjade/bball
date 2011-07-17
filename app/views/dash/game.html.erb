@@ -1,13 +1,14 @@
-<div data-role="page" id="game_wrapper" class="page" data-theme="a">
+<% # game_page %>
+<div id="game_page" class="page" data-role="page" data-theme="a">
   <div id="toolbar" data-role="header" data-position="fixed">
-    <a href="#teams" data-role="button" data-icon="home" > Home</a>
-    <a href="#analytics" data-rel="dialog" data-transition="slidedown" data-role="button" data-icon="grid"> Stats</a>
+    <a href="#teams_page" data-role="button" data-icon="home" data-theme="a"> Home</a>
+    <a href="#analytics_page" data-transition="slidedown" data-role="button" data-icon="grid" data-theme="a"> Stats</a>
     
     <div id="logger" class="head_group" data-role="controlgroup" data-type="horizontal">
       <a id="home_score" data-role="button" class="home_bg">00</a>
       <a id="away_score" data-role="button" class="away_bg">00</a>
       <a id="hop" data-role="button" data-theme="b">[Actions Log]</a>
-      <a href="#log_page" data-role="button" data-rel="dialog" data-transition="slidedown">&#x25BC;</a>
+      <a href="#log_page" data-role="button" data-transition="slidedown">&#x25BC;</a>
     </div>  
   </div>
   
@@ -67,15 +68,19 @@
   
 </div>
 
+
+<% # log_page %>
 <div data-role="page" id="log_page" class="page" data-theme="a">
-  <a href="#game_wrapper" data-role="button">Back</a>
+  <a href="#game_page" data-role="button" data-transition="slideup">Back</a>
 
   <ul id="log" data-role="listview" data-inset="true">
     <li data-role="list-divider" role="heading" style="text-align:center">&#x263C; Actions Log</li>
   </ul>
 </div>
 
-<div data-role="page" id="analytics" class="page" data-theme="a">
-  <a href="#game_wrapper" data-role="button" data-rel="back">Back</a>
+
+<% # analytics_page %>
+<div data-role="page" id="analytics_page" class="page" data-theme="a">
+  <a href="#game_page" data-role="button" data-transition="slideup">Back</a>
   <div class="stat_grid"></div>
 </div>

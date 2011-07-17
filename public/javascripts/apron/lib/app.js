@@ -9,7 +9,7 @@ var App = {
   },
   
   build : function(){
-    var $table = $("<table></table>").appendTo($("#analytics").find("div.stat_grid").empty());
+    var $table = $("<table></table>").appendTo($("#analytics_page").find("div.stat_grid").empty());
     var data = Game.parseStats();
     var cache = "";
     var points = 0;

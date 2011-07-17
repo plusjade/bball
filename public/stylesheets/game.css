@@ -83,7 +83,7 @@ div.away .number{
   display:inline-block;
   margin:5px;
 }
-#game_wrapper a {
+#game_page a {
   font-size:14px !important;
 }
 
@@ -342,19 +342,43 @@ a.close {
 
 
 /* ======================================================
-  analytics */
+  analytics_page */
 
-#analytics table {
+#analytics_page table {
   width:100%;
   border-collapse:collapse;
   margin:auto;
 }  
-#analytics table th, #analytics table td{
+#analytics_page table th, #analytics_page table td{
   padding:5px;
   color:#F8F5EC;
   text-align: center;
 }
 
-#analytics table td {
+#analytics_page table td {
   border:1px solid #999;
+}
+
+
+/* ======================================================
+  team_roster */
+
+#team_roster_wrapper h1{
+  text-align:center;
+}
+#team_roster_wrapper fieldset {
+  overflow:hidden;
+  display:block;
+  margin-bottom:10px;
+}
+
+#team_roster {
+  clear:both;
+  position:relative;
+}
+#team_roster input{
+  padding:3px;
+  font-size:22px; 
+  font-weight:bold;
+  width:50%;
 }

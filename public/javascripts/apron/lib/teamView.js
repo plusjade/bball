@@ -23,7 +23,7 @@ var TeamView = {
       var name = $(this).siblings("h1").text();
       if(Team.destroy(name)){
         Team.refreshList();
-        $.mobile.changePage("#teams")
+        $.mobile.changePage("#teams_page")
         Status.show("Team destroyed!")
       }
       else{

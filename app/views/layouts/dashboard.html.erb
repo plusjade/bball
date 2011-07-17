@@ -5,34 +5,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Record Basketball Stats in Real-time</title>
   <%= csrf_meta_tag %>
+  <!--
   <link rel="stylesheet"  href="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css" /> 
-  <%= stylesheet_link_tag "game" %>
-
-  <style type="text/css">
-    #team_roster_wrapper {
-    }
-    #team_roster_wrapper h1{
-      text-align:center;
-    }
-    #team_roster_wrapper fieldset {
-      overflow:hidden;
-      display:block;
-      margin-bottom:10px;
-    }
-    
-    #team_roster {
-      clear:both;
-      position:relative;
-    }
-    #team_roster input{
-      padding:3px;
-      font-size:22px; 
-      font-weight:bold;
-      width:50%;
-    }
-
-  </style>
-
+  -->
+  <%= stylesheet_link_tag "jquery.mobile-1.0b1", "game" %>
   <%= render_javascripts %>
 
   <script id="playerTemplate" type="text/x-jquery-tmpl">
@@ -70,8 +46,8 @@
 
 
   <div data-role="page" id="menu" class="page" data-theme="a">
-    <a href="#teams" data-role="button">Teams</a>
-    <a href="#new_game" data-role="button">New Game</a>
+    <a href="#teams_page" data-role="button">Teams</a>
+    <a href="#new_game_page" data-role="button">New Game</a>
     <a href="#completed_games"data-role="button">Completed Games</a>
   	<a href="#account" data-role="button">Account</a>
 	</div>
@@ -83,25 +59,13 @@
     $("#rosterTemplate").template("rosterTemplate");
     $("#completedGamesTmpl").template("completedGamesTmpl");
 
+
     /* page rendering callbacks */
-    $('#teams').live('pageshow',function(event, ui){
-      pageCallback.teams();
+    $('div.page').live('pageshow',function(event, ui){
+      if(typeof pageCallback[event.target.id] === "function")
+        pageCallback[event.target.id]();
     });
-    $('#team_roster_page').live('pageshow',function(event, ui){
-      pageCallback.team_roster_page();
-    });
-    $('#new_game').live('pageshow',function(event, ui){
-      pageCallback.new_game();
-    });
-    $('#completed_games').live('pageshow',function(event, ui){
-      pageCallback.completed_games();
-    });
-    $('#analytics').live('pageshow',function(event, ui){
-      pageCallback.analytics();
-    });
-    $('#log_page').live('pageshow',function(event, ui){
-      pageCallback.log_page();
-    });
+
     
     $(function(){
 
@@ -118,14 +82,14 @@
         console.log(klass);
         switch(klass){
           case "continue" :
-            $.mobile.changePage("#game_wrapper");
+            $.mobile.changePage("#game_page");
             break;
           case "complete" :
             Game.sync();
             break;
           case "destroy" :
             Game.destroy();
-            $.mobile.changePage("#new_game")
+            $.mobile.changePage("#new_game_page")
             break;
           case "create" :
             var home = $("#new_game_home").val();
@@ -133,7 +97,7 @@
             if(home && away){
               if(Game.create(home, away)){
                 GameView.show();
-                $.mobile.changePage("#game_wrapper");
+                $.mobile.changePage("#game_page");
               }
               else
                 Status.show("Teams do not exist")

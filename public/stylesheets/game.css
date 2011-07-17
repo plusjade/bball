@@ -126,24 +126,19 @@ div.away .number{
   ACTIONS */
 
 #actions_wrapper {
-  overflow:hidden;
-  margin-bottom:10px;
   position:relative;
-  top:20px;
+  top:10px;
+  margin-bottom:10px;
 }
 #actions_wrapper div {
   display:block;
-  margin-bottom:10px;
-  overflow:hidden;
   text-align:center;
 }
 #actions_wrapper div.top a {
   display:inline-block;
-  height:80px;
+  height:50px;
   width:13%;
-  
-  overflow:hidden;
-  line-height:80px;
+  line-height:50px;
   text-align:center;
   font-weight:bold;
   font-size:17px;
@@ -160,7 +155,7 @@ div.away .number{
 }
 #actions_wrapper p {
   display:inline-block;
-  height:95px;
+  height:70px;
   width:24%;
   overflow:hidden;
   text-align:center;
@@ -172,8 +167,8 @@ div.away .number{
 
 #actions_wrapper p span.title {
   display:block;
-  height:30px;
-  line-height:30px;
+  height:20px;
+  line-height:20px;
   
   background-color:#6C343F;
   border-radius:5px;
@@ -183,7 +178,7 @@ div.away .number{
 #actions_wrapper p a {
   display:inline-block;
   width:45%;
-  height:62px;
+  height:50px;
   text-align:center;
   border-radius: 0 0 5px 5px;
   cursor:pointer;
@@ -202,7 +197,7 @@ div.away .number{
   height:40px; 
   width:33px;
   position:relative;
-  top:8px;
+  top:3px;
 }
 #actions_wrapper a.miss span {
   background: url("/images/thumbs.png") no-repeat -33px 0;
@@ -217,7 +212,7 @@ div.away .number{
 a.player {
   display:inline-block;
   margin:5px;
-  height:100px;
+  height:60px;
   width:18%;
   overflow:hidden;
   text-align:center;
@@ -226,15 +221,14 @@ a.player {
   border-radius:5px;
 }
 a.player .head{
-  padding:5px 10px;
+  padding:2px 0;
 }
 a.player .number{
   display:block;
-  padding:10px 10px;
   text-align:center;
   font-weight:bold;
-  font-size:38px;
-  line-height:54px;
+  font-size:28px;
+  line-height:38px;
 }
 a.player.active .number {
   background:#7E841C;
@@ -249,8 +243,7 @@ a.player.active .number {
 }
 #players_game div.team{
   position:relative; 
-  clear:both;
-  height:125px;
+  height:70px;
   overflow:visible;
   text-align:center;
 }
@@ -371,8 +364,8 @@ a.close {
 }
 span.ratio {
   display:block;
-  padding:4px;
-  margin-bottom:3px;
+  padding:2px;
+  margin-bottom:1px;
   background:#095C5E;
   border-radius:2px;
 }
@@ -380,7 +373,7 @@ span.ratio {
 span.pct {
   display:block;
   background:#002B00;
-  padding:4px;
+  padding:2px;
   border-radius:2px;
 }
 

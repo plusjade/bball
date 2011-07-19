@@ -14,43 +14,26 @@
 
 .home_bg{
   background:#ACB28F;
-  _-webkit-box-shadow: inset 0 0 4px #AFA381;  
-  _-moz-box-shadow: inset 0 0 4px #AFA381;  
-  _box-shadow: inset 0 0 4px #4A3B34;  
 }
 div.home div.head{
-  background:#5F6350;
+  ackground:#5F6350;
+}
+div.home a.player {
   color:#F8F5EC;
+  background:#ACB28F;
 }
 
-div.home a.player {
-  -webkit-box-shadow: inset 0 0 4px #9F824B;
-  -moz-box-shadow: inset 0 0 4px #9F824B;
-  box-shadow: inset 0 0 4px #A69574;
-}
-div.home .number{
- color:#F8F5EC;
- background:#ACB28F;
-}
 
 .away_bg{
   background:#899E9B;
-  _-webkit-box-shadow: inset 0 0 4px #392749;  
-  _-moz-box-shadow: inset 0 0 4px #392749;  
-  _box-shadow: inset 0 0 4px #4A3B34;  
 }
 div.away div.head{
-  background:#4C5A5A;
-  color:#F8F5EC;
+  _background:#4C5A5A;
+  _color:#F8F5EC;
 }
 div.away a.player {
-  -webkit-box-shadow: inset 0 0 4px #392749;
-  -moz-box-shadow: inset 0 0 4px #392749;
-  box-shadow: inset 0 0 4px #36544F;
-}
-div.away .number{
- color:#F8F5EC;
- background:#899E9B;
+  color:#F8F5EC;
+  background:#899E9B;
 }
   
 .offensive_style {
@@ -139,17 +122,20 @@ div.away .number{
   display:block;
   text-align:center;
 }
+#actions_wrapper div.top {
+  margin-bottom:10px;
+}
 #actions_wrapper div.top a {
   display:inline-block;
   height:50px;
   width:13%;
-  font-size:15px;
+  font-size:14px;
   font-weight:normal;
   line-height:50px;
   text-align:center;
   color:#DEDBB0;
   cursor:pointer;
-  border-radius:3px;
+  border-radius:2px;
 }
 
 #actions_wrapper div.top a {
@@ -161,32 +147,31 @@ div.away .number{
   background-color:#B8596E;
 }
 
+/* shots */
 #actions_wrapper p {
   display:inline-block;
-  height:70px;
+  height:90px;
   width:24%;
   overflow:hidden;
   text-align:center;
   color:#DEDBB0;
-  border-radius:3px;
+  border-radius:2px;
+  margin: 0;
 }
 
 #actions_wrapper p span.title {
   display:block;
-  height:20px;
+  height:25px;
   line-height:20px;
   font-size:15px;
-  background-color:#6C343F;
-  border-radius:2px;
-  box-shadow:inset -1px -1px 1px #331110;
 }  
 
 #actions_wrapper p a {
   display:inline-block;
   width:48%;
-  height:50px;
+  height:55px;
   text-align:center;
-  border-radius: 0 0 3px 3px;
+  border-radius:2px;
   cursor:pointer;
 }
 #actions_wrapper a.miss {
@@ -203,7 +188,7 @@ div.away .number{
   height:40px; 
   width:33px;
   position:relative;
-  top:3px;
+  top:6px;
 }
 #actions_wrapper a.miss span {
   background: url("/images/thumbs.png") no-repeat -33px 0;
@@ -231,22 +216,20 @@ a.player {
   overflow:hidden;
   text-align:center;
   cursor:pointer;
-  border-radius:3px;
+  border-radius:2px;
 }
 
-a.player .head{
-  padding:2px 0;
-}
-a.player .head input{
+a.player input{
   width:100%;
   padding:0;
   margin:0;
   background: transparent;
   border:0;
-  color:#FFF;
+  color:#F8F5EC;
   font-size:12px;
   font-weight:normal;
   text-align:center;
+  text-shadow:1px 1px #555;
 }
 a.player .number{
   display:block;
@@ -256,15 +239,17 @@ a.player .number{
   line-height:38px;
 }
 
-a.player.pressed .number {
-  background:#7E841C;
-  color:#FEEDD2;
+a.player.pressed {
+  background:#7E841C !important;
+  color:#FEEDD2 !important;
 }
 
 /* ======================================================
   players in game */
 #players_game {
   margin-bottom:20px;
+  position:relative;
+  top:10px;
 }
 #players_game div.team{
   position:relative; 

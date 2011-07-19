@@ -14,7 +14,7 @@ var GameView = {
     GameView.$actions = $("#actions_wrapper");
     GameView.$players = $("#players_game");
     GameView.$playersBench = $("#players_bench");
-
+    
   /* select action interface */  
     GameView.$actions.find("a").live("tap", function(e){
       Game.setAction(this.id);
@@ -43,15 +43,10 @@ var GameView = {
       return false;
     });
   
-  /* toggle logger */
-    $("div.tab").find("span").tap(function(){
-      $("div.tab").find("span").show();
-      $(this).hide();
+    $("#hop").tap(function(){
+      $.mobile.changePage("#log_page",{transition :"slidedown"});
+    })
       
-      var action = $(this).attr("rel");
-      $("#log").removeClass("expand contract").addClass(action);
-    });
-  
   /* undo/redo logged actions */  
     $("#log").find("a").live("tap", function(e){
       $li = $(this).closest("li");

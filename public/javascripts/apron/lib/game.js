@@ -63,7 +63,7 @@ var Game = {
   
   setAction : function(action){
     Game.action = action;
-    $("#hop").html('<span>--- ' +action+ " ---</span>");
+    $("#hop").html('<span>' +action+ "</span>");
     
     if(Game.player) Stat.record(Game.player, Game.action);
   },  
@@ -71,7 +71,7 @@ var Game = {
   setPlayer : function(side, playerNum){
     Game.player = side+"."+playerNum;
     var player = Game.getPlayer(side, playerNum);
-    $("#hop").html('<span>--- ' +player.name+ " #" +player.number+ " ---</span>");
+    $("#hop").html('<span>' +player.name+ " #" +player.number+ "</span>");
     
     if(Game.action) Stat.record(Game.player, Game.action);
   },

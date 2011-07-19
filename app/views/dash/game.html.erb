@@ -2,10 +2,11 @@
 <div id="game_page" class="page" data-role="page" data-theme="a">
   <div id="toolbar" data-role="header" data-position="fixed" style="height:40px">
     <a data-role="button">
-      <span id="home_score">00</span> | 
+      <span id="home_score">00</span>
+    </a>
+    <a data-role="button">
       <span id="away_score">00</span>
     </a>
-    <a href="#log_page" data-role="button" data-icon="arrow-d" data-transition="slidedown">Log</a>
     
     <div id="hop"><span>..............</span></div>  
   </div>
@@ -65,9 +66,10 @@
   </div>
 
   
-  <div data-role="footer" data-position="fixed">
-    <a href="#menu" data-role="button" data-icon="home" data-theme="a" data-transition="slidedown"> H</a>
-    <a href="#analytics_page" style="float:right" data-transition="slidedown" data-role="button" data-icon="gear" data-theme="a">More</a>
+  <div data-role="footer" data-position="fixed" style="text-align:center">
+    <a href="#menu" data-role="button" data-icon="home" data-theme="a" data-transition="slidedown" style="float:left">Home</a>
+    <button rel="complete" data-role="button" data-theme="b">Complete and Save Game</button>
+    <a href="#analytics_page" style="float:right" data-transition="slidedown" data-role="button" data-icon="gear" data-theme="a">Stats</a>
 	</div>
 
 </div>
@@ -83,10 +85,9 @@
 
 <% # analytics_page %>
 <div data-role="page" id="analytics_page" class="page" data-theme="a">
-  <div data-role="header" style="padding-bottom:10px; text-align:center">
+  <div data-role="header" style="height:40px">
   	<a href="#game_page" data-role="button" data-transition="slideup">Back to Game</a>
-  	<button rel="destroy" data-role="button">Delete Game</button>
-  	<button rel="complete" data-role="button" data-theme="b">Complete and Save Game</button>
+  	<a rel="destroy" data-role="button">Delete Game</a>
   </div>
   
   <h2 style="text-align:center">Current Game Stats</h2>

@@ -157,6 +157,17 @@ div.away .number{
   text-shadow: 0px 1px 0px #331110;
   box-shadow:inset -1px -1px 3px #331110;
 }
+#actions_wrapper div.top a.pressed {
+	background: 			#964959;
+	background-image: -moz-linear-gradient(top, 
+							#6C343F, 
+							#964959);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0, 		#6C343F),
+		color-stop(1, 		#964959));
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#6C343F', EndColorStr='#964959')";
+}
+
 #actions_wrapper p {
   display:inline-block;
   height:70px;
@@ -208,6 +219,28 @@ div.away .number{
   background: url("/images/thumbs.png") no-repeat 0 0;
 }
 
+#actions_wrapper a.miss.pressed {
+	background: 			#DF4857;
+	background-image: -moz-linear-gradient(top, 
+							#AA343F, 
+							#DF4857);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0, 		#AA343F),
+		color-stop(1, 		#DF4857));
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#AA343F', EndColorStr='#DF4857')";
+}
+
+#actions_wrapper a.make.pressed {
+	background: 			#AEBA29;
+	background-image: -moz-linear-gradient(top, 
+							#7E841C, 
+							#AEBA29);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0, 		#7E841C),
+		color-stop(1, 		#AEBA29));
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#7E841C', EndColorStr='#AEBA29')";
+}
+
 /* ======================================================
   Player Icons */
 
@@ -221,6 +254,7 @@ a.player {
   cursor:pointer;
   border-radius:3px;
 }
+
 a.player .head{
   padding:2px 0;
 }
@@ -242,11 +276,11 @@ a.player .number{
   font-size:28px;
   line-height:38px;
 }
-a.player.active .number {
+
+a.player.pressed .number {
   background:#7E841C;
   color:#FEEDD2;
 }
-
 
 /* ======================================================
   players in game */

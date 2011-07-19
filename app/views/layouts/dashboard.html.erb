@@ -67,7 +67,16 @@
         e.preventDefault();
         return false;
       });
-
+      
+      /* button press states */
+      $("a").live("vmousedown", function(e){
+        $(this).addClass("pressed");
+      })
+      $("a").live("vmouseup", function(e){
+        $(this).removeClass("pressed");
+      })
+      
+      
       /* current game interface */
       $("#new_game_pane, #analytics_page").find("button").tap(function(e){
         var klass = $(this).attr("rel");

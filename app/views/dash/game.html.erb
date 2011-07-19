@@ -68,7 +68,7 @@
   
   <div data-role="footer" data-position="fixed" style="text-align:center">
     <a href="#menu" data-role="button" data-icon="home" data-theme="a" data-transition="slidedown" style="float:left">Home</a>
-    <button rel="complete" data-role="button" data-theme="b">Complete and Save Game</button>
+    <button rel="complete" class="game_state" data-role="button" data-theme="b">Complete Game</button>
     <a href="#analytics_page" style="float:right" data-transition="slidedown" data-role="button" data-icon="gear" data-theme="a">Stats</a>
 	</div>
 
@@ -87,7 +87,7 @@
 <div data-role="page" id="analytics_page" class="page" data-theme="a">
   <div data-role="header" style="height:40px">
   	<a href="#game_page" data-role="button" data-transition="slideup">Back to Game</a>
-  	<a rel="destroy" data-role="button">Delete Game</a>
+  	<a rel="destroy" data-role="button" class="game_state">Delete Game</a>
   </div>
   
   <h2 style="text-align:center">Current Game Stats</h2>

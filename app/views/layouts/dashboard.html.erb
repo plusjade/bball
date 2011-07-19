@@ -76,7 +76,7 @@
       })
       
       /* current game interface */
-      $("#new_game_pane, #analytics_page").find("button").tap(function(e){
+      $(".game_state").tap(function(e){
         var klass = $(this).attr("rel");
 
         switch(klass){

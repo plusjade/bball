@@ -117,7 +117,7 @@ div.away a.player {
 #actions_wrapper {
   position:relative;
   top:10px;
-  margin-bottom:10px;
+  margin-bottom:5px;
 }
 #actions_wrapper div {
   display:block;
@@ -168,12 +168,15 @@ div.away a.player {
 }  
 
 #actions_wrapper p a {
-  display:inline-block;
-  width:48%;
+  display:block;
+  float:left;
+  width:49%;
   height:55px;
   text-align:center;
   border-radius:2px;
   cursor:pointer;
+  margin:0;
+  padding:0;
 }
 #actions_wrapper a.miss {
   background:#AA343F;

@@ -34,6 +34,7 @@ var TeamView = {
     
     /* sync to server (probably want to automate this) */
     $("#team_roster_wrapper").find("button.sync_team").tap(function(e){
+      TeamView.update()
       Team.sync();
       e.preventDefault();
       return false;

@@ -42,6 +42,12 @@ var Game = {
   },
   
   destroy : function(){
+    /* destroy the stats */
+    for(var key in localStorage)
+      if(key.split(".")[0] === Game.current.id)
+        localStorage.removeItem(key);
+    
+    /* reset current */
     localStorage.removeItem("current");
     Game.current = {}
   },

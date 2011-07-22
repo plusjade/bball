@@ -1,0 +1,121 @@
+<style type="text/css">
+  table {
+    border-collapse:collapse;
+  }
+  table td, table th {
+    line-height:40px;
+    border-right:2px solid #222;
+    border-bottom:2px solid #222;
+    text-align:center;
+    vertical-align:middle;
+  }
+  table th {
+    padding:3px;
+  }
+  
+  table td {
+    min-width:150px;
+  }
+  
+  table tr.odd td{
+    background:#555;
+  }
+  table span {
+    display:inline-block;
+    float:left;
+    width:50%;
+    background:#005B5C;
+  }
+  table span.percentage {
+    background:#4A8048;
+  }
+  table .shots {
+    isplay:none;
+  }
+  table .offense {
+    
+  }
+  table .defense {
+    
+  }
+  ul.menu {
+    padding:0;
+    margin:0;
+    margin-left:150px;
+  }
+  ul li {
+    display:inline;
+  }
+  ul a {
+    padding:5px 10px;
+    background:#333;
+    border:1px solid #ccc;
+  }
+</style>
+<div id="games_show" class="page" data-role="page" data-theme="a">
+
+  <ul class="menu">
+    <li><a href="#" rel="shots">Shots</a></li>
+    <li><a href="#" rel="offense">Offense</a></li>
+    <li><a href="#" rel="defense">Defense</a></li>
+  </ul>
+  
+	<div data-role="content" style="text-align:center">	
+	  <table><tr>
+	    <th width="150px">Player</th>
+	  <% @shots.each do |action| %>
+	    <th class="shots toggle"><%= action %></th>
+	  <% end %>
+	  
+	  <% @offense.each do |action| %>
+	    <th class="offense toggle"><%= action %></th>
+	  <% end %>
+	  
+	  <% @defense.each do |action| %>
+	    <th class="defense toggle"><%= action %></th>
+	  <% end %>
+	  
+	  <% @game_data[:away][:players].each do |player| %>
+	    <tr class="<%= cycle("odd", "even") %>">
+	      <td width="150px"><%= player["name"] %></td>
+	    
+	    <% player[:shots].each do |shot| %>
+	      <td class="shots toggle">
+	        <span><%= "#{shot["make"]}/#{shot["total"]}" %></span>
+	        <span class="percentage"><%= shot[:percentage] %>%</span>
+	      </td>
+	    <% end %>
+	    
+	    <% player[:offense].each do |action| %>
+	      <td class="offense toggle">
+	        <%= action["total"] %>
+	      </td>
+	    <% end %>
+	    
+	    <% player[:defense].each do |action| %>
+	      <td class="defense toggle">
+	        <%= action["total"] %>
+	      </td>
+	    <% end %>
+	    
+	    </tr>
+	  <% end %>
+	  
+	  
+	  </table></tr>
+	</div>
+</div>
+
+<script>
+  $(function(){
+    $("ul").find("a").tap(function(e){
+      var klass = $(this).attr("rel");
+      $("table").find(".toggle").hide();
+      $("table").find("."+klass).show("fast");
+      
+      e.preventDefault();
+      return false;
+    })
+    $("ul").find("a").first().tap();
+  })
+</script>

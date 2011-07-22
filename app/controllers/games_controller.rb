@@ -7,7 +7,25 @@ class GamesController < ApplicationController
   
   def show
     @game = Game.get!(params[:id])
-    render :json => @game
+    
+    respond_to do |format|
+      
+      format.html do
+        @shots = []
+        Action::Shots.map {|s| @shots.push(s[:name])}
+        @offense = []
+        Action::Offense.map {|o| @offense.push(o[:name])}
+        @defense = []
+        Action::Defense.map {|d| @defense.push(d[:name])}
+        
+        
+        @game_data = @game.full_stats
+      end
+      
+      format.json do
+        render :json => @game.full_stats
+      end
+    end
   end
   
   def create

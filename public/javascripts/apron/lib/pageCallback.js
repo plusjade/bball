@@ -6,7 +6,6 @@ var pageCallback = {
 
   },
   teams_page : function(){
-    console.log("teams page callback");
     $("#teams_dropdown").listview("refresh");
   },
   
@@ -50,7 +49,6 @@ var pageCallback = {
   },
   
   log_page : function(){
-    console.log("log_page");
     $("#log").listview("refresh");
   }
   

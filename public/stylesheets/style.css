@@ -18,7 +18,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 body {
 	line-height: 1;
 	color:#3a4c4c;
-  background:#333 url("/images/linen.png") repeat 0 0; 
+  background:#222;
 	font-family:arial;
 }
 ol, ul {
@@ -53,3 +53,67 @@ p {margin-bottom:10px;
   line-height:1.5em;
   }
 em {font-weight:bold;}
+
+/* ======================================================
+  homepage */
+
+#main {
+  margin:auto;
+  font-size:40px;
+  font-weight:bold;
+  line-height:1.5em;
+  color:#FFCA06;
+  text-align:center;
+  text-shadow: 1px 1px 1px #000;
+}
+p.intro {
+  margin:20px 0 30px 0;
+  text-align:center;
+  
+  color:#eee;
+  line-height:1.5em;
+  font-size:18px;
+}
+.big_button {
+  display:block;
+  margin:auto;
+  width:300px;
+  padding:15px 20px;
+
+  text-align:center;
+  font-size:24px;
+  font-weight:bold;
+  border-radius:10px;
+  cursor:pointer;
+}
+#demo {
+  background:#79BA32;
+  color:#FFF;
+  text-shadow:1px 1px 0 #395A17;
+  box-shadow:2px 2px 4px #000;
+  margin-bottom:40px;
+}
+#signup {
+  background:#FFFFCC;
+  color:#467432;
+  margin-bottom:70px;
+  text-shadow:1px 1px 0 #FFF;
+  box-shadow:2px 2px 4px #000;
+}
+
+#support {
+  margin:auto;
+  width:90%;
+  overflow:hidden;
+}
+#support div {
+  width:30%;
+  min-width:200px;
+  margin-bottom:10px;
+  color:#fff;
+  float:left;
+  line-height:1.5em;
+  text-shadow: 0px 1px 0px #000;
+  
+}
+

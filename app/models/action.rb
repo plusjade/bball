@@ -1,10 +1,13 @@
 class Action
   
   # shots are recorded as {name}-miss/{name}-make in the app
-  Shots = [
+  FieldGoals = [
     {:name => "layup", :value => 2},
     {:name => "two", :value => 2},
     {:name => "three", :value => 3},
+  #  {:name => "freethrow", :value => 1}
+  ]
+  Freethrows = [
     {:name => "freethrow", :value => 1}
   ]
   

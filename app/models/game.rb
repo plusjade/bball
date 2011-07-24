@@ -7,85 +7,85 @@ class Game
   property :home, Json, :lazy => false
   property :away, Json, :lazy => false
   property :timestamp, DateTime
-  
+  attr_accessor :raw_stats
+
   has n, :stats
   
+  # These constants serve as object templates for our data apis.
+  # -- 
+  ShotAnalysis = {
+    "points" => 0, "make" => 0, "miss" => 0, "total" => 0, "percentage" => 0
+  }
+  PlayerAnalysis = {
+    "offense" => [],
+    "defense" => [],
+    "points" => 0,
+    "freethrows" => ShotAnalysis.dup.merge("name" => "freethrow") ,
+    "field_goals" => { 
+      "shots" => [],
+      "aggregate" => ShotAnalysis.dup
+    }
+  }
+  GameAnalysis = {
+    "home" => {
+      "aggregate" => PlayerAnalysis.dup,
+      "players" => []
+    },
+    "away" => {
+      "aggregate" => PlayerAnalysis.dup,
+      "players" => []
+    }
+  }
   
   def full_stats
-    stats = self.parse_raw_stats
-    game_stats = {
-      "home" => {
-        "players" => []
-      },
-      "away" => {
-        "players" => []
-      }
-    }
-    
+    self.parse_raw_stats if raw_stats.blank?
+
   # stats per player per side
     ["home", "away"].each do |side|
       
-    # loop through all players
+    # loop through all players in this game
       self.send(side)["players"].each do |player|
-        p = player.dup
-        p["field_goals"] = { 
-          "shots" => [],
-          "aggregate" => {
-            "points" => 0, "make" => 0, "miss" => 0, "total" => 0, "percentage" => 0
-          }
-        }
-        p["freethrows"] = {
-          "points" => 0, "make" => 0, "miss" => 0, "total" => 0, "percentage" => 0
-        }
-        p["offense"] = []
-        p["defense"] = []
-        p["points"] = 0
+      # deepclone the player object template
+        p = Marshal::load(Marshal::dump(PlayerAnalysis)).merge(player.dup)
 
-
-      # loop through Field goals stats
+      # Field goals stats
         Action::FieldGoals.each do |action|  
-          aggregate = { 
-            "name" => action[:name], "points" => 0, "make" => 0, "miss" => 0, "total" => 0, "percentage" => 0,
-          }
+          data = ShotAnalysis.dup.merge("name" => action[:name])
+          
+          # assign stats
           ["miss", "make"].each do |val|
             key = "#{action[:name]}-#{val}"
-            if stats[side.to_sym][key]
-              aggregate[val] = stats[side.to_sym][key][player["number"].to_i].to_i
+            if raw_stats[side.to_sym][key]
+              data[val] = raw_stats[side.to_sym][key][player["number"].to_i].to_i
             end
           end
           
-          # points 
-          aggregate["points"] += (aggregate["make"]*action[:value])
+          # points
+          data["points"] += (data["make"]*action[:value])
           # total
-          aggregate["total"] = aggregate["make"]+aggregate["miss"]
+          data["total"] = data["make"]+data["miss"]
           # percentage
-          if !aggregate["make"].to_i.zero?
-            aggregate["percentage"] = 100.to_f*(aggregate["make"].to_f/(aggregate["total"]))
-          end
-          
-          p["points"] += (action[:value]*aggregate["make"])
+          data["percentage"] = percentify(data["make"],data["total"])
           
           # all field goals for this player.
-          p["field_goals"]["shots"].push(aggregate)
-          p["field_goals"]["aggregate"]["points"] += (action[:value]*aggregate["make"])
-          p["field_goals"]["aggregate"]["make"] += aggregate["make"]
-          p["field_goals"]["aggregate"]["miss"] += aggregate["miss"]
-          p["field_goals"]["aggregate"]["total"] += aggregate["total"]
+          p["field_goals"]["shots"].push(data)
+          p["points"] += (action[:value]*data["make"])
+          p["field_goals"]["aggregate"]["points"] += (action[:value]*data["make"])
+          p["field_goals"]["aggregate"]["make"] += data["make"]
+          p["field_goals"]["aggregate"]["miss"] += data["miss"]
+          p["field_goals"]["aggregate"]["total"] += data["total"]
         end
-        
       # field_goal percentage for this player
-        if !p["field_goals"]["aggregate"]["make"].to_i.zero?
-          p["field_goals"]["aggregate"]["percentage"] = 100.to_f*(p["field_goals"]["aggregate"]["make"].to_f/p["field_goals"]["aggregate"]["total"])
-        end
+        p["field_goals"]["aggregate"]["percentage"] = percentify(p["field_goals"]["aggregate"]["make"],p["field_goals"]["aggregate"]["total"])
         
-      # loop through freethrow stats
+      # Freethrow stats
         Action::Freethrows.each do |action|  
           p["freethrows"]["name"] = action[:name]
 
           ["miss", "make"].each do |val|
             key = "#{action[:name]}-#{val}"
-            if stats[side.to_sym][key]
-              p["freethrows"][val] = stats[side.to_sym][key][player["number"].to_i].to_i
+            if raw_stats[side.to_sym][key]
+              p["freethrows"][val] = raw_stats[side.to_sym][key][player["number"].to_i].to_i
             end
           end
           
@@ -94,82 +94,106 @@ class Game
           # total
           p["freethrows"]["total"] = p["freethrows"]["make"]+p["freethrows"]["miss"]
           # percentage
-          if !p["freethrows"]["make"].to_i.zero?
-            p["freethrows"]["percentage"] = 100.to_f*(p["freethrows"]["make"].to_f/(p["freethrows"]["total"]))
-          end
+          p["freethrows"]["percentage"] = percentify(p["freethrows"]["make"],p["freethrows"]["total"])
           
           # add to total point count
           p["points"] += (action[:value]*p["freethrows"]["make"])
         end
-                
-      # loop through offense stats
+              
+      # Offense stats
         Action::Offense.each do |action|  
-          aggregate = {"name" => action[:name], "total" => 0}
-          if stats[side.to_sym][action[:name]]
-            aggregate["total"] = stats[side.to_sym][action[:name]][player["number"].to_i].to_i
+          data = {"name" => action[:name], "total" => 0}
+          if raw_stats[side.to_sym][action[:name]]
+            data["total"] = raw_stats[side.to_sym][action[:name]][player["number"].to_i].to_i
           end
           
-          p["offense"].push(aggregate)
+          p["offense"].push(data)
         end
-        
-      # loop through defense stats
+
+      # Defense stats
         Action::Defense.each do |action|  
-          aggregate = {"name" => action[:name], "total" => 0}
-          if stats[side.to_sym][action[:name]]
-            aggregate["total"] = stats[side.to_sym][action[:name]][player["number"].to_i].to_i
+          data = {"name" => action[:name], "total" => 0}
+          if raw_stats[side.to_sym][action[:name]]
+            data["total"] = raw_stats[side.to_sym][action[:name]][player["number"].to_i].to_i
           end
 
-          p["defense"].push(aggregate)
+          p["defense"].push(data)
         end
         
-        
-        # add player stats to player object    
-        game_stats[side]["players"].push(p)
+      # add player stats to player object    
+        GameAnalysis[side]["players"].push(p)
       end
       
     end
 
-    build_aggregate(game_stats)
+    calculate_aggregates(GameAnalysis)
+  end
+
+
+  def percentify(make, total)
+    ((make.to_i.zero? ? 0 : (100.to_f*(make.to_f/total)))*100).to_i/100.0
   end
   
-  # build aggregate values for each side.
-  def build_aggregate(game_stats)
-    game_stats["home"]["aggregate"] = {
-      "offense" => [],
-      "defense" => [],
-      "field_goals" => {
-        "aggregate" => {},
-        "shots" => []
-      },
-      "freethrows" => {},
-      "points" => 0
-    }
-    game_stats["away"]["aggregate"] = {
-      "offense" => [],
-      "defense" => [],
-      "field_goals" => {
-        "aggregate" => {},
-        "shots" => []
-      },
-      "freethrows" => {},
-      "points" => 0
-    }
-    
+
+  # calculate aggregate values.
+  def calculate_aggregates(game_stats)
     ["home", "away"].each do |side|
       game_stats[side]["players"].each do |player|
-        
-        ["offense", "defense"].each do |blah|
-          player[blah].each_with_index do |o, i|
-            if game_stats[side]["aggregate"][blah][i]
-              game_stats[side]["aggregate"][blah][i]["total"] += o["total"]
+      
+      # aggregate for offense and defense
+        ["offense", "defense"].each do |state|
+          player[state].each_with_index do |o, i|
+            if game_stats[side]["aggregate"][state][i]
+              game_stats[side]["aggregate"][state][i]["total"] += o["total"]
             else
-              game_stats[side]["aggregate"][blah].push(o)
+              game_stats[side]["aggregate"][state].push(o)
             end
           end
         end
         
-        # points 
+      # agregrate points 
         game_stats[side]["aggregate"]["points"] += player["points"]
+
+      # aggregate freethrows
+        player["freethrows"].each do |a,b|
+          next if (a == "name" || a == "percentage")
+          if game_stats[side]["aggregate"]["freethrows"]["total"]
+            game_stats[side]["aggregate"]["freethrows"][a] += b
+          else
+            game_stats[side]["aggregate"]["freethrows"] = player["freethrows"]
+          end
+        end
+      # aggregate freethrow percentage
+        game_stats[side]["aggregate"]["freethrows"]["percentage"] = percentify(game_stats[side]["aggregate"]["freethrows"]["make"], game_stats[side]["aggregate"]["freethrows"]["total"])
+
+      # aggregate aggregate fieldgoals
+        player["field_goals"]["aggregate"].each do |c,d|
+          next if (c == "name" || c == "percentage")
+          if game_stats[side]["aggregate"]["field_goals"]["aggregate"]["total"]
+            game_stats[side]["aggregate"]["field_goals"]["aggregate"][c] += d
+          else
+            game_stats[side]["aggregate"]["field_goals"]["aggregate"] = player["field_goals"]["aggregate"]
+          end
+        end  
+      # aggregate aggregate fieldgoals percentage
+        game_stats[side]["aggregate"]["field_goals"]["aggregate"]["percentage"] = percentify(game_stats[side]["aggregate"]["field_goals"]["aggregate"]["make"], game_stats[side]["aggregate"]["field_goals"]["aggregate"]["total"])
+
+      # aggregate fieldgoals shots
+      # note we clone the first player's data and add subsequent data to the clone.
+        if game_stats[side]["aggregate"]["field_goals"]["shots"].empty? 
+          game_stats[side]["aggregate"]["field_goals"]["shots"] = Marshal::load(Marshal::dump(player["field_goals"]["shots"]))
+        else
+          player["field_goals"]["shots"].each_with_index do |shot, z|          
+            shot.each do |e,f|
+              next if (e == "name" || e == "percentage")
+              game_stats[side]["aggregate"]["field_goals"]["shots"][z][e] += f
+            end
+          end        
+        end
+      # aggregate fieldgoals shot percentage
+        game_stats[side]["aggregate"]["field_goals"]["shots"].each_with_index do |shot,y|
+          game_stats[side]["aggregate"]["field_goals"]["shots"][y]["percentage"] = percentify(shot["make"], shot["total"])
+        end
         
       end
     end
@@ -209,7 +233,7 @@ class Game
       end
     end
     
-    {:home => home, :away => away}
+    self.raw_stats = {:home => home, :away => away}
   end
   
   

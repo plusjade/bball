@@ -12,12 +12,13 @@ class GamesController < ApplicationController
       
       format.html do
         @shots = []
-        Action::Shots.map {|s| @shots.push(s[:name])}
+        @freethrows = []
         @offense = []
-        Action::Offense.map {|o| @offense.push(o[:name])}
         @defense = []
+        Action::FieldGoals.map {|s| @shots.push(s[:name])}
+        Action::Freethrows.map {|s| @freethrows.push(s[:name])}
+        Action::Offense.map {|o| @offense.push(o[:name])}
         Action::Defense.map {|d| @defense.push(d[:name])}
-        
         
         @game_data = @game.full_stats
       end

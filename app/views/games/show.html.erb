@@ -62,8 +62,15 @@
   
 	<div data-role="content" style="text-align:center">	
 	  <table><tr>
+	  
 	    <th width="150px">Player</th>
+	    <th>Points</th>
+	    <th>FG</th>
 	  <% @shots.each do |action| %>
+	    <th class="shots toggle"><%= action %></th>
+	  <% end %>
+	  
+	  <% @freethrows.each do |action| %>
 	    <th class="shots toggle"><%= action %></th>
 	  <% end %>
 	  
@@ -75,24 +82,39 @@
 	    <th class="defense toggle"><%= action %></th>
 	  <% end %>
 	  
-	  <% @game_data[:away][:players].each do |player| %>
+<%# data -----> %>
+
+	  <% @game_data["home"]["players"].each do |player| %>
 	    <tr class="<%= cycle("odd", "even") %>">
+	      
 	      <td width="150px"><%= player["name"] %></td>
-	    
-	    <% player[:shots].each do |shot| %>
+	      
+	      <td><%= player["points"] %></td>
+	      
+	      <td class="shots toggle">
+	        <span><%= "#{player["field_goals"]["aggregate"]["make"]}/#{player["field_goals"]["aggregate"]["total"]}" %></span>
+	        <span class="percentage"><%= player["field_goals"]["aggregate"]["percentage"] %>%</span>
+	      </td>
+	      
+	    <% player["field_goals"]["shots"].each do |shot| %>
 	      <td class="shots toggle">
 	        <span><%= "#{shot["make"]}/#{shot["total"]}" %></span>
-	        <span class="percentage"><%= shot[:percentage] %>%</span>
+	        <span class="percentage"><%= shot["percentage"] %>%</span>
 	      </td>
 	    <% end %>
 	    
-	    <% player[:offense].each do |action| %>
+	      <td class="shots toggle">
+	        <span><%= "#{player["freethrows"]["make"]}/#{player["freethrows"]["total"]}" %></span>
+	        <span class="percentage"><%= player["freethrows"]["percentage"] %>%</span>
+	      </td>
+	    
+	    <% player["offense"].each do |action| %>
 	      <td class="offense toggle">
 	        <%= action["total"] %>
 	      </td>
 	    <% end %>
 	    
-	    <% player[:defense].each do |action| %>
+	    <% player["defense"].each do |action| %>
 	      <td class="defense toggle">
 	        <%= action["total"] %>
 	      </td>
@@ -100,8 +122,51 @@
 	    
 	    </tr>
 	  <% end %>
+
+<%# totals %>
+	    <tr>
+	      <td>Total</td>
+	      
+	    <%# total points %>
+	      <td class="shots toggle">
+          <%= @game_data["home"]["aggregate"]["points"] %>
+	      </td>
+	    
+	    <%# total FG %>
+	      <td class="shots toggle">
+	        <span><%= "#{@game_data["home"]["aggregate"]["field_goals"]["aggregate"]["make"]}/#{@game_data["home"]["aggregate"]["field_goals"]["aggregate"]["total"]}" %></span>
+	        <span class="percentage"><%= @game_data["home"]["aggregate"]["field_goals"]["aggregate"]["percentage"] %>%</span>
+	      </td>
+	      
+        <% @game_data["home"]["aggregate"]["field_goals"]["shots"].each do |shot| %>
+  	      <td class="shots toggle">
+  	        <span><%= "#{shot["make"]}/#{shot["total"]}" %></span>
+  	        <span class="percentage"><%= shot["percentage"] %>%</span>
+  	      </td>
+  	    <% end %>
+
+        <td class="shots toggle">
+          <span><%= "#{@game_data["home"]["aggregate"]["freethrows"]["make"]}/#{@game_data["home"]["aggregate"]["freethrows"]["total"]}" %></span>
+          <span class="percentage"><%= @game_data["home"]["aggregate"]["freethrows"]["percentage"] %>%</span>
+        </td>
+        
+
+        <% @game_data["home"]["aggregate"]["offense"].each do |action| %>
+  	      <td class="offense toggle">
+            <%= action["total"] %>
+  	      </td>
+  	    <% end %>
+  	    
+  	    <% @game_data["home"]["aggregate"]["defense"].each do |action| %>
+  	      <td class="defense toggle">
+            <%= action["total"] %>
+  	      </td>
+  	    <% end %>
+  	            
+	    </tr>
 	  
-	  
+
+      
 	  </table></tr>
 	</div>
 </div>
@@ -116,6 +181,6 @@
       e.preventDefault();
       return false;
     })
-    $("ul").find("a").first().tap();
+    //$("ul").find("a").first().tap();
   })
 </script>
